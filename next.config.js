@@ -4,6 +4,9 @@ const nextConfig = {
   swcMinify: true,
   experimental: {
     appDir: true
+  },
+  eslint: {
+    dirs: ['app', 'components', 'lib', 'src']
   }
 }
 
