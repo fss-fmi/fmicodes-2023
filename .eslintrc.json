@@ -28,6 +28,8 @@
   "ignorePatterns": [
     "node_modules/",
     ".next/",
-    "out/"
+    "out/",
+    "tailwind.config.js",
+    "postcss.config.js"
   ]
 }

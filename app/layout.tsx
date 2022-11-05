@@ -1,4 +1,5 @@
 import {ReactNode} from 'react';
+import '../styles/globals.css';
 
 /**
  * Defines the layout of the application.
@@ -6,7 +7,11 @@ import {ReactNode} from 'react';
  * @return {RootLayout} Layout of the application.
  * @constructor
  */
-export default function RootLayout({children}: { children: ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+    children: ReactNode
+}): ReactNode {
   return (
     <html>
       <head>
