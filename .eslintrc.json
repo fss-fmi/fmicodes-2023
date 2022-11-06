@@ -24,6 +24,12 @@
     "@typescript-eslint"
   ],
   "rules": {
+    "max-len": [
+      "warn",
+      {
+        "code": 120
+      }
+    ]
   },
   "ignorePatterns": [
     "node_modules/",
