@@ -1,0 +1,60 @@
+{
+  "name": "fmi-codes-discord-bot",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/fmi-codes-discord-bot/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/fmi-codes-discord-bot",
+        "main": "apps/fmi-codes-discord-bot/src/main.ts",
+        "tsConfig": "apps/fmi-codes-discord-bot/tsconfig.app.json",
+        "assets": ["apps/fmi-codes-discord-bot/src/assets"]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/fmi-codes-discord-bot/src/environments/environment.ts",
+              "with": "apps/fmi-codes-discord-bot/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/js:node",
+      "options": {
+        "buildTarget": "fmi-codes-discord-bot:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "fmi-codes-discord-bot:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/fmi-codes-discord-bot/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/fmi-codes-discord-bot/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
