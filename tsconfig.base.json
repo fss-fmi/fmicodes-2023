@@ -23,7 +23,9 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
-    "useDefineForClassFields": true
+    "useDefineForClassFields": true,
+    "strict": true,
+    "esModuleInterop": true
   },
   "exclude": ["node_modules", "tmp"]
 }
