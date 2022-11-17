@@ -4,6 +4,7 @@ import {BotModule} from "./bot/bot.module";
 import {DiscordModule} from "@discord-nestjs/core";
 import {Module} from "@nestjs/common";
 import {environment} from "../environments/environment";
+import {TeamModule} from "./team/team.module";
 
 @Module({
   imports: [
@@ -15,7 +16,8 @@ import {environment} from "../environments/environment";
       useFactory: (configService: ConfigService) => (configService.get('discord')),
       inject: [ConfigService],
     }),
-    BotModule
+    BotModule,
+    TeamModule
   ]
 })
 export class AppModule {

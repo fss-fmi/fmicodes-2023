@@ -5,8 +5,24 @@ const environment = () => ({
   discord: {
     token: process.env.DISCORD_TOKEN,
     discordClientOptions: {
-      intents: [IntentsBitField.Flags.Guilds, IntentsBitField.Flags.GuildMessages]
+      intents: [
+        IntentsBitField.Flags.Guilds,
+        IntentsBitField.Flags.GuildMessages,
+        IntentsBitField.Flags.GuildMembers,
+        IntentsBitField.Flags.GuildPresences,
+        IntentsBitField.Flags.GuildMessageReactions,
+        IntentsBitField.Flags.GuildMessageTyping,
+        IntentsBitField.Flags.GuildVoiceStates,
+        IntentsBitField.Flags.GuildInvites,
+      ]
     },
+    registerCommandOptions: [
+      {
+        forGuild: process.env.GUILD_ID,
+        removeCommandsBefore: true
+      }
+    ],
+    guildId: process.env.GUILD_ID,
   }
 });
 

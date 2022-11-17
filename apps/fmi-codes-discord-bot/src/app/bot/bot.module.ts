@@ -3,7 +3,9 @@ import {Module} from '@nestjs/common';
 import {BotGateway} from "./bot.gateway";
 
 @Module({
-  imports: [DiscordModule.forFeature()],
+  imports: [
+    DiscordModule.forFeature(),
+  ],
   providers: [
     BotGateway,
   ]
