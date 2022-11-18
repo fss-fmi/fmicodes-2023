@@ -5,6 +5,7 @@ import {DiscordModule} from "@discord-nestjs/core";
 import {Module} from "@nestjs/common";
 import {environment} from "../environments/environment";
 import {TeamModule} from "./team/team.module";
+import {TicketModule} from "./ticket/ticket.module";
 
 @Module({
   imports: [
@@ -17,7 +18,8 @@ import {TeamModule} from "./team/team.module";
       inject: [ConfigService],
     }),
     BotModule,
-    TeamModule
+    TeamModule,
+    TicketModule,
   ]
 })
 export class AppModule {

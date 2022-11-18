@@ -14,6 +14,8 @@ const environment = () => ({
         IntentsBitField.Flags.GuildMessageTyping,
         IntentsBitField.Flags.GuildVoiceStates,
         IntentsBitField.Flags.GuildInvites,
+        IntentsBitField.Flags.MessageContent,
+        IntentsBitField.Flags.GuildScheduledEvents,
       ]
     },
     registerCommandOptions: [
