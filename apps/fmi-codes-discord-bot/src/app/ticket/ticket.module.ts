@@ -6,6 +6,8 @@ import {DiscordModule} from "@discord-nestjs/core";
   imports: [
     DiscordModule.forFeature(),
   ],
-  providers: [TicketGateway],
+  providers: [
+    TicketGateway
+  ],
 })
 export class TicketModule {}

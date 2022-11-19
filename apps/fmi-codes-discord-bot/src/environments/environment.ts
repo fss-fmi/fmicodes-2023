@@ -1,4 +1,4 @@
-import {IntentsBitField} from "discord.js";
+import {GatewayIntentBits, Partials} from "discord.js";
 
 const environment = () => ({
   production: false,
@@ -6,24 +6,31 @@ const environment = () => ({
     token: process.env.DISCORD_TOKEN,
     discordClientOptions: {
       intents: [
-        IntentsBitField.Flags.Guilds,
-        IntentsBitField.Flags.GuildMessages,
-        IntentsBitField.Flags.GuildMembers,
-        IntentsBitField.Flags.GuildPresences,
-        IntentsBitField.Flags.GuildMessageReactions,
-        IntentsBitField.Flags.GuildMessageTyping,
-        IntentsBitField.Flags.GuildVoiceStates,
-        IntentsBitField.Flags.GuildInvites,
-        IntentsBitField.Flags.MessageContent,
-        IntentsBitField.Flags.GuildScheduledEvents,
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.GuildMembers,
+        GatewayIntentBits.GuildPresences,
+        GatewayIntentBits.GuildMessageReactions,
+        GatewayIntentBits.GuildMessageTyping,
+        GatewayIntentBits.GuildVoiceStates,
+        GatewayIntentBits.GuildInvites,
+        GatewayIntentBits.MessageContent,
+        GatewayIntentBits.GuildScheduledEvents,
       ]
     },
-    registerCommandOptions: [
-      {
-        forGuild: process.env.GUILD_ID,
-        removeCommandsBefore: true
-      }
+    partials: [
+      Partials.Message,
+      Partials.Channel,
+      Partials.Reaction,
+      Partials.User,
+      Partials.GuildMember,
     ],
+    // registerCommandOptions: [
+    //   {
+    //     forGuild: process.env.GUILD_ID,
+    //     removeCommandsBefore: true
+    //   }
+    // ],
     guildId: process.env.GUILD_ID,
   }
 });
