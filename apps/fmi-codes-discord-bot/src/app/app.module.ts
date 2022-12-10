@@ -6,6 +6,7 @@ import {Module} from "@nestjs/common";
 import {environment} from "../environments/environment";
 import {TeamModule} from "./team/team.module";
 import {TicketModule} from "./ticket/ticket.module";
+import {ScheduleModule} from "./schedule/schedule.module";
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import {TicketModule} from "./ticket/ticket.module";
     BotModule,
     TeamModule,
     TicketModule,
+    ScheduleModule,
   ]
 })
 export class AppModule {

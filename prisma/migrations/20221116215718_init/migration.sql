@@ -133,12 +133,14 @@ CREATE TABLE "Sponsor" (
 CREATE TABLE "Schedule" (
     "title" TEXT NOT NULL,
     "starts_at" TIMESTAMP(3) NOT NULL,
+    "ends_at" TIMESTAMP(3) NOT NULL,
     "description" TEXT NOT NULL,
     "image" TEXT,
+    "location" TEXT NOT NULL,
     "is_primary" BOOLEAN NOT NULL DEFAULT false,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-    CONSTRAINT "Schedule_pkey" PRIMARY KEY ("title","starts_at")
+    CONSTRAINT "Schedule_pkey" PRIMARY KEY ("title","starts_at","ends_at")
 );
 
 -- CreateTable
