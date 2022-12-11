@@ -50,7 +50,6 @@ export class ScheduleService {
           value: event.location,
         }
       ])
-    // .setTimestamp(event.startsAt)
 
     if (event.image) {
       embed.setImage(event.image);
