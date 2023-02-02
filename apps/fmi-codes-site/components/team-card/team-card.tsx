@@ -1,11 +1,12 @@
 import styles from './team-card.module.css';
 import FancyCard from '../fancy-card/fancy-card';
+import { Technology } from '@prisma/client';
 
 export interface TeamCardProps {
   image: string;
   name: string;
   roaster: string[];
-  technologies: string[];
+  technologies: Technology[];
 }
 
 export function TeamCard(props: TeamCardProps) {
@@ -20,7 +21,7 @@ export function TeamCard(props: TeamCardProps) {
   );
 }
 
-function CardContent(roaster: string[], technologies: string[]) {
+function CardContent(roaster: string[], technologies: Technology[]) {
   return (
     <div className={styles['card-content']}>
       <div className={styles['card-content__roaster']}>
@@ -36,10 +37,11 @@ function CardContent(roaster: string[], technologies: string[]) {
         <ul>
           {technologies.map((tech, i) => (
             <li
-              className="bg-red-500 inline-block rounded-xl px-2 py-1 mr-2"
+              style={{ backgroundColor: tech.color }}
+              className="inline-block rounded-xl px-2 py-1 mr-2"
               key={i}
             >
-              {tech}
+              {tech.name}
             </li>
           ))}
         </ul>
