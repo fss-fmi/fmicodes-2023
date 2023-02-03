@@ -16,7 +16,6 @@ export default async function TeamsPage(): Promise<ReactNode> {
     },
   });
 
-  console.log(teams[0].teamProjectTechnologies);
   return (
     <div className="teams-page">
       <h1>Teams</h1>
@@ -29,7 +28,11 @@ export default async function TeamsPage(): Promise<ReactNode> {
             roaster={team.members.map(
               (member) => `${member.firstName} ${member.lastName}`
             )}
-            technologies={team.teamProjectTechnologies.map((r) => r.technology)}
+            projectName={team.projectName}
+            projectDescription={team.projectDescription}
+            projectTechnologies={team.teamProjectTechnologies.map(
+              (r) => r.technology
+            )}
           />
         ))}
       </div>

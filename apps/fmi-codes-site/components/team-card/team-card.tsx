@@ -6,7 +6,9 @@ export interface TeamCardProps {
   image: string;
   name: string;
   roaster: string[];
-  technologies: Technology[];
+  projectName: string;
+  projectDescription: string;
+  projectTechnologies: Technology[];
 }
 
 export function TeamCard(props: TeamCardProps) {
@@ -15,13 +17,23 @@ export function TeamCard(props: TeamCardProps) {
       <FancyCard
         image={props.image}
         title={`Отбор "${props.name}"`}
-        content={CardContent(props.roaster, props.technologies)}
+        content={CardContent(
+          props.roaster,
+          props.projectName,
+          props.projectDescription,
+          props.projectTechnologies
+        )}
       />
     </div>
   );
 }
 
-function CardContent(roaster: string[], technologies: Technology[]) {
+function CardContent(
+  roaster: string[],
+  projectName: string,
+  projectDescription: string,
+  projectTechnologies: Technology[]
+) {
   return (
     <div className={styles['card-content']}>
       <div className={styles['card-content__roaster']}>
@@ -32,10 +44,16 @@ function CardContent(roaster: string[], technologies: Technology[]) {
           ))}
         </ul>
       </div>
+      {projectName && projectDescription ? (
+        <div className={styles['card-content__project']}>
+          <h3 className="font-bold">{`Проект "${projectName}"`}</h3>
+          <p className="line-clamp-3">{projectDescription}</p>
+        </div>
+      ) : null}
       <div className={styles['card-content__technologies']}>
         <h3 className="font-bold">Технологии</h3>
         <ul>
-          {technologies.map((tech, i) => (
+          {projectTechnologies.map((tech, i) => (
             <li
               style={{ backgroundColor: tech.color }}
               className="inline-block rounded-xl px-2 py-1 mr-2"

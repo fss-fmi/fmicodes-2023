@@ -1,4 +1,4 @@
-const path = require("path");
+const path = require('path');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -9,5 +9,5 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [],
-}
+  plugins: [require('@tailwindcss/line-clamp')],
+};
