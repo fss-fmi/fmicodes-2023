@@ -1,6 +1,7 @@
-import {ReactNode} from 'react';
+import { ReactNode } from 'react';
 import '../styles/globals.css';
-import Navbar from '../components/Navbar/Navbar';
+import Head from 'next/head';
+import Navbar from '../components/navbar/Navbar';
 
 /**
  * Defines the layout of the application.
@@ -11,18 +12,16 @@ import Navbar from '../components/Navbar/Navbar';
 export default function RootLayout({
   children,
 }: {
-    children: ReactNode
+  children: ReactNode;
 }): ReactNode {
   return (
     <html>
-      <head>
+      <Head>
         <title>FMICodes</title>
-      </head>
+      </Head>
       <body>
         <Navbar />
-        <div className="mx-auto max-w-7xl px-2">
-          {children}
-        </div>
+        <div className="mx-auto max-w-7xl px-2">{children}</div>
         {/* <Footer />*/}
       </body>
     </html>

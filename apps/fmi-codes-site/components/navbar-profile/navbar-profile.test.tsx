@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import NavbarProfile from './NavbarProfile';
+import NavbarProfile from './navbar-profile';
 
 it('It should mount', () => {
   const div = document.createElement('div');
