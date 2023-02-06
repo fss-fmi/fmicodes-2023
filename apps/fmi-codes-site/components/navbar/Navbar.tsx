@@ -7,7 +7,6 @@ import NavbarProfile from '../navbar-profile/navbar-profile';
 import Link from 'next/link';
 import Image from 'next/image';
 import fmiCodesLogo from '../../public/images/fmi-codes-logo-60x60.jpg';
-import styles from './Navbar.module.scss';
 
 const navigation = [
   { name: 'За хакатона', href: '/about' },
@@ -23,7 +22,7 @@ const Navbar: FC = () => {
   const pathname = usePathname();
 
   return (
-    <Disclosure as="nav" className={styles.container}>
+    <Disclosure as="nav" className="sticky top-0 z-10 bg-gray-800">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-5xl px-2">
