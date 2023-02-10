@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import TeamCard from '../../components/team-card/team-card';
-import { PrismaClient } from '@prisma/client';
+import { getTeams } from '../../pages/api/teams';
 
 /**
  * Defines the "/teams" page.
@@ -8,13 +8,7 @@ import { PrismaClient } from '@prisma/client';
  * @constructor
  */
 export default async function TeamsPage(): Promise<ReactNode> {
-  const prisma = new PrismaClient();
-  const teams = await prisma.team.findMany({
-    include: {
-      members: true,
-      teamProjectTechnologies: { include: { technology: true } },
-    },
-  });
+  const teams = await getTeams();
 
   return (
     <div className="teams-page">
