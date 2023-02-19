@@ -33,5 +33,9 @@
   "exclude": [
     "node_modules",
     "jest.config.ts"
+  ],
+  "lib": [
+    "dom",
+    "dom.iterable",
   ]
 }

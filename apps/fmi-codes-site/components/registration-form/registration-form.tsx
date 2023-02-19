@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import FormImageField from '../form-image-field/form-image-field';
 import FormDropdownField from '../form-dropdown-field/form-dropdown-field';
 import FormTextField from '../form-text-field/form-text-field';
+import { router } from 'next/client';
 
 export function RegistrationForm() {
   const {
@@ -36,6 +37,13 @@ export function RegistrationForm() {
         maxLength: 30,
         pattern: /^[а-яА-Я-]+$/,
       },
+    },
+    {
+      name: 'phone',
+      type: 'phone',
+      label: 'Телефон',
+      required: true,
+      placeholder: '0888888888',
     },
     {
       name: 'email',
@@ -90,7 +98,7 @@ export function RegistrationForm() {
       options: ['Първи', 'Втори', 'Трети', 'Четвърти', 'Пети', 'Шести'],
     },
     {
-      name: 'facultyNumber',
+      name: 'universityFacultyNumber',
       type: 'text',
       label: 'Факултетен номер',
       required: true,
@@ -111,17 +119,25 @@ export function RegistrationForm() {
     },
   ];
 
-  const onSubmit = async (values) => {
-    console.log(values);
-    // try {
-    //   const body = { values };
-    //   await signIn('credentials', {
-    //     ...body,
-    //     callbackUrl: `${window.location.origin}/`,
-    //   });
-    // } catch (error) {
-    //   console.error(error);
-    // }
+  const onSubmit = async (data) => {
+    const formData = new FormData();
+    formData.append('universityProofImage', data.universityProofImage[0]);
+    Object.keys(data).forEach((key) => {
+      formData.append(key, data[key]);
+    });
+
+    try {
+      const res = await fetch(`/api/users`, {
+        method: 'POST',
+        body: formData,
+      }); // TODO: replace with = await createUser(body);
+
+      if (res.status === 201) {
+        await router.push('/auth/login');
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -138,6 +154,7 @@ export function RegistrationForm() {
             switch (field.type) {
               case 'text':
               case 'email':
+              case 'phone':
               case 'password':
                 return (
                   <FormTextField
