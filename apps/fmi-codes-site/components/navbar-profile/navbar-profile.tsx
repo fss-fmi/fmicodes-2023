@@ -1,8 +1,9 @@
 import { Menu, Transition } from '@headlessui/react';
-import React, { FC, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import styles from './navbar-profile.module.scss';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 
 const loginNavigation = [
   { name: 'Вход', href: '/auth/login', isPrimary: false },
@@ -12,23 +13,23 @@ const loginNavigation = [
 const profileNavigation = [
   { name: 'Профил', href: '/profile' },
   { name: 'Създаване на отбор', href: '/teams/create' },
-  { name: 'Изход', href: '/logout' },
+  { name: 'Изход', href: '/auth/logout' },
 ];
 
-const isUserLoggedIn = true; // TODO: Replace with real value
-
-const NavbarProfile: FC = () => {
+const NavbarProfile = () => {
   const pathname = usePathname();
+  const { data: session, status } = useSession();
 
   return (
     <div className={styles.NavbarProfile}>
-      {isUserLoggedIn ? (
+      {status === 'authenticated' ? (
         <Menu as="div" className="relative ml-3">
           <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
             <span className="sr-only">Отваряне на потребителскоте меню</span>
             <img
               className="h-8 w-8 rounded-full"
               src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+              // TODO: src={session.user.image}
               alt=""
             />
           </Menu.Button>
@@ -47,7 +48,7 @@ const NavbarProfile: FC = () => {
                   <Menu.Item>
                     {({ active }) => (
                       <a
-                        href="#"
+                        href={item.href}
                         className={
                           (active ? 'bg-gray-100 ' : '') +
                           'block px-4 py-2 text-sm text-gray-700'

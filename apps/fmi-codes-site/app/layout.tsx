@@ -1,7 +1,10 @@
+'use client';
+
 import { ReactNode } from 'react';
 import '../styles/globals.css';
 import Head from 'next/head';
 import Navbar from '../components/navbar/Navbar';
+import { SessionProvider } from 'next-auth/react';
 
 /**
  * Defines the layout of the application.
@@ -20,9 +23,11 @@ export default function RootLayout({
         <title>FMICodes</title>
       </Head>
       <body>
-        <Navbar />
-        <div className="mx-auto max-w-7xl px-2">{children}</div>
-        {/* <Footer />*/}
+        <SessionProvider>
+          <Navbar />
+          <div className="mx-auto max-w-7xl px-2">{children}</div>
+          {/* <Footer />*/}
+        </SessionProvider>
       </body>
     </html>
   );

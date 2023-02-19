@@ -1,11 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../../lib/prismadb';
-import sha256 from 'crypto-js/sha256';
 import nextConnect from 'next-connect';
 import multer from 'multer';
 import { onError } from '../../../lib/api-middleware';
 import path from 'path';
 import bodyParser from 'body-parser';
+import { hashPassword } from '../../../lib/password';
 
 interface UserDto {
   firstName: string;
@@ -43,7 +43,7 @@ handler.use(uploadFile);
 // POST /api/user
 handler.post(
   async (
-    req: NextApiRequest & { [key: string]: any },
+    req: NextApiRequest & { [key: string]: string },
     res: NextApiResponse
   ) => {
     const userDto: UserDto = req.body;
@@ -96,10 +96,6 @@ export async function createUser(userDto: UserDto, universityProofImage) {
 
   const { passwordHash, ...userWithoutPassword } = user;
   return userWithoutPassword;
-}
-
-async function hashPassword(password: string): Promise<string> {
-  return await sha256(password).toString();
 }
 
 export default handler;
