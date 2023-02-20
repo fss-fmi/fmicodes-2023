@@ -3,7 +3,7 @@
 import { ReactNode } from 'react';
 import '../styles/globals.css';
 import Head from 'next/head';
-import Navbar from '../components/navbar/Navbar';
+import Navbar from '../components/navbar/navbar';
 import { SessionProvider } from 'next-auth/react';
 
 /**
