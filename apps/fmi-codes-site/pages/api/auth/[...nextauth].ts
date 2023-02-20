@@ -20,12 +20,16 @@ export default NextAuth({
           where: { email },
         });
 
-        if (!user) {
-          throw new Error('No user found');
+        if (!user || !(await comparePasswords(password, user.passwordHash))) {
+          // throw new Error('Невалиден имейл адрес или парола.');
+          throw new Error('Invalid email address or password.');
         }
 
-        if (!(await comparePasswords(password, user.passwordHash))) {
-          throw new Error('Invalid password');
+        if (!user.emailVerifiedDate) {
+          throw new Error(
+            // 'Имейл адресът не е потвърден. Моля, проверете пощата си.' TODO: Find a way to return message in cyrillic
+            'Email address is not verified. Please check your email for instructions on verifying.'
+          );
         }
 
         return {
@@ -40,6 +44,7 @@ export default NextAuth({
   pages: {
     signIn: '/auth/login',
     signOut: '/auth/signout',
+    error: '/auth/login',
   },
   secret: process.env.SECRET,
   session: { strategy: 'jwt' },

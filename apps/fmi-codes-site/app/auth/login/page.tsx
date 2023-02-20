@@ -6,12 +6,12 @@ import LoginForm from '../../../components/login-form/login-form';
  * @return {ReactNode} Login page component.
  * @constructor
  */
-export default function LoginPage(): ReactNode {
+export default function LoginPage({ searchParams }): ReactNode {
   return (
     <div className="login-page">
       <h1>Login</h1>
       <div className="grid place-items-center h-screen">
-        <LoginForm />
+        <LoginForm error={searchParams.error} />
       </div>
     </div>
   );

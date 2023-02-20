@@ -4,7 +4,11 @@ import { useForm } from 'react-hook-form';
 import FormTextField from '../form-text-field/form-text-field';
 import { signIn } from 'next-auth/react';
 
-export function LoginForm() {
+interface LoginFormProps {
+  error?: string;
+}
+
+export function LoginForm(props: LoginFormProps) {
   const {
     register,
     handleSubmit,
@@ -50,8 +54,13 @@ export function LoginForm() {
         <h1 className="text-xl font-bold text-gray-900 md:text-2xl dark:text-white">
           Вход
         </h1>
+        <div>
+          {props.error && (
+            <div className="text-red-500 text-sm">{props.error}</div>
+          )}
+        </div>
         <form
-          className="space-y-4 md:space-y-6 xl:columns-2"
+          className="space-y-4 md:space-y-6"
           onSubmit={handleSubmit(onSubmit)}
         >
           {formFields.map((field) => {
