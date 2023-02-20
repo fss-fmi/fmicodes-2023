@@ -37,10 +37,11 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 const uploadFile = upload.single('universityProofImage');
 
-handler.use(bodyParser());
+handler.use(bodyParser.json());
+handler.use(bodyParser.urlencoded({ extended: true }));
 handler.use(uploadFile);
 
-// POST /api/user
+// POST /api/users
 handler.post(
   async (
     req: NextApiRequest & { [key: string]: string },
