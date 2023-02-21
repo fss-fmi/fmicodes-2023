@@ -1,12 +1,14 @@
 'use client';
+
 import { Disclosure, Transition } from '@headlessui/react';
 import React, { FC, Fragment } from 'react';
-import { usePathname } from 'next/navigation';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import NavbarProfile from '../navbar-profile/navbar-profile';
 import Link from 'next/link';
 import Image from 'next/image';
 import fmiCodesLogo from '../../public/images/fmi-codes-logo-60x60.jpg';
+import FancyLink from '../fancy-link/fancy-link';
+import { SessionProvider } from 'next-auth/react';
 
 const navigation = [
   { name: 'За хакатона', href: '/about' },
@@ -19,8 +21,6 @@ const navigation = [
 ];
 
 const Navbar: FC = () => {
-  const pathname = usePathname();
-
   return (
     <Disclosure as="nav" className="sticky top-0 z-10 bg-gray-800">
       {({ open }) => (
@@ -53,28 +53,18 @@ const Navbar: FC = () => {
                 <div className="hidden lg:ml-6 lg:block">
                   <div className="flex space-x-2">
                     {navigation.map((item) => (
-                      <Link
-                        key={item.name}
-                        href={item.href}
-                        className={
-                          (item.href === pathname
-                            ? 'bg-gray-900 text-white'
-                            : 'text-gray-300 hover:bg-gray-700 hover:text-white') +
-                          ' px-3 py-2 rounded-md text-sm font-medium'
-                        }
-                        aria-current={
-                          item.href === pathname ? 'page' : undefined
-                        }
-                      >
+                      <FancyLink key={item.name} href={item.href}>
                         {item.name}
-                      </Link>
+                      </FancyLink>
                     ))}
                   </div>
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 lg:static lg:inset-auto lg:ml-6 lg:pr-0">
                 {/* Profile dropdown */}
-                <NavbarProfile />
+                <SessionProvider>
+                  <NavbarProfile />
+                </SessionProvider>
               </div>
             </div>
           </div>
@@ -90,19 +80,12 @@ const Navbar: FC = () => {
             <Disclosure.Panel className="lg:hidden">
               <div className="space-y-1 px-2 pt-2 pb-3">
                 {navigation.map((item) => (
-                  <Disclosure.Button
-                    key={item.name}
-                    as="a"
-                    href={item.href}
-                    className={
-                      (item.href === pathname
-                        ? 'bg-gray-900 text-white'
-                        : 'text-gray-300 hover:bg-gray-700 hover:text-white') +
-                      ' block px-3 py-2 rounded-md text-base font-medium'
-                    }
-                    aria-current={item.href === pathname ? 'page' : undefined}
-                  >
-                    {item.name}
+                  <Disclosure.Button key={item.name} className="block w-full">
+                    {({ open }) => (
+                      <FancyLink href={item.href} isBlock>
+                        {item.name}
+                      </FancyLink>
+                    )}
                   </Disclosure.Button>
                 ))}
               </div>

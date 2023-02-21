@@ -1,8 +1,8 @@
+'use client';
 import { Menu, Transition } from '@headlessui/react';
 import React, { Fragment } from 'react';
 import styles from './navbar-profile.module.scss';
-import { usePathname } from 'next/navigation';
-import Link from 'next/link';
+import FancyLink from '../fancy-link/fancy-link';
 import { useSession } from 'next-auth/react';
 
 const loginNavigation = [
@@ -17,7 +17,6 @@ const profileNavigation = [
 ];
 
 const NavbarProfile = () => {
-  const pathname = usePathname();
   const { data: session, status } = useSession();
 
   return (
@@ -66,20 +65,13 @@ const NavbarProfile = () => {
       ) : (
         <div className="flex space-x-2">
           {loginNavigation.map((item) => (
-            <Link
+            <FancyLink
               key={item.name}
               href={item.href}
-              className={
-                (item.href === pathname
-                  ? 'bg-gray-900 text-white'
-                  : 'text-gray-300 hover:bg-gray-700 hover:text-white') +
-                (item.isPrimary ? ' bg-purple-900' : '') +
-                ' px-3 py-2 rounded-md text-sm font-medium'
-              }
-              aria-current={item.href === pathname ? 'page' : undefined}
+              isPrimary={item.isPrimary}
             >
               {item.name}
-            </Link>
+            </FancyLink>
           ))}
         </div>
       )}

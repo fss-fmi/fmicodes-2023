@@ -3,6 +3,7 @@
 import { useForm } from 'react-hook-form';
 import FormTextField from '../form-text-field/form-text-field';
 import { signIn } from 'next-auth/react';
+import FancyButton from '../fancy-button/fancy-button';
 
 interface LoginFormProps {
   error?: string;
@@ -74,12 +75,7 @@ export function LoginForm(props: LoginFormProps) {
             );
           })}
           <div className="flex justify-end">
-            <button
-              type="submit"
-              className="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
-            >
-              Вход
-            </button>
+            <FancyButton isPrimary>Вход</FancyButton>
           </div>
         </form>
       </div>

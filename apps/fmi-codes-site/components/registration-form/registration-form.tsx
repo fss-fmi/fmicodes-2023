@@ -5,6 +5,7 @@ import FormImageField from '../form-image-field/form-image-field';
 import FormDropdownField from '../form-dropdown-field/form-dropdown-field';
 import FormTextField from '../form-text-field/form-text-field';
 import { router } from 'next/client';
+import FancyButton from '../fancy-button/fancy-button';
 
 export function RegistrationForm() {
   const {
@@ -147,54 +148,51 @@ export function RegistrationForm() {
           Регистрация
         </h1>
         <form
-          className="space-y-4 md:space-y-6 xl:columns-2"
+          className="space-y-4 md:space-y-6"
           onSubmit={handleSubmit(onSubmit)}
         >
-          {formFields.map((field) => {
-            switch (field.type) {
-              case 'text':
-              case 'email':
-              case 'phone':
-              case 'password':
-                return (
-                  <FormTextField
-                    key={field.name}
-                    register={register}
-                    errors={errors}
-                    {...field}
-                  />
-                );
+          <div className="xl:columns-2">
+            {formFields.map((field) => {
+              switch (field.type) {
+                case 'text':
+                case 'email':
+                case 'phone':
+                case 'password':
+                  return (
+                    <FormTextField
+                      key={field.name}
+                      register={register}
+                      errors={errors}
+                      {...field}
+                    />
+                  );
 
-              case 'dropdown':
-                return (
-                  // TODO: Fix field type
-                  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                  // @ts-ignore
-                  <FormDropdownField
-                    key={field.name}
-                    register={register}
-                    errors={errors}
-                    {...field}
-                  />
-                );
-              case 'image':
-                return (
-                  <FormImageField
-                    key={field.name}
-                    register={register}
-                    errors={errors}
-                    {...field}
-                  />
-                );
-            }
-          })}
+                case 'dropdown':
+                  return (
+                    // TODO: Fix field type
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                    // @ts-ignore
+                    <FormDropdownField
+                      key={field.name}
+                      register={register}
+                      errors={errors}
+                      {...field}
+                    />
+                  );
+                case 'image':
+                  return (
+                    <FormImageField
+                      key={field.name}
+                      register={register}
+                      errors={errors}
+                      {...field}
+                    />
+                  );
+              }
+            })}
+          </div>
           <div className="flex justify-end">
-            <button
-              type="submit"
-              className="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
-            >
-              Регистрация
-            </button>
+            <FancyButton isPrimary>Регистрация</FancyButton>
           </div>
         </form>
       </div>

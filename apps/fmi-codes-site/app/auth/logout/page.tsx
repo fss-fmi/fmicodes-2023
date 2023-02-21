@@ -2,6 +2,7 @@
 
 import { ReactNode } from 'react';
 import { signOut } from 'next-auth/react';
+import FancyButton from '../../../components/fancy-button/fancy-button';
 
 interface Props {
   callbackUrl: string;
@@ -15,11 +16,12 @@ interface Props {
 export default function LogoutPage(props: Props): ReactNode {
   return (
     <div>
-      <button
-        onClick={() => signOut({ callbackUrl: props.callbackUrl ?? '/' })}
+      <FancyButton
+        isPrimary
+        onClick={() => signOut({ callbackUrl: props.callbackUrl })}
       >
-        Sign out
-      </button>
+        Изход
+      </FancyButton>
     </div>
   );
 }
