@@ -1,24 +1,15 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../../lib/prismadb';
+import nextConnect from 'next-connect';
+import { onError } from '../../../lib/api-middleware';
 
-export default async function handle(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  if (req.method === 'GET') {
-    await handleGET(res);
-  } else {
-    throw new Error(
-      `The HTTP ${req.method} method is not supported at this route.`
-    );
-  }
-}
+const handler = nextConnect(onError);
 
 // GET /api/teams
-async function handleGET(res) {
+handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
   const teams = await getTeams();
   res.json(teams);
-}
+});
 
 export async function getTeams() {
   return await prisma.team.findMany({
@@ -28,3 +19,5 @@ export async function getTeams() {
     },
   });
 }
+
+export default handler;
