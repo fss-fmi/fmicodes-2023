@@ -18,6 +18,7 @@ export function FormImageField(props: FormImageFieldProps) {
     <>
       <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
         {props.label}
+        {props.required && <span className="text-red-500">*</span>}
         {props.description && (
           <span className="block text-xs text-gray-500 text-justify">
             {props.description}

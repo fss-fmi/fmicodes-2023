@@ -15,6 +15,7 @@ export function FormDropdownField(props: FormDropdownFieldProps) {
     <>
       <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
         {props.label}
+        {props.required && <span className="text-red-500">*</span>}
         {props.description && (
           <span className="text-xs text-gray-500">{props.description}</span>
         )}

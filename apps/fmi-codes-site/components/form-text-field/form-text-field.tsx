@@ -22,6 +22,7 @@ export function FormTextField(props: FormTextFieldProps) {
     <>
       <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
         {props.label}
+        {props.required && <span className="text-red-500">*</span>}
         {props.description && (
           <span className="text-xs text-gray-500">{props.description}</span>
         )}
@@ -29,7 +30,6 @@ export function FormTextField(props: FormTextFieldProps) {
           className="border-solid border-gray-300 border py-2 px-2 my-1 w-full rounded text-gray-700"
           name={props.name}
           type={props.type}
-          // required={props.required}
           placeholder={props.placeholder}
           {...props.register(props.name, {
             required: props.required,
