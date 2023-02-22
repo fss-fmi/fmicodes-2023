@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import TeamCard from '../../components/team-card/team-card';
 import { getTeams } from '../../pages/api/teams';
+import TeamWidget from '../../components/team-widget/team-widget';
 
 /**
  * Defines the "/teams" page.
@@ -13,7 +14,14 @@ export default async function TeamsPage(): Promise<ReactNode> {
   return (
     <div className="teams-page">
       <h1>Teams</h1>
-      <div className={'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'}>
+
+      {/* @ts-expect-error Server Component */}
+      <TeamWidget />
+
+      <div
+        id="team-cards"
+        className={'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'}
+      >
         {teams.map((team, i) => (
           <TeamCard
             key={i}

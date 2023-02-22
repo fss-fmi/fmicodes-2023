@@ -1,10 +1,10 @@
-import NextAuth from 'next-auth';
+import NextAuth, { NextAuthOptions } from 'next-auth';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import prisma from '../../../lib/prismadb';
 import { comparePasswords } from '../../../lib/password';
 
-export default NextAuth({
+export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
@@ -21,15 +21,15 @@ export default NextAuth({
         });
 
         if (!user || !(await comparePasswords(password, user.passwordHash))) {
-          // throw new Error('Невалиден имейл адрес или парола.');
+          // throw create Error('Невалиден имейл адрес или парола.');
           throw new Error('Invalid email address or password.');
         }
 
         if (!user.emailVerifiedDate) {
-          throw new Error(
-            // 'Имейл адресът не е потвърден. Моля, проверете пощата си.' TODO: Find a way to return message in cyrillic
-            'Email address is not verified. Please check your email for instructions on verifying.'
-          );
+          // throw create Error(
+          //   // 'Имейл адресът не е потвърден. Моля, проверете пощата си.' TODO: Find a way to return message in cyrillic
+          //   'Email address is not verified. Please check your email for instructions on verifying.'
+          // );
         }
 
         return {
@@ -46,6 +46,10 @@ export default NextAuth({
     signOut: '/auth/signout',
     error: '/auth/login',
   },
-  secret: process.env.SECRET,
-  session: { strategy: 'jwt' },
-});
+  secret: process.env.NEXTAUTH_SECRET,
+  session: {
+    strategy: 'jwt',
+  },
+};
+
+export default NextAuth(authOptions);
