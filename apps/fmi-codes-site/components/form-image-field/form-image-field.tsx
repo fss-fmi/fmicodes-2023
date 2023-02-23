@@ -68,11 +68,11 @@ export function FormImageField(props: FormImageFieldProps) {
             })}
           />
         </div>
-        {props.errors[props.name] && (
-          <p className="text-normal text-red-500 ">
-            {String(props.errors[props.name].message)}
-          </p>
-        )}
+        <div className="text-normal text-red-500 h-4">
+          {props.errors[props.name] && (
+            <span>{String(props.errors[props.name].message)}</span>
+          )}
+        </div>
       </label>
     </>
   );
