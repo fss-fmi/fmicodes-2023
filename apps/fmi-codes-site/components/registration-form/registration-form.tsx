@@ -4,13 +4,16 @@ import { useForm } from 'react-hook-form';
 import FormImageField from '../form-image-field/form-image-field';
 import FormDropdownField from '../form-dropdown-field/form-dropdown-field';
 import FormTextField from '../form-text-field/form-text-field';
-import { router } from 'next/client';
 import FancyButton from '../fancy-button/fancy-button';
+import { useRouter } from 'next/navigation';
 
 export function RegistrationForm() {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -132,6 +135,8 @@ export function RegistrationForm() {
         method: 'POST',
         body: formData,
       }); // TODO: replace with = await createUser(body);
+
+      reset();
 
       if (res.status === 201) {
         await router.push('/auth/login');

@@ -1,3 +1,4 @@
+import TeamRegistrationForm from '../../../components/team-registration-form/team-registration-form';
 import { ReactNode } from 'react';
 
 /**
@@ -6,5 +7,9 @@ import { ReactNode } from 'react';
  * @constructor
  */
 export default function NewTeamPage(): ReactNode {
-  return <div className="new-team-page"></div>;
+  return (
+    <div className="new-team-page">
+      <TeamRegistrationForm title="Създаване на отбор" />
+    </div>
+  );
 }

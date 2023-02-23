@@ -2,8 +2,19 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../../lib/prismadb';
 import nextConnect from 'next-connect';
 import { onError } from '../../../lib/api-middleware';
+import { getUserBySession } from '../users/self';
+import { authOptions } from '../auth/[...nextauth]';
+import { getServerSession } from 'next-auth';
 
 const handler = nextConnect(onError);
+
+interface TeamDto {
+  name: string;
+  projectName?: string;
+  projectDescription?: string;
+  projectRepository?: string;
+  projectLink?: string;
+}
 
 // GET /api/teams
 handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
@@ -17,6 +28,38 @@ export async function getTeams() {
       members: true,
       teamProjectTechnologies: { include: { technology: true } },
     },
+  });
+}
+
+// POST /api/teams
+handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
+  const session = await getServerSession(req, res, authOptions);
+  if (!session) {
+    res.status(401).send('Unauthorized');
+    return;
+  }
+
+  const teamDto: TeamDto = req.body;
+  const team = await createTeam(teamDto);
+
+  const user = await getUserBySession(session);
+  await assignPlayerToTeam(team.id, user.id);
+
+  res.status(201).json(team);
+});
+
+export async function createTeam(teamDto: TeamDto) {
+  const teamInformation = {
+    ...teamDto,
+    acceptsNewMembers: true,
+  };
+  return await prisma.team.create({ data: teamInformation });
+}
+
+export async function assignPlayerToTeam(teamId: number, playerId: string) {
+  await prisma.user.update({
+    where: { id: playerId },
+    data: { teamId: teamId },
   });
 }
 
