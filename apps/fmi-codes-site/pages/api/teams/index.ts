@@ -14,6 +14,7 @@ interface TeamDto {
   projectDescription?: string;
   projectRepository?: string;
   projectLink?: string;
+  teamProjectTechnologies: string[];
 }
 
 // GET /api/teams
@@ -49,9 +50,17 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 });
 
 export async function createTeam(teamDto: TeamDto) {
+  console.log(teamDto);
+  const projectTechnologies = teamDto.teamProjectTechnologies.map((t) => {
+    return { technology: { connect: { id: parseInt(t) } } };
+  });
+
   const teamInformation = {
     ...teamDto,
     acceptsNewMembers: true,
+    teamProjectTechnologies: {
+      create: projectTechnologies,
+    },
   };
   return await prisma.team.create({ data: teamInformation });
 }

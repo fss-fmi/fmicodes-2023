@@ -6,8 +6,14 @@ import FormDropdownField from '../form-dropdown-field/form-dropdown-field';
 import FormTextField from '../form-text-field/form-text-field';
 import FancyButton from '../fancy-button/fancy-button';
 import { useRouter } from 'next/navigation';
+import FormTechnologiesField from '../form-technologies-field/form-technologies-field';
+import { Technology } from '@prisma/client';
 
-export function RegistrationForm() {
+interface RegistrationFormProps {
+  technologies: Technology[];
+}
+
+export function RegistrationForm(props: RegistrationFormProps) {
   const router = useRouter();
 
   const {
@@ -121,6 +127,13 @@ export function RegistrationForm() {
       description:
         'Снимка на студентската Ви книжка или профила Ви в студентската система на университета, на която се вижда, че сте записали летен семестър през учебната 2022/2023 година',
     },
+    {
+      name: 'userTechnologies',
+      type: 'technologies',
+      label: 'Технологии',
+      required: true,
+      technologies: props.technologies,
+    },
   ];
 
   const onSubmit = async (data) => {
@@ -187,6 +200,16 @@ export function RegistrationForm() {
                 case 'image':
                   return (
                     <FormImageField
+                      key={field.name}
+                      register={register}
+                      errors={errors}
+                      {...field}
+                    />
+                  );
+                case 'technologies':
+                  return (
+                    // @ts-expect-error Server component.
+                    <FormTechnologiesField
                       key={field.name}
                       register={register}
                       errors={errors}

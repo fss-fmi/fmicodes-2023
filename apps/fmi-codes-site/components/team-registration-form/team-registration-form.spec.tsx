@@ -5,7 +5,7 @@ import TeamRegistrationForm from './team-registration-form';
 describe('TeamRegistrationForm', () => {
   it('should render successfully', () => {
     const { baseElement } = render(
-      <TeamRegistrationForm title="Създаване на отбор" />
+      <TeamRegistrationForm title="Създаване на отбор" technologies={[]} />
     );
     expect(baseElement).toBeTruthy();
   });

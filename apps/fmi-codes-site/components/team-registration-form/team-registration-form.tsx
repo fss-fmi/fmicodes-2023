@@ -1,15 +1,20 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
-import { router } from 'next/client';
 import FormTextField from '../form-text-field/form-text-field';
 import FancyButton from '../fancy-button/fancy-button';
+import { Technology } from '@prisma/client';
+import { useRouter } from 'next/navigation';
+import FormTechnologiesField from '../form-technologies-field/form-technologies-field';
 
 export interface TeamRegistrationFormProps {
   title: string;
+  technologies: Technology[];
 }
 
 export function TeamRegistrationForm(props: TeamRegistrationFormProps) {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -57,6 +62,13 @@ export function TeamRegistrationForm(props: TeamRegistrationFormProps) {
       required: false,
       placeholder: '',
     },
+    {
+      name: 'teamProjectTechnologies',
+      type: 'technologies',
+      label: 'Използвани технологии',
+      required: false,
+      technologies: props.technologies,
+    },
   ];
 
   const onSubmit = async (data) => {
@@ -98,6 +110,16 @@ export function TeamRegistrationForm(props: TeamRegistrationFormProps) {
                 case 'password':
                   return (
                     <FormTextField
+                      key={field.name}
+                      register={register}
+                      errors={errors}
+                      {...field}
+                    />
+                  );
+                case 'technologies':
+                  return (
+                    // @ts-expect-error TODO: Fix types
+                    <FormTechnologiesField
                       key={field.name}
                       register={register}
                       errors={errors}

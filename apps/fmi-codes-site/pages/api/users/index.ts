@@ -18,6 +18,7 @@ interface UserDto {
   universityMajor: string;
   universityYear: string;
   universityFacultyNumber: string;
+  userTechnologies: string;
 }
 
 const handler = nextConnect(onError);
@@ -84,11 +85,18 @@ export async function createUser(userDto: UserDto, universityProofImage) {
 
   const { password, ...userDtoWithoutPassword } = userDto;
 
+  const userTechnologies = userDto.userTechnologies.split(',').map((t) => {
+    return { technology: { connect: { id: parseInt(t) } } };
+  });
+
   const userInformation = {
     ...userDtoWithoutPassword,
     passwordHash: hashedPassword,
     universityProofImage: universityProofImage.path,
     discordVerificationCode: discordVerificationCode,
+    userTechnologies: {
+      create: userTechnologies,
+    },
   };
 
   const user = await prisma.user.create({
