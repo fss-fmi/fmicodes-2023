@@ -6,6 +6,7 @@ import FancyButton from '../fancy-button/fancy-button';
 import { Technology } from '@prisma/client';
 import { useRouter } from 'next/navigation';
 import FormTechnologiesField from '../form-technologies-field/form-technologies-field';
+import InviteUsersButton from '../invite-users-button/invite-users-button';
 
 export interface TeamRegistrationFormProps {
   title: string;
@@ -20,7 +21,7 @@ export function TeamRegistrationForm(props: TeamRegistrationFormProps) {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm();
+  } = useForm({ mode: 'onBlur' });
 
   const formFields = [
     {
@@ -128,6 +129,9 @@ export function TeamRegistrationForm(props: TeamRegistrationFormProps) {
                   );
               }
             })}
+          </div>
+          <div className="border-t border-gray-200 dark:border-gray-700 pt-4 md:pt-6">
+            <InviteUsersButton technologies={props.technologies} />
           </div>
           <div className="flex justify-end">
             <FancyButton isPrimary>Създай отбор</FancyButton>

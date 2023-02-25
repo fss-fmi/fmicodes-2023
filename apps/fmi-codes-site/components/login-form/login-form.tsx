@@ -14,7 +14,7 @@ export function LoginForm(props: LoginFormProps) {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({ mode: 'onBlur' });
 
   const formFields = [
     {

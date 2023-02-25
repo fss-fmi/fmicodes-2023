@@ -21,7 +21,7 @@ export function RegistrationForm(props: RegistrationFormProps) {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm();
+  } = useForm({ mode: 'onBlur' });
 
   const formFields = [
     {
