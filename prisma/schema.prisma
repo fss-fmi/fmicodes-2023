@@ -76,7 +76,7 @@ model UserTechnology {
 
 model Team {
   id                      Int                     @id @default(autoincrement())
-  name                    String
+  name                    String                  @unique
   image                   String?
   projectName             String?                 @map("project_name")
   projectDescription      String?                 @map("project_description")
@@ -84,6 +84,8 @@ model Team {
   projectLink             String?                 @map("project_link")
   acceptsNewMembers       Boolean                 @map("accepts_new_members")
   points                  Int?
+  room                    String?
+  presentationTime        DateTime?               @map("presentation_time")
   createdAt               DateTime                @default(now()) @map("created_at")
   members                 User[]
   teamRequests            TeamRequest[]
@@ -178,7 +180,7 @@ model AdminEmail {
 
 model Technology {
   id                      Int                     @id @default(autoincrement())
-  name                    String
+  name                    String                  @unique
   color                   String
   userTechnologies        UserTechnology[]
   teamProjectTechnologies TeamProjectTechnology[]
