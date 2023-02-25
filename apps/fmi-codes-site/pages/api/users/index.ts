@@ -85,9 +85,11 @@ export async function createUser(userDto: UserDto, universityProofImage) {
 
   const { password, ...userDtoWithoutPassword } = userDto;
 
-  const userTechnologies = userDto.userTechnologies.split(',').map((t) => {
-    return { technology: { connect: { id: parseInt(t) } } };
-  });
+  const userTechnologies = userDto.userTechnologies
+    ? userDto.userTechnologies.split(',').map((t) => {
+        return { technology: { connect: { id: parseInt(t) } } };
+      })
+    : [];
 
   const userInformation = {
     ...userDtoWithoutPassword,
