@@ -1,11 +1,10 @@
-import {Injectable} from '@nestjs/common';
-import {PgService} from "../database/pg.service";
-import {InjectDiscordClient} from "@discord-nestjs/core";
-import {Client, Guild, Role} from "discord.js";
-import {ChannelType} from "discord-api-types/v10";
-import environment from "../../environments/environment";
-import {PrismaService} from "../database/prisma.service";
-
+import { Injectable } from '@nestjs/common';
+import { PgService } from '../database/pg.service';
+import { InjectDiscordClient } from '@discord-nestjs/core';
+import { Client, Guild, Role } from 'discord.js';
+import { ChannelType } from 'discord-api-types/v10';
+import environment from '../../environments/environment';
+import { PrismaService } from '../database/prisma.service';
 
 interface Team {
   id: number;
@@ -17,7 +16,7 @@ export class TeamService {
   constructor(
     private readonly pg: PgService,
     private readonly prisma: PrismaService,
-    @InjectDiscordClient() private readonly client: Client,
+    @InjectDiscordClient() private readonly client: Client
   ) {
     // Subscribe to database team added event
     pg.client.query('LISTEN team_added');
@@ -58,7 +57,7 @@ export class TeamService {
       name: `❓︱въпроси-към-менторите`,
       topic: `Канал за въпроси на отбор ${team.name} към менторите`,
       availableTags: await this.prisma.technology.findMany({
-        select: {name: true},
+        select: { name: true },
       }),
       type: ChannelType.GuildForum,
       parent: category.id,
@@ -74,7 +73,7 @@ export class TeamService {
 
     // Set channels to be visible only to team members
     const everyone = guild.roles.cache.find(
-      role => role.name === '@everyone',
+      (role) => role.name === '@everyone'
     );
 
     await category.permissionOverwrites.create(everyone, {
@@ -85,6 +84,6 @@ export class TeamService {
       ViewChannel: true,
     });
 
-    return {category, textChannel, questionsChannel, voiceChannel};
+    return { category, textChannel, questionsChannel, voiceChannel };
   }
 }

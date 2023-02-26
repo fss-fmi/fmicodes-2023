@@ -50,7 +50,6 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 });
 
 export async function createTeam(teamDto: TeamDto) {
-  console.log(teamDto);
   const projectTechnologies = teamDto.teamProjectTechnologies
     ? teamDto.teamProjectTechnologies.map((t) => {
         return { technology: { connect: { id: parseInt(t) } } };
