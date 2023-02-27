@@ -1,7 +1,8 @@
-import { ReactNode } from 'react';
 import '../styles/globals.css';
+
 import Head from 'next/head';
 import Navbar from '../components/navbar/navbar';
+import { ReactNode } from 'react';
 
 /**
  * Defines the layout of the application.

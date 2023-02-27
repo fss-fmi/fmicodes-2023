@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { ReactNode } from 'react';
+import { usePathname } from 'next/navigation';
 
 export interface FancyLinkProps {
   href: string;
@@ -11,7 +12,7 @@ export interface FancyLinkProps {
 }
 
 export function FancyLink(props: FancyLinkProps) {
-  const pathname = '/';
+  const pathname = usePathname();
 
   return (
     <Link
