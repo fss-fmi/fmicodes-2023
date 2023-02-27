@@ -1,6 +1,7 @@
-import styles from './form-technologies-field.module.scss';
-import { Technology } from '@prisma/client';
 import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
+
+import { Technology } from '@prisma/client';
+import styles from './form-technologies-field.module.scss';
 
 export interface FormTechnologiesFieldProps {
   name: string;
@@ -31,7 +32,6 @@ export function FormTechnologiesField(props: FormTechnologiesFieldProps) {
             >
               <input
                 type="checkbox"
-                name={tech.name}
                 value={tech.id}
                 className={styles['badge-checkbox']}
                 {...props.register(props.name)}
@@ -41,11 +41,11 @@ export function FormTechnologiesField(props: FormTechnologiesFieldProps) {
           ))}
         </div>
 
-        {props.errors[props.name] && (
-          <p className="text-normal text-red-500">
-            {String(props.errors[props.name].message)}
-          </p>
-        )}
+        <div className="text-normal text-red-500 h-4">
+          {props.errors[props.name] && (
+            <span>{String(props.errors[props.name])}</span>
+          )}
+        </div>
       </label>
     </>
   );

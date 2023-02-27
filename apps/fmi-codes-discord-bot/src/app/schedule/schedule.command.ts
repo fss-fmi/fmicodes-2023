@@ -6,6 +6,7 @@ import {
   TransformedCommandExecutionContext,
   UsePipes
 } from "@discord-nestjs/core";
+import {ChannelType} from 'discord-api-types/v10';
 import {ScheduleService} from "./schedule.service";
 import {ScheduleDto} from "./schedule.dto";
 import {TransformPipe} from "@discord-nestjs/common";
@@ -25,6 +26,10 @@ export class ScheduleCommand implements DiscordTransformedCommand<ScheduleDto> {
     @Payload() dto: ScheduleDto,
     {interaction}: TransformedCommandExecutionContext,
   ): Promise<string> {
+    if (interaction.channel.type !== ChannelType.GuildText) {
+        return 'Тази команда може да се използва само в текстови канали.';
+    }
+
     const schedule = await this.scheduleService.getSchedule();
     for (const event of schedule) {
       const eventEmbed = this.scheduleService.getEventEmbed(event);

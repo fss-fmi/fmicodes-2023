@@ -1,13 +1,13 @@
-import styles from './team-card.module.css';
 import FancyCard from '../fancy-card/fancy-card';
 import { Technology } from '@prisma/client';
+import styles from './team-card.module.css';
 
 export interface TeamCardProps {
   image: string;
   name: string;
   roaster: string[];
-  projectName: string;
-  projectDescription: string;
+  projectName: string | null;
+  projectDescription: string | null;
   projectTechnologies: Technology[];
 }
 
@@ -30,8 +30,8 @@ export function TeamCard(props: TeamCardProps) {
 
 function CardContent(
   roaster: string[],
-  projectName: string,
-  projectDescription: string,
+  projectName: string | null,
+  projectDescription: string | null,
   projectTechnologies: Technology[]
 ) {
   return (

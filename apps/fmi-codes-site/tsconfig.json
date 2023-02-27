@@ -15,11 +15,10 @@
       "jest",
       "node"
     ],
-    "plugins": [
-      {
+    "strictNullChecks": true,
+    "plugins": [{
         "name": "next"
-      }
-    ]
+    }]
   },
   "include": [
     "**/*.ts",
@@ -27,15 +26,11 @@
     "**/*.js",
     "**/*.jsx",
     "next-env.d.ts",
-    ".next/types/**/*.ts",
-    "../../apps/fmi-codes-site/.next/types/**/*.ts"
+    "../../apps/fmi-codes-site/.next/types/**/*.ts",
+    ".next/types/**/*.ts"
   ],
   "exclude": [
     "node_modules",
     "jest.config.ts"
-  ],
-  "lib": [
-    "dom",
-    "dom.iterable",
   ]
 }

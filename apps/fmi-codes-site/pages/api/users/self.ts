@@ -1,9 +1,10 @@
+import { NextApiRequest, NextApiResponse } from 'next';
+import { Session, getServerSession } from 'next-auth';
+
+import { authOptions } from '../auth/[...nextauth]';
 import nextConnect from 'next-connect';
 import { onError } from '../../../lib/api-middleware';
-import { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../../lib/prismadb';
-import { getServerSession, Session } from 'next-auth';
-import { authOptions } from '../auth/[...nextauth]';
 
 const handler = nextConnect(onError);
 
@@ -19,16 +20,25 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
 });
 
 export async function getUserByEmail(email: string) {
-  const { passwordHash, ...user } = await prisma.user.findUnique({
+  const dbUser = await prisma.user.findUnique({
     where: {
       email: email,
     },
   });
+  
+  if (!dbUser) {
+    return null;
+  }
+  
+  const { passwordHash, ...user } = dbUser;
 
   return user;
 }
 
 export async function getUserBySession(session: Session) {
+  if (!session.user || !session.user.email) {
+    return null;
+  }
   return await getUserByEmail(session.user.email);
 }
 

@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import { ReactNode } from 'react';
 
 export interface FancyLinkProps {
@@ -12,7 +11,7 @@ export interface FancyLinkProps {
 }
 
 export function FancyLink(props: FancyLinkProps) {
-  const pathname = usePathname();
+  const pathname = '/';
 
   return (
     <Link

@@ -1,10 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import prisma from '../../../lib/prismadb';
-import nextConnect from 'next-connect';
-import { onError } from '../../../lib/api-middleware';
-import { getUserBySession } from '../users/self';
+
 import { authOptions } from '../auth/[...nextauth]';
 import { getServerSession } from 'next-auth';
+import { getUserBySession } from '../users/self';
+import nextConnect from 'next-connect';
+import { onError } from '../../../lib/api-middleware';
+import prisma from '../../../lib/prismadb';
 
 const handler = nextConnect(onError);
 
@@ -44,6 +45,10 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
   const team = await createTeam(teamDto);
 
   const user = await getUserBySession(session);
+  if (!user) {
+    res.status(401).send('Unauthorized');
+    return;
+  }
   await assignPlayerToTeam(team.id, user.id);
 
   res.status(201).json(team);

@@ -21,7 +21,6 @@ export function FormDropdownField(props: FormDropdownFieldProps) {
         )}
         <select
           className="border-solid border-gray-300 border py-2 px-2 my-1 w-full rounded text-gray-700"
-          name={props.name}
           required={props.required}
           {...props.register(props.name, {
             required: props.required,
@@ -37,7 +36,7 @@ export function FormDropdownField(props: FormDropdownFieldProps) {
         </select>
         <div className="text-normal text-red-500 h-4">
           {props.errors[props.name] && (
-            <span>{String(props.errors[props.name].message)}</span>
+            <span>{String(props.errors[props.name])}</span>
           )}
         </div>
       </label>

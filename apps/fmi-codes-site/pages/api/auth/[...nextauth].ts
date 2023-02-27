@@ -1,8 +1,9 @@
 import NextAuth, { NextAuthOptions } from 'next-auth';
-import { PrismaAdapter } from '@next-auth/prisma-adapter';
+
 import CredentialsProvider from 'next-auth/providers/credentials';
-import prisma from '../../../lib/prismadb';
+import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { comparePasswords } from '../../../lib/password';
+import prisma from '../../../lib/prismadb';
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -15,6 +16,11 @@ export const authOptions: NextAuthOptions = {
         password: { label: 'Password', type: 'password' },
       },
       authorize: async (credentials, request) => {
+        if (!credentials || !credentials.email || !credentials.password) {
+          // throw create Error('Моля, попълнете всички полета.');
+          throw new Error('Please fill all fields.');
+        }
+
         const { email, password } = credentials;
         const user = await prisma.user.findUnique({
           where: { email },

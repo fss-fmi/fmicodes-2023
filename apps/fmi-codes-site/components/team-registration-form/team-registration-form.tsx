@@ -1,12 +1,12 @@
 'use client';
 
-import { useForm } from 'react-hook-form';
-import FormTextField from '../form-text-field/form-text-field';
 import FancyButton from '../fancy-button/fancy-button';
-import { Technology } from '@prisma/client';
-import { useRouter } from 'next/navigation';
 import FormTechnologiesField from '../form-technologies-field/form-technologies-field';
+import FormTextField from '../form-text-field/form-text-field';
 import InviteUsersButton from '../invite-users-button/invite-users-button';
+import { Technology } from '@prisma/client';
+import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
 
 export interface TeamRegistrationFormProps {
   title: string;
@@ -82,10 +82,8 @@ export function TeamRegistrationForm(props: TeamRegistrationFormProps) {
 
       reset();
 
-      const id = res.body['id'];
-
       if (res.status === 201) {
-        await router.push(`/teams`);
+        router.push(`/teams`);
       }
     } catch (error) {
       console.error(error);

@@ -28,7 +28,6 @@ export function FormTextField(props: FormTextFieldProps) {
         )}
         <input
           className="border-solid border-gray-300 border py-2 px-2 my-1 w-full rounded text-gray-700"
-          name={props.name}
           type={props.type}
           placeholder={props.placeholder}
           {...props.register(props.name, {
@@ -72,7 +71,7 @@ export function FormTextField(props: FormTextFieldProps) {
         />
         <div className="text-normal text-red-500 h-4">
           {props.errors[props.name] && (
-            <span>{String(props.errors[props.name].message)}</span>
+            <span>{String(props.errors[props.name])}</span>
           )}
         </div>
       </label>

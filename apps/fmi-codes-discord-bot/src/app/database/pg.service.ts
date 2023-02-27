@@ -8,6 +8,7 @@ export class PgService {
   });
 
   constructor() {
+    console.log(process.env.DATABASE_URL);
     this.client.connect();
   }
 }
