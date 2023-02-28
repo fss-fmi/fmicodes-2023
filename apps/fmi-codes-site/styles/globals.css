@@ -8,7 +8,10 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  @apply bg-black text-white;
+}
+
+body {
+  @apply bg-black text-white overflow-hidden;
 }
 
 a {

@@ -1,8 +1,8 @@
 import '../styles/globals.css';
 
-import Head from 'next/head';
 import Navbar from '../components/navbar/navbar';
 import { ReactNode } from 'react';
+import BackgroundBlob from '../components/background-blob/background-blob';
 
 /**
  * Defines the layout of the application.
@@ -17,10 +17,11 @@ export default function RootLayout({
 }): ReactNode {
   return (
     <html>
-      <Head>
+      <head>
         <title>FMICodes</title>
-      </Head>
+      </head>
       <body>
+        <BackgroundBlob />
         <Navbar />
         <div className="mx-auto max-w-7xl px-2">{children}</div>
         {/* <Footer />*/}
