@@ -1,7 +1,7 @@
 import {Injectable, Logger} from '@nestjs/common';
 import {InjectDiscordClient, Once} from '@discord-nestjs/core';
 import {Client, ColorResolvable} from 'discord.js';
-import environment from "../../environments/environment";
+import environment from "../environments/environment";
 import {PrismaService} from "../database/prisma.service";
 
 @Injectable()

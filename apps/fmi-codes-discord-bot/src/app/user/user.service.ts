@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PgService } from '../database/pg.service';
 import { InjectDiscordClient } from '@discord-nestjs/core';
 import { Client, Guild } from 'discord.js';
-import environment from '../../environments/environment';
+import environment from '../environments/environment';
 import { PrismaService } from '../database/prisma.service';
 import { User } from '@prisma/client';
 

@@ -3,7 +3,7 @@ import { PgService } from '../database/pg.service';
 import { InjectDiscordClient } from '@discord-nestjs/core';
 import { Client, Guild, Role } from 'discord.js';
 import { ChannelType } from 'discord-api-types/v10';
-import environment from '../../environments/environment';
+import environment from '../environments/environment';
 import { PrismaService } from '../database/prisma.service';
 
 interface Team {
