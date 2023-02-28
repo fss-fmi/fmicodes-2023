@@ -1,6 +1,9 @@
+'use client';
+
 import styles from './fancy-card.module.scss';
-import React from 'react';
+import React, { useRef } from 'react';
 import Image from 'next/image';
+import useMousePosition from '../../lib/use-mouse-position';
 
 export interface FancyCardProps {
   image: string;
@@ -9,8 +12,25 @@ export interface FancyCardProps {
 }
 
 export function FancyCard(props: FancyCardProps) {
+  const mousePosition = useMousePosition();
+  const fancyCardRef = useRef<HTMLDivElement>(null);
+
+  const fancyCard = fancyCardRef.current;
+  const constrain = 60;
+  if (fancyCard && mousePosition.x && mousePosition.y) {
+    const box = fancyCard.getBoundingClientRect();
+    const calcX = (-(mousePosition.y - box.y - box.height / 2) / constrain) * 3;
+    const calcY = (mousePosition.x - box.x - box.width / 2) / constrain;
+    fancyCard.animate(
+      {
+        transform: `rotateX(${calcX}deg) rotateY(${calcY}deg)`,
+      },
+      { duration: 2000, fill: 'forwards' }
+    );
+  }
+
   return (
-    <div className="bg-gray-800 rounded-md">
+    <div ref={fancyCardRef} className="bg-gray-800 rounded-md">
       <Image
         className="w-full h-full object-cover rounded-t-md"
         src={props.image}
