@@ -30,7 +30,7 @@ export function FancyCard(props: FancyCardProps) {
   }
 
   return (
-    <div ref={fancyCardRef} className="bg-gray-800 rounded-md">
+    <div ref={fancyCardRef} className="rounded-md">
       <Image
         className="w-full h-full object-cover rounded-t-md"
         src={props.image}
