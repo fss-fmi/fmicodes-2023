@@ -19,7 +19,7 @@ export function FancyCard(props: FancyCardProps) {
   const constrain = 60;
   if (fancyCard && mousePosition.x && mousePosition.y) {
     const box = fancyCard.getBoundingClientRect();
-    const calcX = (-(mousePosition.y - box.y - box.height / 2) / constrain) * 3;
+    const calcX = -((mousePosition.y - box.y - box.height / 2) / constrain) * 3;
     const calcY = (mousePosition.x - box.x - box.width / 2) / constrain;
     fancyCard.animate(
       {

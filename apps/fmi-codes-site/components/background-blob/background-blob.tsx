@@ -20,10 +20,10 @@ export function BackgroundBlob() {
   }
 
   return (
-    <>
+    <div className={styles.container}>
       <div ref={blobRef} className={styles.blob}></div>
       <div className={styles.blur}></div>
-    </>
+    </div>
   );
 }
 
