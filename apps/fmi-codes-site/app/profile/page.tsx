@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import DiscordWidget from '../../components/discord-widget/discord-widget';
+import FancyHeading from '../../components/fancy-heading/fancy-heading';
 
 /**
  * Defines the "/profile" page.
@@ -9,7 +10,7 @@ import DiscordWidget from '../../components/discord-widget/discord-widget';
 export default function ProfilePage(): ReactNode {
   return (
     <div className="profile-page">
-      <h1>Profile</h1>
+      <FancyHeading title="Профил" />
 
       {/* @ts-expect-error Server Component */}
       <DiscordWidget />

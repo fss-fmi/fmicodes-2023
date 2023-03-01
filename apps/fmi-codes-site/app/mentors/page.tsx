@@ -1,14 +1,15 @@
-import {ReactNode} from 'react';
+import { ReactNode } from 'react';
+import FancyHeading from '../../components/fancy-heading/fancy-heading';
 
 /**
  * Defines the "/mentors" page.
  * @return {ReactNode} Mentors page component.
  * @constructor
  */
-export default function AboutPage() : ReactNode {
+export default function AboutPage(): ReactNode {
   return (
     <div className="mentors-page">
-      <h1>Mentors</h1>
+      <FancyHeading title="Ментори" />
     </div>
   );
 }

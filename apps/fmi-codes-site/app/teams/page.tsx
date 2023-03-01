@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 import TeamCard from '../../components/team-card/team-card';
 import { getTeams } from '../../pages/api/teams';
 import TeamWidget from '../../components/team-widget/team-widget';
+import FancyHeading from '../../components/fancy-heading/fancy-heading';
 
 /**
  * Defines the "/teams" page.
@@ -13,7 +14,7 @@ export default async function TeamsPage(): Promise<ReactNode> {
 
   return (
     <div className="teams-page">
-      <h1>Teams</h1>
+      <FancyHeading title="Отбори" />
 
       {/* @ts-expect-error Server Component */}
       <TeamWidget />

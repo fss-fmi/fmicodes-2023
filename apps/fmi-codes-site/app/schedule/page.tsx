@@ -1,5 +1,6 @@
 'use client';
 import { ReactNode } from 'react';
+import FancyHeading from '../../components/fancy-heading/fancy-heading';
 
 /**
  * Defines the "/schedule" page.
@@ -7,5 +8,9 @@ import { ReactNode } from 'react';
  * @constructor
  */
 export default function SchedulePage(): ReactNode {
-  return <h1>Schedule</h1>;
+  return (
+    <div className="schedule-page">
+      <FancyHeading title="Програма" />
+    </div>
+  );
 }

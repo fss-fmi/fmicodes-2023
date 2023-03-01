@@ -3,6 +3,7 @@
 import FancyButton from '../../../components/fancy-button/fancy-button';
 import { ReactNode } from 'react';
 import { signOut } from 'next-auth/react';
+import FancyHeading from '../../../components/fancy-heading/fancy-heading';
 
 /**
  * Defines the "/logout" page.
@@ -12,10 +13,8 @@ import { signOut } from 'next-auth/react';
 export default function LogoutPage(): ReactNode {
   return (
     <div>
-      <FancyButton
-        isPrimary
-        onClick={() => signOut()}
-      >
+      <FancyHeading title="Изход" />
+      <FancyButton isPrimary onClick={() => signOut()}>
         Изход
       </FancyButton>
     </div>
