@@ -22,7 +22,7 @@ const navigation = [
 
 const Navbar: FC = () => {
   return (
-    <Disclosure as="nav" className="sticky top-0 z-10 bg-gray-800">
+    <Disclosure as="nav" className="sticky top-0 z-10 acrylic">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-5xl px-2">

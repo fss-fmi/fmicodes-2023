@@ -22,3 +22,9 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.acrylic {
+  background: rgba(50,50,50,0.5);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
