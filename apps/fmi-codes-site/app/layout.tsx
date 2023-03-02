@@ -1,6 +1,4 @@
 import '../styles/globals.css';
-
-import Navbar from '../components/navbar/navbar';
 import { ReactNode } from 'react';
 import BackgroundBlob from '../components/background-blob/background-blob';
 
@@ -18,12 +16,12 @@ export default function RootLayout({
   return (
     <html>
       <head>
-        <title>FMICodes</title>
+        <title>{'FMI{Codes} 2023'}</title>
       </head>
       <body>
         <BackgroundBlob />
-        <Navbar />
-        <div className="mx-auto max-w-7xl px-2">{children}</div>
+        {/*<Navbar />*/}
+        <div className="mx-auto">{children}</div>
         {/* <Footer />*/}
       </body>
     </html>

@@ -1891,7 +1891,7 @@
     tmp "~0.2.1"
     tslib "^2.3.0"
 
-"@nrwl/nest@^15.0.13":
+"@nrwl/nest@15.7.2":
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/@nrwl/nest/-/nest-15.7.2.tgz#a22dc69fd787cf2adc408ee0307cdcd0879578ad"
   integrity sha512-YTG37XoX0DUoWbPE/CP+tTXa+aD+bjtkRTR7I5e4/E8K7RRIqaJWf21ni56FD3mek7ACq6GxEu1hrrPfY9LE+g==
@@ -1926,20 +1926,6 @@
     tsconfig-paths "^3.9.0"
     url-loader "^4.1.1"
     webpack-merge "^5.8.0"
-
-"@nrwl/node@15.0.13":
-  version "15.0.13"
-  resolved "https://registry.yarnpkg.com/@nrwl/node/-/node-15.0.13.tgz#97e1335166fcfebf6a2591c3f43111eb2f463cd9"
-  integrity sha512-Ld33L0mjWuAu3jW26VU5HdPe7nsv+1G/eucMTiDWK8usCK3bxfs7Y9fGsfHAEfR/S3w0APj4I5rm+VO65tYQBA==
-  dependencies:
-    "@nrwl/devkit" "15.0.13"
-    "@nrwl/jest" "15.0.13"
-    "@nrwl/js" "15.0.13"
-    "@nrwl/linter" "15.0.13"
-    "@nrwl/webpack" "15.0.13"
-    "@nrwl/workspace" "15.0.13"
-    chalk "4.1.0"
-    tslib "^2.3.0"
 
 "@nrwl/node@15.7.2":
   version "15.7.2"
@@ -2465,6 +2451,21 @@
   integrity sha512-BPS4ynJW/o92PUR4wgriz2Ud5gpST5vz6GQfMixEDK0Z8ZCUv2M7SkBLykH56T++Xs+8ln9zTGbOvNGIe02/jw==
   dependencies:
     "@sinonjs/commons" "^1.7.0"
+
+"@splinetool/react-spline@^2.2.6":
+  version "2.2.6"
+  resolved "https://registry.yarnpkg.com/@splinetool/react-spline/-/react-spline-2.2.6.tgz#c48f634f352311b9da210978f88bd195d605ee8a"
+  integrity sha512-y9L2VEbnC6FNZZu8XMmWM9YTTTWal6kJVfP05Amf0QqDNzCSumKsJxZyGUODvuCmiAvy0PfIfEsiVKnSxvhsDw==
+  dependencies:
+    lodash.debounce "^4.0.8"
+    react-merge-refs "^2.0.1"
+
+"@splinetool/runtime@^0.9.243":
+  version "0.9.243"
+  resolved "https://registry.yarnpkg.com/@splinetool/runtime/-/runtime-0.9.243.tgz#45973c4e63b3ba9e130ff527e998935f5db4d8d5"
+  integrity sha512-+LYE3PreJQa4EsaqXv30dOzECxJM+W/bNkFJ8RH+gdtMLVuYoZn4rVuhwCJBmmSQdmTrwpEAbC2vpEtyr3e6OA==
+  dependencies:
+    on-change "^4.0.0"
 
 "@svgr/babel-plugin-add-jsx-attribute@^6.5.1":
   version "6.5.1"
@@ -8273,6 +8274,11 @@ oidc-token-hash@^5.0.1:
   resolved "https://registry.yarnpkg.com/oidc-token-hash/-/oidc-token-hash-5.0.1.tgz#ae6beec3ec20f0fd885e5400d175191d6e2f10c6"
   integrity sha512-EvoOtz6FIEBzE+9q253HsLCVRiK/0doEJ2HCvvqMQb3dHZrP3WlJKYtJ55CRTw4jmYomzH4wkPuCj/I3ZvpKxQ==
 
+on-change@^4.0.0:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/on-change/-/on-change-4.0.2.tgz#838129790f09dc2ed04284944bda6e82b92c10b8"
+  integrity sha512-cMtCyuJmTx/bg2HCpHo3ZLeF7FZnBOapLqZHr2AlLeJ5Ul0Zu2mUJJz051Fdwu/Et2YW04ZD+TtU+gVy0ACNCA==
+
 on-finished@2.4.1:
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/on-finished/-/on-finished-2.4.1.tgz#58c8c44116e54845ad57f14ab10b03533184ac3f"
@@ -9224,6 +9230,11 @@ react-is@^17.0.1:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
+
+react-merge-refs@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/react-merge-refs/-/react-merge-refs-2.0.1.tgz#a1f8c2dadefa635333e9b91ec59f30b65228b006"
+  integrity sha512-pywF6oouJWuqL26xV3OruRSIqai31R9SdJX/I3gP2q8jLxUnA1IwXcLW8werUHLZOrp4N7YOeQNZrh/BKrHI4A==
 
 react-refresh@^0.10.0:
   version "0.10.0"

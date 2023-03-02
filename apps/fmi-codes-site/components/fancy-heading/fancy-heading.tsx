@@ -4,11 +4,16 @@ import { useRef } from 'react';
 
 export interface FancyHeadingProps {
   title: string;
+  isRoman?: boolean;
+  containsNumbers?: boolean;
 }
 
 export function FancyHeading(props: FancyHeadingProps) {
   const headingRef = useRef<HTMLHeadingElement>(null);
-  const letters = 'АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЬЮЯ';
+  const letters = props.isRoman
+    ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    : 'АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЩЪЬЮЯ' +
+      (props.containsNumbers ? '0123456789' : '');
 
   if (headingRef.current) {
     const textEffect = () => {
@@ -40,7 +45,7 @@ export function FancyHeading(props: FancyHeadingProps) {
   }
 
   return (
-    <h1 ref={headingRef} className="text-5xl font-black capitalize">
+    <h1 ref={headingRef} className="text-4xl sm:text-7xl font-black capitalize">
       {props.title.toUpperCase()}
     </h1>
   );
