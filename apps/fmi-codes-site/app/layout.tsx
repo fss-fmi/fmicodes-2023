@@ -1,6 +1,7 @@
 import '../styles/globals.css';
 import { ReactNode } from 'react';
 import BackgroundBlob from '../components/background-blob/background-blob';
+import Navbar from '../components/navbar/navbar';
 
 /**
  * Defines the layout of the application.
@@ -20,7 +21,7 @@ export default function RootLayout({
       </head>
       <body>
         <BackgroundBlob />
-        {/*<Navbar />*/}
+        <Navbar />
         <div className="mx-auto">{children}</div>
         {/* <Footer />*/}
       </body>
