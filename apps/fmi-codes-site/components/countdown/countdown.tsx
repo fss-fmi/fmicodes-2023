@@ -3,7 +3,7 @@ import { useCountdown } from '../../lib/use-countdown';
 
 /* eslint-disable-next-line */
 export interface CountdownProps {
-  targetDate: Date;
+  targetDate: string;
 }
 
 export function Countdown(props: CountdownProps) {
@@ -14,7 +14,7 @@ export function Countdown(props: CountdownProps) {
       {timeValues.map((value, index) => (
         <p
           key={index}
-          className="text-4xl sm:text-7xl text-center font-black capitalize p-1 m-1 border border-red-600 rounded"
+          className="text-xl sm:text-2xl text-center font-black capitalize p-1 m-1 border border-red-600 rounded"
         >
           {value.toLocaleString('en-US', {
             minimumIntegerDigits: 2,
