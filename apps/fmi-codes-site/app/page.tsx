@@ -16,9 +16,7 @@ export default function HomePage(): ReactNode {
           <Countdown targetDate={'2023-03-17:17:00'} />
         </div>
       </div>
-      <div className="absolute top-0 left-0 w-full h-full">
-        <HeroLogo />
-      </div>
+      <HeroLogo />
     </div>
   );
 }
