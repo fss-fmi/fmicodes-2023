@@ -18,7 +18,7 @@ export function FancyLink(props: FancyLinkProps) {
     <Link
       href={props.href}
       className={
-        (props.isPrimary ? ' bg-blue-700 text-white' : '') +
+        (props.isPrimary ? ' bg-red-600 hover:bg-red-700 text-white' : '') +
         (props.href === pathname
           ? 'bg-gray-900 text-white'
           : 'text-gray-300 hover:bg-gray-700 hover:text-white') +
