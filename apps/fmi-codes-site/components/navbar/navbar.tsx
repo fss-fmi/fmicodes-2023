@@ -6,7 +6,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import NavbarProfile from '../navbar-profile/navbar-profile';
 import Link from 'next/link';
 import Image from 'next/image';
-import fmiCodesLogo from '../../public/images/fmi-codes-logo-60x60.jpg';
+import fmiCodesLogo from '../../public/images/fmi-codes-logo-256x256.png';
 import FancyLink from '../fancy-link/fancy-link';
 import { SessionProvider } from 'next-auth/react';
 
@@ -15,9 +15,9 @@ const navigation = [
   { name: 'Програма', href: '/schedule' },
   { name: 'Регламент', href: '/regulation' },
   { name: 'Отбори', href: '/teams' },
-  { name: 'Ментори', href: '/mentors' },
-  { name: 'Класация', href: '/ranking' },
-  { name: 'Архив', href: '/archive' },
+  // { name: 'Ментори', href: '/mentors' },
+  // { name: 'Класация', href: '/ranking' },
+  // { name: 'Архив', href: '/archive' },
 ];
 
 const Navbar: FC = () => {
@@ -42,22 +42,20 @@ const Navbar: FC = () => {
                 <div className="flex flex-shrink-0 items-center">
                   <Link href="/">
                     <Image
-                      className="block h-8 w-auto"
+                      className="block h-16 w-auto"
                       src={fmiCodesLogo}
                       alt="FMI{Codes} Logo"
-                      width={60}
-                      height={60}
+                      width={100}
+                      height={100}
                     />
                   </Link>
                 </div>
-                <div className="hidden lg:ml-6 lg:block">
-                  <div className="flex space-x-2">
-                    {navigation.map((item) => (
-                      <FancyLink key={item.name} href={item.href}>
-                        {item.name}
-                      </FancyLink>
-                    ))}
-                  </div>
+                <div className="hidden lg:ml-4 lg:flex items-center space-x-2">
+                  {navigation.map((item) => (
+                    <FancyLink key={item.name} href={item.href}>
+                      {item.name}
+                    </FancyLink>
+                  ))}
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 lg:static lg:inset-auto lg:ml-6 lg:pr-0">

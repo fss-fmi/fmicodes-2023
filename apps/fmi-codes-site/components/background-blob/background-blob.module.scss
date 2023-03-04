@@ -15,10 +15,9 @@
 .blob {
   animation: rotate 10s linear infinite;
   @apply h-96 aspect-square absolute inset-1/2 rounded-full;
-  @apply bg-gradient-to-r from-red-600 to-blue-600;
+  @apply bg-gradient-to-r from-red-600 to-blue-600 blur-4xl;
   translate: -50% -50%;
   z-index: -2;
-  filter: blur(12.5rem);
 }
 
 .container {

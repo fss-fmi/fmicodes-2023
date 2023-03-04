@@ -7,7 +7,11 @@ module.exports = {
     path.join(__dirname, './components/**/*.{js,ts,jsx,tsx}'),
   ],
   theme: {
-    extend: {},
+    extend: {
+      blur: {
+        '4xl': '150px',
+      },
+    },
   },
   plugins: [require('@tailwindcss/line-clamp')],
 };
