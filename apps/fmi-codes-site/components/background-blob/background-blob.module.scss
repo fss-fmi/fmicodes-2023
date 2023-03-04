@@ -18,13 +18,7 @@
   @apply bg-gradient-to-r from-red-600 to-blue-600;
   translate: -50% -50%;
   z-index: -2;
-}
-
-.blur {
-  @apply relative w-full h-full absolute top-0 left-0;
-
-  z-index: -1;
-  backdrop-filter: blur(12.5rem);
+  filter: blur(12.5rem);
 }
 
 .container {
