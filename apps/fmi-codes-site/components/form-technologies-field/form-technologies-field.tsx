@@ -43,7 +43,7 @@ export function FormTechnologiesField(props: FormTechnologiesFieldProps) {
 
         <div className="text-normal text-red-500 h-4">
           {props.errors[props.name] && (
-            <span>{String(props.errors[props.name])}</span>
+            <span>{String(props.errors[props.name]?.message)}</span>
           )}
         </div>
       </label>
