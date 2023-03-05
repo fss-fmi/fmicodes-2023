@@ -12,11 +12,26 @@ import FancyHeading from '../../../components/fancy-heading/fancy-heading';
  */
 export default function LogoutPage(): ReactNode {
   return (
-    <div>
+    <>
       <FancyHeading title="Изход" />
-      <FancyButton isPrimary onClick={() => signOut()}>
-        Изход
-      </FancyButton>
-    </div>
+      <div className="h-2/3 grid place-items-center">
+        <div className="w-full acrylic rounded-lg md:mt-0 sm:max-w-6xl xl:p-0">
+          <div className="p-6 space-y-2 sm:p-8">
+            <h3 className="text-xl font-bold text-gray-900 md:text-2xl dark:text-white">
+              Наистина ли искате да излезете?
+            </h3>
+            <p>Ще бъдете пренасочени към началната страница на хакатона.</p>
+          </div>
+          <div className="flex items-center justify-end p-4 space-x-4">
+            <FancyButton
+              isPrimary
+              onClick={() => signOut({ callbackUrl: '/' })}
+            >
+              Изход
+            </FancyButton>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }

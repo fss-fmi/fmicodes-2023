@@ -13,7 +13,7 @@ export async function TeamWidget() {
   const team = await getTeamBySession(session);
 
   return (
-    <div className="w-full flex justify-between bg-white rounded-lg p-6 dark:border dark:bg-gray-800 dark:border-gray-700">
+    <div className="w-full flex acrylic justify-between rounded-lg p-6 dark:border dark:border-gray-700">
       {team ? (
         <div className="">
           <span className="text-sm">Вие сте част от отбор</span>

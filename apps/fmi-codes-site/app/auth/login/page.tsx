@@ -20,11 +20,11 @@ export default async function LoginPage({ searchParams }): Promise<ReactNode> {
   }
 
   return (
-    <div className="login-page">
+    <>
       <FancyHeading title="Вход" />
-      <div className="grid place-items-center h-screen">
+      <div className="h-2/3 grid place-items-center">
         <LoginForm error={searchParams.error} />
       </div>
-    </div>
+    </>
   );
 }

@@ -19,10 +19,13 @@ export default function RootLayout({
       <head>
         <title>{'FMI{Codes} 2023'}</title>
       </head>
-      <body>
-        <BackgroundBlob />
+      <body className="h-screen">
         <Navbar />
-        <div className="mx-auto">{children}</div>
+        <BackgroundBlob />
+        <div className="h-screen max-w-7xl m-auto p-2">
+          <div className="h-16" />
+          {children}
+        </div>
         {/* <Footer />*/}
       </body>
     </html>

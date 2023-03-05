@@ -23,11 +23,11 @@ export default async function RegisterPage(): Promise<ReactNode> {
   const technologies = await prisma.technology.findMany();
 
   return (
-    <div className="register-page">
+    <>
       <FancyHeading title="Регистрация" />
-      <div className="grid place-items-center">
+      <div className="h-2/3 grid place-items-center">
         <RegistrationForm technologies={technologies} />
       </div>
-    </div>
+    </>
   );
 }

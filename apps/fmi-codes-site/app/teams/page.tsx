@@ -13,7 +13,7 @@ export default async function TeamsPage(): Promise<ReactNode> {
   const teams = await getTeams();
 
   return (
-    <div className="teams-page">
+    <>
       <FancyHeading title="Отбори" />
 
       {/* @ts-expect-error Server Component */}
@@ -39,6 +39,6 @@ export default async function TeamsPage(): Promise<ReactNode> {
           />
         ))}
       </div>
-    </div>
+    </>
   );
 }
