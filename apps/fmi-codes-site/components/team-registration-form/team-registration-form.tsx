@@ -6,7 +6,7 @@ import FormTextField from '../form-text-field/form-text-field';
 import InviteUsersButton from '../invite-users-button/invite-users-button';
 import { Technology } from '@prisma/client';
 import { useForm } from 'react-hook-form';
-import { useRouter } from 'next/navigation';
+import { redirect } from 'next/navigation';
 
 export interface TeamRegistrationFormProps {
   title: string;
@@ -14,8 +14,6 @@ export interface TeamRegistrationFormProps {
 }
 
 export function TeamRegistrationForm(props: TeamRegistrationFormProps) {
-  const router = useRouter();
-
   const {
     register,
     handleSubmit,
@@ -83,7 +81,7 @@ export function TeamRegistrationForm(props: TeamRegistrationFormProps) {
       reset();
 
       if (res.status === 201) {
-        router.push(`/teams`);
+        redirect(`/teams`);
       }
     } catch (error) {
       console.error(error);

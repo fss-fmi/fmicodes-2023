@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { Session, getServerSession } from 'next-auth';
+import { getServerSession, Session } from 'next-auth';
 
 import { authOptions } from '../auth/[...nextauth]';
 import nextConnect from 'next-connect';
@@ -25,18 +25,18 @@ export async function getUserByEmail(email: string) {
       email: email,
     },
   });
-  
+
   if (!dbUser) {
     return null;
   }
-  
+
   const { passwordHash, ...user } = dbUser;
 
   return user;
 }
 
-export async function getUserBySession(session: Session) {
-  if (!session.user || !session.user.email) {
+export async function getUserBySession(session: Session | null | undefined) {
+  if (!session || !session.user || !session.user.email) {
     return null;
   }
   return await getUserByEmail(session.user.email);

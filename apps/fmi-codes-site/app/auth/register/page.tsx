@@ -4,7 +4,7 @@ import prisma from '../../../lib/prismadb';
 import FancyHeading from '../../../components/fancy-heading/fancy-heading';
 import { getServerSession } from 'next-auth';
 import { getUserBySession } from '../../../pages/api/users/self';
-import { useRouter } from 'next/navigation';
+import { redirect } from 'next/navigation';
 
 /**
  * Defines the "/register" page.
@@ -12,12 +12,11 @@ import { useRouter } from 'next/navigation';
  * @constructor
  */
 export default async function RegisterPage(): Promise<ReactNode> {
-  const router = useRouter();
   const session = await getServerSession();
   const user = await getUserBySession(session);
 
-  if (!user) {
-    await router.push('/');
+  if (user) {
+    await redirect('/');
     return;
   }
 

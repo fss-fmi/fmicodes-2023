@@ -3,7 +3,7 @@ import LoginForm from '../../../components/login-form/login-form';
 import FancyHeading from '../../../components/fancy-heading/fancy-heading';
 import { getServerSession } from 'next-auth';
 import { getUserBySession } from '../../../pages/api/users/self';
-import { useRouter } from 'next/navigation';
+import { redirect } from 'next/navigation';
 
 /**
  * Defines the "/login" page.
@@ -11,12 +11,11 @@ import { useRouter } from 'next/navigation';
  * @constructor
  */
 export default async function LoginPage({ searchParams }): Promise<ReactNode> {
-  const router = useRouter();
   const session = await getServerSession();
   const user = await getUserBySession(session);
 
-  if (!user) {
-    router.push('/');
+  if (user) {
+    redirect('/');
     return;
   }
 

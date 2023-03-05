@@ -5,7 +5,7 @@ import FormImageField from '../form-image-field/form-image-field';
 import FormDropdownField from '../form-dropdown-field/form-dropdown-field';
 import FormTextField from '../form-text-field/form-text-field';
 import FancyButton from '../fancy-button/fancy-button';
-import { useRouter } from 'next/navigation';
+import { redirect } from 'next/navigation';
 import FormTechnologiesField from '../form-technologies-field/form-technologies-field';
 import { Technology } from '@prisma/client';
 
@@ -14,8 +14,6 @@ interface RegistrationFormProps {
 }
 
 export function RegistrationForm(props: RegistrationFormProps) {
-  const router = useRouter();
-
   const {
     register,
     handleSubmit,
@@ -152,7 +150,7 @@ export function RegistrationForm(props: RegistrationFormProps) {
       reset();
 
       if (res.status === 201) {
-        await router.push('/auth/login');
+        await redirect('/auth/login');
       }
     } catch (error) {
       console.error(error);
