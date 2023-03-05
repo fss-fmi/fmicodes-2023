@@ -25,13 +25,10 @@ const handler = nextConnect(onError);
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads/university-proof-images');
+    cb(null, 'apps/fmi-codes-site/public/images/university-proof-images');
   },
   filename: function (req, file, cb) {
-    cb(
-      null,
-      file.fieldname + '-' + Date.now() + path.extname(file.originalname)
-    );
+    cb(null, Date.now() + path.extname(file.originalname));
   },
 });
 
