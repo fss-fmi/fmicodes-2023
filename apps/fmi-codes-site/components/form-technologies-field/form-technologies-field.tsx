@@ -23,7 +23,7 @@ export function FormTechnologiesField(props: FormTechnologiesFieldProps) {
           <span className="text-xs text-gray-500">{props.description}</span>
         )}
 
-        <div className="flex">
+        <div className="flex flex-wrap justify-between">
           {props.technologies.map((tech, i) => (
             <label
               className={styles['badge']}

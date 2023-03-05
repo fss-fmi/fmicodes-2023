@@ -1,5 +1,5 @@
 .badge {
-  @apply inline-block rounded-xl px-2.5 py-1 mr-2;
+  @apply inline-block rounded-xl px-2.5 py-1 m-1;
 }
 
 .badge-label {
@@ -13,4 +13,5 @@
 
 .badge:has(input[type=checkbox]:checked) {
   @apply bg-red-700 text-white #{!important};
+  box-shadow: inset 0 0 0 0.1rem white;
 }
