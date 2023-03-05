@@ -2,6 +2,9 @@ import { ReactNode } from 'react';
 import RegistrationForm from '../../../components/registration-form/registration-form';
 import prisma from '../../../lib/prismadb';
 import FancyHeading from '../../../components/fancy-heading/fancy-heading';
+import { getServerSession } from 'next-auth';
+import { getUserBySession } from '../../../pages/api/users/self';
+import { useRouter } from 'next/navigation';
 
 /**
  * Defines the "/register" page.
@@ -9,6 +12,15 @@ import FancyHeading from '../../../components/fancy-heading/fancy-heading';
  * @constructor
  */
 export default async function RegisterPage(): Promise<ReactNode> {
+  const router = useRouter();
+  const session = await getServerSession();
+  const user = await getUserBySession(session);
+
+  if (!user) {
+    await router.push('/');
+    return;
+  }
+
   const technologies = await prisma.technology.findMany();
 
   return (
