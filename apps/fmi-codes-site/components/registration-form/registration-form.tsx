@@ -162,9 +162,6 @@ export function RegistrationForm(props: RegistrationFormProps) {
   return (
     <div className="w-full acrylic rounded-lg md:mt-0 sm:max-w-6xl xl:p-0">
       <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-        <h1 className="text-xl font-bold text-gray-900 md:text-2xl dark:text-white">
-          Регистрация
-        </h1>
         <form
           className="space-y-4 md:space-y-6"
           onSubmit={handleSubmit(onSubmit)}
