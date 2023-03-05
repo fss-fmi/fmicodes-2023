@@ -6,7 +6,8 @@ import { onError } from '../../../lib/api-middleware';
 import path from 'path';
 import bodyParser from 'body-parser';
 import { hashPassword } from '../../../lib/password';
-import * as process from 'process';
+import { S3Client } from '../../../lib/s3-client';
+import multerS3 from 'multer-s3';
 
 interface UserDto {
   firstName: string;
@@ -24,17 +25,15 @@ interface UserDto {
 
 const handler = nextConnect(onError);
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
+const storage = multerS3({
+  s3: S3Client,
+  acl: 'public-read',
+  bucket: process.env.DIGITALOCEAN_SPACE_BUCKET,
+  key: function (req, file, cb) {
     cb(
       null,
-      process.env.NODE_ENV === 'production'
-        ? 'images/university-proof-images'
-        : 'apps/fmi-codes-site/public/images/university-proof-images'
+      'university-proof-image/' + Date.now() + path.extname(file.originalname)
     );
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + path.extname(file.originalname));
   },
 });
 
@@ -52,7 +51,7 @@ handler.post(
     res: NextApiResponse
   ) => {
     const userDto: UserDto = req.body;
-    const user = await createUser(userDto, req.file);
+    const user = await createUser(userDto, req.files);
     res.status(201).json(user);
   }
 );
@@ -97,7 +96,7 @@ export async function createUser(userDto: UserDto, universityProofImage) {
   const userInformation = {
     ...userDtoWithoutPassword,
     passwordHash: hashedPassword,
-    universityProofImage: universityProofImage.path,
+    universityProofImage: universityProofImage.location,
     discordVerificationCode: discordVerificationCode,
     userTechnologies: {
       create: userTechnologies,
