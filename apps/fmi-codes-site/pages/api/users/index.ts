@@ -6,6 +6,7 @@ import { onError } from '../../../lib/api-middleware';
 import path from 'path';
 import bodyParser from 'body-parser';
 import { hashPassword } from '../../../lib/password';
+import * as process from 'process';
 
 interface UserDto {
   firstName: string;
@@ -25,7 +26,12 @@ const handler = nextConnect(onError);
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'apps/fmi-codes-site/public/images/university-proof-images');
+    cb(
+      null,
+      process.env.NODE_ENV === 'production'
+        ? 'images/university-proof-images'
+        : 'apps/fmi-codes-site/public/images/university-proof-images'
+    );
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + path.extname(file.originalname));
