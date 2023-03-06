@@ -12,7 +12,6 @@ const useCountdown = (targetDate) => {
     const interval = setInterval(() => {
       const now = new Date();
       const difference = target.getTime() - now.getTime();
-      console.log(difference);
 
       const d = Math.floor(difference / (1000 * 60 * 60 * 24));
       setDays(d);

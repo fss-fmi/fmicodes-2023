@@ -20,13 +20,25 @@ export function FancyCard(props: FancyCardProps) {
 
   const fancyCard = fancyCardRef.current;
   const constrain = 60;
-  if (fancyCard && mousePosition.x && mousePosition.y) {
+  if (
+    fancyCard &&
+    mousePosition.x &&
+    mousePosition.y &&
+    window.innerWidth > 768
+  ) {
     const box = fancyCard.getBoundingClientRect();
     const calcX = -((mousePosition.y - box.y - box.height / 2) / constrain) * 3;
     const calcY = (mousePosition.x - box.x - box.width / 2) / constrain;
     fancyCard.animate(
       {
         transform: `rotateX(${calcX}deg) rotateY(${calcY}deg)`,
+      },
+      { duration: 2000, fill: 'forwards' }
+    );
+  } else {
+    fancyCard?.animate(
+      {
+        transform: `rotateX(0deg) rotateY(0deg)`,
       },
       { duration: 2000, fill: 'forwards' }
     );
