@@ -20,7 +20,7 @@ export function BackgroundBlob() {
   }
 
   return (
-    <div className={styles.container}>
+    <div id="blobcho" className={styles.container}>
       <div ref={blobRef} className={styles.blob}></div>
     </div>
   );
