@@ -51,7 +51,7 @@ handler.post(
     res: NextApiResponse
   ) => {
     const userDto: UserDto = req.body;
-    const user = await createUser(userDto, req.files);
+    const user = await createUser(userDto, req.file);
     res.status(201).json(user);
   }
 );
