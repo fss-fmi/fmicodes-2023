@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import FormTechnologiesField from '../form-technologies-field/form-technologies-field';
 import { Technology } from '@prisma/client';
 import { useState } from 'react';
+import FormConditionsField from '../../app/form-conditions-field/form-conditions-field';
 
 interface RegistrationFormProps {
   technologies: Technology[];
@@ -224,9 +225,12 @@ export function RegistrationForm(props: RegistrationFormProps) {
                   );
               }
             })}
-          </div>
-          <div className="flex justify-end">
-            <FancyButton isPrimary>Регистрация</FancyButton>
+            <div className="flex items-center">
+              <FormConditionsField />
+            </div>
+            <div className="flex justify-end">
+              <FancyButton isPrimary>Регистрация</FancyButton>
+            </div>
           </div>
         </form>
       </div>
