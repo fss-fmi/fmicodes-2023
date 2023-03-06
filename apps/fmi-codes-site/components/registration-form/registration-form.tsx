@@ -8,6 +8,7 @@ import FancyButton from '../fancy-button/fancy-button';
 import { redirect } from 'next/navigation';
 import FormTechnologiesField from '../form-technologies-field/form-technologies-field';
 import { Technology } from '@prisma/client';
+import { useState } from 'react';
 
 interface RegistrationFormProps {
   technologies: Technology[];
@@ -20,6 +21,8 @@ export function RegistrationForm(props: RegistrationFormProps) {
     reset,
     formState: { errors },
   } = useForm({ mode: 'onBlur' });
+
+  const [error, setError] = useState<string | null>(null);
 
   const formFields = [
     {
@@ -151,15 +154,22 @@ export function RegistrationForm(props: RegistrationFormProps) {
 
       if (res.status === 201) {
         await redirect('/auth/login');
+      } else {
+        const error = await res.json();
+        setError(error.error);
       }
     } catch (error) {
       console.error(error);
+      setError(error);
     }
   };
 
   return (
     <div className="w-full acrylic rounded-lg md:mt-0 sm:max-w-6xl xl:p-0">
       <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+        <div>
+          {error && <div className="text-red-500 text-sm">{error}</div>}
+        </div>
         <form
           className="space-y-4 md:space-y-6"
           onSubmit={handleSubmit(onSubmit)}

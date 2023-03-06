@@ -7,6 +7,7 @@ import InviteUsersButton from '../invite-users-button/invite-users-button';
 import { Technology } from '@prisma/client';
 import { useForm } from 'react-hook-form';
 import { redirect } from 'next/navigation';
+import { useState } from 'react';
 
 export interface TeamRegistrationFormProps {
   title: string;
@@ -20,6 +21,8 @@ export function TeamRegistrationForm(props: TeamRegistrationFormProps) {
     reset,
     formState: { errors },
   } = useForm({ mode: 'onBlur' });
+
+  const [error, setError] = useState<string | null>(null);
 
   const formFields = [
     {
@@ -82,15 +85,22 @@ export function TeamRegistrationForm(props: TeamRegistrationFormProps) {
 
       if (res.status === 201) {
         redirect(`/teams`);
+      } else {
+        const error = await res.json();
+        setError(error.error);
       }
     } catch (error) {
       console.error(error);
+      setError(error);
     }
   };
 
   return (
     <div className="w-full acrylic rounded-lg md:mt-0 sm:max-w-6xl xl:p-0">
       <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+        <div>
+          {error && <div className="text-red-500 text-sm">{error}</div>}
+        </div>
         <form
           className="space-y-4 md:space-y-6"
           onSubmit={handleSubmit(onSubmit)}
