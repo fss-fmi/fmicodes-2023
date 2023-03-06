@@ -25,7 +25,6 @@ export function InviteUsersButton(props: InviteUsersButtonProps) {
     const subscription = watch((value, { name, type }) => {
       const delayDebounceFn = setTimeout(() => {
         console.log(value);
-        // Send Axios request here
       }, 3000);
 
       return () => clearTimeout(delayDebounceFn);
@@ -41,7 +40,7 @@ export function InviteUsersButton(props: InviteUsersButtonProps) {
           setIsModalShown(true);
         }}
       >
-        <UserPlusIcon className="block h-4 w-4" />
+        <UserPlusIcon className="inline h-5 w-5" /> Покани потребители
       </FancyButton>
 
       <FancyModal

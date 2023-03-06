@@ -47,7 +47,7 @@ export function FancyHeading(props: FancyHeadingProps) {
   return (
     <h1
       ref={headingRef}
-      className="text-4xl sm:text-7xl font-black capitalize my-4"
+      className="text-4xl sm:text-6xl font-black capitalize my-4 clip"
     >
       {props.title.toUpperCase()}
     </h1>

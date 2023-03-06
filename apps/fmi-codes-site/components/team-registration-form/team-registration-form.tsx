@@ -3,7 +3,6 @@
 import FancyButton from '../fancy-button/fancy-button';
 import FormTechnologiesField from '../form-technologies-field/form-technologies-field';
 import FormTextField from '../form-text-field/form-text-field';
-import InviteUsersButton from '../invite-users-button/invite-users-button';
 import { Technology } from '@prisma/client';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
@@ -135,9 +134,7 @@ export function TeamRegistrationForm(props: TeamRegistrationFormProps) {
               }
             })}
           </div>
-          <div className="border-t border-gray-200 dark:border-gray-700 pt-4 md:pt-6">
-            <InviteUsersButton technologies={props.technologies} />
-          </div>
+
           <div className="flex justify-end">
             <FancyButton isPrimary>Създай отбор</FancyButton>
           </div>

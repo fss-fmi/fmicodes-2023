@@ -4,7 +4,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession, Session } from 'next-auth';
 import { authOptions } from '../auth/[...nextauth]';
 import { getUserBySession } from '../users/self';
-import prisma from '../../../lib/prismadb';
+import { getTeamById } from './[id]';
 
 const handler = nextConnect(onError);
 
@@ -26,11 +26,7 @@ export async function getTeamBySession(session: Session) {
     return null;
   }
 
-  return await prisma.team.findUnique({
-    where: {
-      id: user.teamId,
-    },
-  });
+  return getTeamById(user.teamId);
 }
 
 export default handler;

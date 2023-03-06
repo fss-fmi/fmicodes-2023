@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 import FormTechnologiesField from '../form-technologies-field/form-technologies-field';
 import { Technology } from '@prisma/client';
 import { useState } from 'react';
-import FormConditionsField from '../../app/form-conditions-field/form-conditions-field';
+import FormConditionsField from '../form-conditions-field/form-conditions-field';
 
 interface RegistrationFormProps {
   technologies: Technology[];

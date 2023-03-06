@@ -1,9 +1,6 @@
 import Link from 'next/link';
 
-/* eslint-disable-next-line */
-export interface FormConditionsFieldProps {}
-
-export function FormConditionsField(props: FormConditionsFieldProps) {
+export function FormConditionsField() {
   return (
     <>
       <input

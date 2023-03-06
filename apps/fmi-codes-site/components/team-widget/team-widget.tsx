@@ -24,10 +24,7 @@ export async function TeamWidget() {
           </div>
           <div className="flex content-center items-center space-x-2">
             <NotificationsButton />
-            <FancyLink isPrimary href="/teams#team-cards">
-              Напусни отбора
-            </FancyLink>
-            <FancyLink isPrimary href="/teams/create">
+            <FancyLink isPrimary href="/teams/self">
               Прегледай отбора
             </FancyLink>
           </div>
