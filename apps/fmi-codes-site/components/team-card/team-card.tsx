@@ -1,6 +1,7 @@
 import FancyCard from '../fancy-card/fancy-card';
 import { Technology } from '@prisma/client';
 import styles from './team-card.module.css';
+import TechnologiesShowcase from '../technologies-showcase/technologies-showcase';
 
 export interface TeamCardProps {
   id: number;
@@ -52,19 +53,9 @@ function CardContent(
           <p className="line-clamp-3">{projectDescription}</p>
         </div>
       ) : null}
-      <div className={styles['card-content__technologies']}>
+      <div>
         <h3 className="font-bold">Технологии</h3>
-        <ul>
-          {projectTechnologies.map((tech, i) => (
-            <li
-              style={{ backgroundColor: tech.color }}
-              className="inline-block rounded-xl px-2 py-1 mr-2"
-              key={i}
-            >
-              {tech.name}
-            </li>
-          ))}
-        </ul>
+        <TechnologiesShowcase technologies={projectTechnologies} />
       </div>
     </div>
   );
