@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 export interface FancyHeadingProps {
   title: string;
@@ -10,17 +10,17 @@ export interface FancyHeadingProps {
 
 export function FancyHeading(props: FancyHeadingProps) {
   const headingRef = useRef<HTMLHeadingElement>(null);
-  const letters = props.isRoman
-    ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    : 'АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЩЪЬЮЯ' +
-      (props.containsNumbers ? '0123456789' : '');
+  const letters =
+    (props.isRoman
+      ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+      : 'АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЩЪЬЮЯ') +
+    (props.containsNumbers ? '0123456789' : '');
 
-  if (headingRef.current) {
-    const textEffect = () => {
-      let iterations = 0;
+  const textEffect = () => {
+    let iterations = 0;
 
-      const interval = setInterval(() => {
-        // @ts-expect-error TODO: idk tbh, it works fine
+    const interval = setInterval(() => {
+      if (headingRef.current !== null) {
         headingRef.current.innerText = headingRef.current.innerText
           .split('')
           .map((letter, index) => {
@@ -37,17 +37,21 @@ export function FancyHeading(props: FancyHeadingProps) {
         }
 
         iterations += 1 / 4;
-      }, 30);
-    };
+      }
+    }, 30);
+  };
 
-    textEffect();
-    headingRef.current.onmouseover = textEffect;
-  }
+  useEffect(() => {
+    if (headingRef.current !== null) {
+      textEffect();
+      headingRef.current.onmouseover = textEffect;
+    }
+  }, [textEffect]);
 
   return (
     <h1
       ref={headingRef}
-      className="text-4xl sm:text-6xl font-black capitalize my-4 clip"
+      className="inline text-4xl sm:text-6xl font-black capitalize my-4 clip"
     >
       {props.title.toUpperCase()}
     </h1>
