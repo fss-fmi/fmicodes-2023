@@ -26,6 +26,7 @@ export default async function TeamsPage(): Promise<ReactNode> {
         {teams.map((team, i) => (
           <TeamCard
             key={i}
+            id={team.id}
             image="/images/team-banner-temp.png" // TODO: Replace with team banner
             name={team.name}
             roaster={team.members.map(

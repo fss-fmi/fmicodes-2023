@@ -3,6 +3,7 @@ import { Technology } from '@prisma/client';
 import styles from './team-card.module.css';
 
 export interface TeamCardProps {
+  id: number;
   image: string;
   name: string;
   roaster: string[];
@@ -17,6 +18,7 @@ export function TeamCard(props: TeamCardProps) {
       <FancyCard
         image={props.image}
         title={`Отбор "${props.name}"`}
+        url={`/teams/${props.id}`}
         content={CardContent(
           props.roaster,
           props.projectName,
@@ -67,4 +69,5 @@ function CardContent(
     </div>
   );
 }
+
 export default TeamCard;

@@ -4,14 +4,17 @@ import styles from './fancy-card.module.scss';
 import React, { useRef } from 'react';
 import Image from 'next/image';
 import useMousePosition from '../../lib/use-mouse-position';
+import { useRouter } from 'next/navigation';
 
 export interface FancyCardProps {
   image: string;
   title: string;
   content: JSX.Element;
+  url?: string;
 }
 
 export function FancyCard(props: FancyCardProps) {
+  const router = useRouter();
   const mousePosition = useMousePosition();
   const fancyCardRef = useRef<HTMLDivElement>(null);
 
@@ -30,7 +33,19 @@ export function FancyCard(props: FancyCardProps) {
   }
 
   return (
-    <div ref={fancyCardRef} className="acrylic rounded-md">
+    <div
+      onClick={
+        props.url
+          ? () => {
+              if (props.url) {
+                router.push(props.url);
+              }
+            }
+          : undefined
+      }
+      ref={fancyCardRef}
+      className={`acrylic rounded-md ${props.url ? 'cursor-pointer' : ''}`}
+    >
       <Image
         className="w-full h-full object-cover rounded-t-md"
         src={props.image}
