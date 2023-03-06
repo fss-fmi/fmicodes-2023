@@ -187,6 +187,12 @@ model Technology {
   mentorTechnologies      MentorTechnology[]
 }
 
+model Regulation {
+  id                      Int                     @id @default(autoincrement())
+  title                   String
+  content                 String
+}
+
 enum Role {
   PARTICIPANT
   ORGANIZER
