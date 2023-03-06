@@ -8,6 +8,7 @@ export interface FancyLinkProps {
   href: string;
   isPrimary?: boolean;
   isBlock?: boolean;
+  target?: string;
   children: ReactNode;
 }
 
@@ -17,6 +18,7 @@ export function FancyLink(props: FancyLinkProps) {
   return (
     <Link
       href={props.href}
+      target={props.target}
       className={
         (props.isPrimary ? ' bg-red-600 hover:bg-red-700 text-white' : '') +
         (props.href === pathname
