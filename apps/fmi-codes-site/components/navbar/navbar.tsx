@@ -12,7 +12,7 @@ import { SessionProvider } from 'next-auth/react';
 
 const navigation = [
   { name: 'За хакатона', href: '/about' },
-  { name: 'Програма', href: '/schedule' },
+  // { name: 'Програма', href: '/schedule' },
   { name: 'Регламент', href: '/regulation' },
   { name: 'Отбори', href: '/teams' },
   // { name: 'Ментори', href: '/mentors' },

@@ -14,14 +14,12 @@
 
 .blob {
   animation: rotate 10s linear infinite;
-  @apply h-96 aspect-square absolute inset-1/2 rounded-full;
+  @apply h-96 aspect-square absolute inset-1/2 rounded-full -z-10;
   @apply bg-gradient-to-r from-red-600 to-blue-600 blur-4xl;
   translate: -50% -50%;
-  z-index: -2;
 }
 
 .container {
-  @apply fixed w-screen h-screen overflow-hidden;
-  z-index: -2;
+  @apply fixed w-screen h-screen overflow-hidden -z-10;
 }
 

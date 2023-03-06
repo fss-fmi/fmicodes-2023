@@ -25,9 +25,11 @@ export function CookieConsent() {
         overflow: 'wrap',
       }}
       buttonStyle={{
-        background: 'rgb(239, 68, 68)',
+        background: 'rgb(185, 25, 25)',
         fontSize: '13px',
         fontWeight: 'bold',
+        color: 'white',
+        borderRadius: '0.5rem',
       }}
     >
       Този уебсайт използва бисквитки. Научете повече{' '}

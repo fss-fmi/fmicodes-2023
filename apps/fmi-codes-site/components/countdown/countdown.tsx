@@ -14,7 +14,7 @@ export function Countdown(props: CountdownProps) {
       {timeValues.map((value, index) => (
         <p
           key={index}
-          className="text-xl sm:text-2xl text-center font-black capitalize p-1 m-1 border border-red-600 rounded"
+          className="acrylic text-xl sm:text-2xl text-center font-black capitalize p-1 m-1 border border-red-600 rounded"
         >
           {value.toLocaleString('en-US', {
             minimumIntegerDigits: 2,
