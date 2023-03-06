@@ -51,7 +51,9 @@ export async function leaveTeam(session: Session) {
   });
 
   // Delete team if there is no one left
-  if (team && team.members.length === 0) {
+  // Note, that the condition is <= 1, because the team is queried before the
+  // user is removed
+  if (team && team.members.length <= 1) {
     await prisma.team.delete({
       where: {
         id: teamId,
