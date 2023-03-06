@@ -4,8 +4,8 @@ import { getTechnologies } from '../../pages/api/technologies';
 import FancyButton from '../fancy-button/fancy-button';
 import { FireIcon, UserMinusIcon } from '@heroicons/react/24/outline';
 import EditTeamButton from '../../components/edit-team-button/edit-team-button';
-
-type UserWithoutPassword = Omit<User, 'passwordHash'>;
+import LeaveTeamButton from '../leave-team-button/leave-team-button';
+import { UserWithoutPasswordWithJoins } from '../../lib/types';
 
 export interface TeamProfileProps {
   team:
@@ -15,7 +15,7 @@ export interface TeamProfileProps {
           technology: Technology;
         })[];
       };
-  user: UserWithoutPassword | null;
+  user: UserWithoutPasswordWithJoins | null;
 }
 
 export async function TeamProfile(props: TeamProfileProps) {
@@ -66,6 +66,11 @@ export async function TeamProfile(props: TeamProfileProps) {
                 <InviteUsersButton technologies={technologies} />
                 <EditTeamButton teamId={props.team.id} />
               </>
+            ) : null}
+
+            {props.user?.id !== props.team.captainId ||
+            props.team.members.length === 1 ? (
+              <LeaveTeamButton />
             ) : null}
           </div>
         ) : null}

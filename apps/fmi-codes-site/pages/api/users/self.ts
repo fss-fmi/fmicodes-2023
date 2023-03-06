@@ -24,6 +24,9 @@ export async function getUserByEmail(email: string) {
     where: {
       email: email,
     },
+    include: {
+      teamCaptain: true,
+    },
   });
 
   if (!dbUser) {

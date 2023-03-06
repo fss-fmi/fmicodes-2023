@@ -34,6 +34,7 @@ export default async function TeamByIdPage({ params }): Promise<ReactNode> {
     <>
       <FancyHeading title={`Отбор ${team.name}`} />
       <div className="h-2/3 grid place-items-center">
+        {/*@ts-expect-error Serverside component.*/}
         <TeamProfile team={team} user={user} />
       </div>
     </>

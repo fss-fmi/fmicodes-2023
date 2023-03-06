@@ -3,6 +3,7 @@ import { ReactNode } from 'react';
 export interface FancyButtonProps {
   onClick?: () => void;
   isPrimary?: boolean;
+  disabled?: boolean;
   children: ReactNode;
 }
 
@@ -11,6 +12,7 @@ export function FancyButton(props: FancyButtonProps) {
     <button
       type="submit"
       onClick={props.onClick}
+      disabled={props.disabled}
       className={
         (props.isPrimary
           ? 'bg-red-600  border-transparent active:bg-red-600 focus:outline-none focus:shadow-outline-red'

@@ -1,10 +1,10 @@
 import nextConnect from 'next-connect';
-import { onError } from '../../../lib/api-middleware';
+import { onError } from '../../../../lib/api-middleware';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession, Session } from 'next-auth';
-import { authOptions } from '../auth/[...nextauth]';
-import { getUserBySession } from '../users/self';
-import { getTeamById } from './[id]';
+import { authOptions } from '../../auth/[...nextauth]';
+import { getUserBySession } from '../../users/self';
+import { getTeamById } from '../[id]';
 
 const handler = nextConnect(onError);
 
