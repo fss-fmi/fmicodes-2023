@@ -19,6 +19,12 @@ export default async function TeamsPage(): Promise<ReactNode> {
       {/* @ts-expect-error Server Component */}
       <TeamWidget />
 
+      {teams.length === 0 ? (
+        <div className="acrylic px-4 mt-2 py-2 text-md text-white rounded-lg">
+          Все още няма регистрирани отбори. 🥲
+        </div>
+      ) : null}
+
       <div
         id="team-cards"
         className={'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'}
