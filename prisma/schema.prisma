@@ -11,18 +11,18 @@ datasource db {
 }
 
 model Account {
-  id                 String  @id @default(cuid())
-  userId             String
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?  @db.Text
-  access_token       String?  @db.Text
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?  @db.Text
-  session_state      String?
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -48,9 +48,10 @@ model User {
   universityProofImage    String           @map("university_proof_image")
   role                    Role             @default(PARTICIPANT)
   createdAt               DateTime         @default(now()) @map("created_at")
-  team                    Team?            @relation(fields: [teamId], references: [id])
+  team                    Team?            @relation(name: "TeamMembers", fields: [teamId], references: [id])
   teamRequests            TeamRequest[]
   teamInvitations         TeamInvitation[]
+  teamCaptain             Team?            @relation(name: "TeamCaptain")
   userTechnologies        UserTechnology[]
   accounts                Account[]
   sessions                Session[]
@@ -86,11 +87,13 @@ model Team {
   points                  Int?
   room                    String?
   presentationTime        DateTime?               @map("presentation_time")
+  captainId               String                  @unique @map("captain_id")
   createdAt               DateTime                @default(now()) @map("created_at")
-  members                 User[]
+  members                 User[]                  @relation("TeamMembers")
   teamRequests            TeamRequest[]
   teamInvitations         TeamInvitation[]
   teamProjectTechnologies TeamProjectTechnology[]
+  captain                 User                   @relation(name: "TeamCaptain", fields: [captainId], references: [id], onDelete: Cascade)
 }
 
 model TeamProjectTechnology {
@@ -188,9 +191,9 @@ model Technology {
 }
 
 model Regulation {
-  id                      Int                     @id @default(autoincrement())
-  title                   String
-  content                 String
+  id      Int    @id @default(autoincrement())
+  title   String
+  content String
 }
 
 enum Role {

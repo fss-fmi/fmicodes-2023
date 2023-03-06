@@ -15,12 +15,23 @@ export async function TeamWidget() {
   return (
     <div className="w-full flex acrylic justify-between rounded-lg p-6 dark:border dark:border-gray-700">
       {team ? (
-        <div className="">
-          <span className="text-sm">Вие сте част от отбор</span>
-          <h3 className="text-2xl font-bold text-gray-800 dark:text-white">
-            {team.name}
-          </h3>
-        </div>
+        <>
+          <div className="">
+            <span className="text-sm">Вие сте част от отбор</span>
+            <h3 className="text-2xl font-bold text-gray-800 dark:text-white">
+              {team.name}
+            </h3>
+          </div>
+          <div className="flex content-center items-center space-x-2">
+            <NotificationsButton />
+            <FancyLink isPrimary href="/teams#team-cards">
+              Напусни отбора
+            </FancyLink>
+            <FancyLink isPrimary href="/teams/create">
+              Прегледай отбора
+            </FancyLink>
+          </div>
+        </>
       ) : (
         <>
           <div className="grid">
@@ -31,9 +42,6 @@ export async function TeamWidget() {
           </div>
           <div className="flex content-center items-center space-x-2">
             <NotificationsButton />
-            <FancyLink isPrimary href="/teams#team-cards">
-              Намери отбор
-            </FancyLink>
             <FancyLink isPrimary href="/teams/create">
               Създайте отбор
             </FancyLink>

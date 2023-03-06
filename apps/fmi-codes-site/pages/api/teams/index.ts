@@ -41,20 +41,21 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
-  const teamDto: TeamDto = req.body;
-  const team = await createTeam(teamDto);
-
   const user = await getUserBySession(session);
   if (!user) {
     res.status(401).send('Unauthorized');
     return;
   }
+
+  const teamDto: TeamDto = req.body;
+  const team = await createTeam(teamDto, user.id);
+
   await assignPlayerToTeam(team.id, user.id);
 
   res.status(201).json(team);
 });
 
-export async function createTeam(teamDto: TeamDto) {
+export async function createTeam(teamDto: TeamDto, userId: string) {
   const projectTechnologies = teamDto.teamProjectTechnologies
     ? teamDto.teamProjectTechnologies.map((t) => {
         return { technology: { connect: { id: parseInt(t) } } };
@@ -64,6 +65,7 @@ export async function createTeam(teamDto: TeamDto) {
   const teamInformation = {
     ...teamDto,
     acceptsNewMembers: true,
+    captainId: userId,
     teamProjectTechnologies: {
       create: projectTechnologies,
     },
@@ -71,9 +73,9 @@ export async function createTeam(teamDto: TeamDto) {
   return await prisma.team.create({ data: teamInformation });
 }
 
-export async function assignPlayerToTeam(teamId: number, playerId: string) {
+export async function assignPlayerToTeam(teamId: number, userId: string) {
   await prisma.user.update({
-    where: { id: playerId },
+    where: { id: userId },
     data: { teamId: teamId },
   });
 }
