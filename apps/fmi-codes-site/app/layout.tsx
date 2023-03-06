@@ -4,7 +4,7 @@ import '../styles/globals.css';
 import { ReactNode } from 'react';
 import BackgroundBlob from '../components/background-blob/background-blob';
 import Navbar from '../components/navbar/navbar';
-import CookieConsent from './cookie-consent/cookie-consent';
+import CookieConsent from '../components/cookie-consent/cookie-consent';
 
 /**
  * Defines the layout of the application.
