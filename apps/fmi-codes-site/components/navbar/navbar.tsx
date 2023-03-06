@@ -6,12 +6,11 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import NavbarProfile from '../navbar-profile/navbar-profile';
 import Link from 'next/link';
 import Image from 'next/image';
-import fmiCodesLogo from '../../public/images/fmi-codes-logo-256x256.png';
 import FancyLink from '../fancy-link/fancy-link';
 import { SessionProvider } from 'next-auth/react';
 
 const navigation = [
-  { name: 'За хакатона', href: '/about' },
+  // { name: 'За хакатона', href: '/about' },
   // { name: 'Програма', href: '/schedule' },
   { name: 'Регламент', href: '/regulation' },
   { name: 'Отбори', href: '/teams' },
@@ -42,9 +41,9 @@ const Navbar: FC = () => {
                 <div className="flex flex-shrink-0 items-center">
                   <Link href="/">
                     <Image
-                      className="block h-16 w-auto"
-                      src={fmiCodesLogo}
-                      alt="FMI{Codes} Logo"
+                      className="block h-12 w-auto"
+                      src="/images/fmi-codes-logo-simplified.png"
+                      alt={'FMI{Codes} Logo'}
                       width={100}
                       height={100}
                     />
