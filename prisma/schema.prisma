@@ -159,14 +159,14 @@ model Sponsor {
 model Schedule {
   title       String
   startsAt    DateTime @map("starts_at")
-  endsAt      DateTime @map("ends_at")
+  endsAt      DateTime? @map("ends_at")
   description String
   image       String?
   location    String
   isPrimary   Boolean  @default(false) @map("is_primary")
   createdAt   DateTime @default(now()) @map("created_at")
 
-  @@id([title, startsAt, endsAt])
+  @@id([title, startsAt])
 }
 
 model VerificationToken {
