@@ -24,6 +24,10 @@ export function FancyHeading(props: FancyHeadingProps) {
         headingRef.current.innerText = headingRef.current.innerText
           .split('')
           .map((letter, index) => {
+            if (letter === ' ') {
+              return letter;
+            }
+
             if (index < iterations) {
               return props.title[index].toUpperCase();
             }
@@ -36,9 +40,9 @@ export function FancyHeading(props: FancyHeadingProps) {
           clearInterval(interval);
         }
 
-        iterations += 1 / 4;
+        iterations += 1 / 3;
       }
-    }, 30);
+    }, 50);
   };
 
   useEffect(() => {
