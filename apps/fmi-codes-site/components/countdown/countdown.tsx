@@ -1,7 +1,6 @@
 'use client';
 import { useCountdown } from '../../lib/use-countdown';
 
-/* eslint-disable-next-line */
 export interface CountdownProps {
   targetDate: string;
 }
