@@ -20,7 +20,7 @@ export interface FormTextFieldProps {
 export function FormTextField(props: FormTextFieldProps) {
   return (
     <>
-      <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+      <label className="block mb-2 text-sm font-medium text-white">
         {props.label}
         {props.required && <span className="text-red-500">*</span>}
         {props.description && (

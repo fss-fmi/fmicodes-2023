@@ -27,7 +27,7 @@ export async function TeamProfile(props: TeamProfileProps) {
           {props.team.members.map((member) => (
             <div
               key={member.id}
-              className="flex flex-col w-48 text-center items-center space-y-1"
+              className="flex flex-col w-56 text-center items-center space-y-1 p-4 border border-gray-700 rounded-lg bg-gray-800 bg-opacity-10"
             >
               <img
                 className="h-28 w-28 rounded-full"
@@ -35,7 +35,7 @@ export async function TeamProfile(props: TeamProfileProps) {
                 // TODO: src={session.user.image}
                 alt=""
               />
-              <h3 className="text-bold">
+              <h3 className="font-bold text-lg">
                 {member.firstName + ' ' + member.lastName}
               </h3>
               <p>{member.university}</p>
@@ -60,7 +60,7 @@ export async function TeamProfile(props: TeamProfileProps) {
           ))}
         </div>
         {props.user?.teamId === props.team.id ? (
-          <div className="flex flex-row space-x-2 border-t border-gray-200 dark:border-gray-700 pt-4 md:pt-6">
+          <div className="flex flex-row space-x-2 border-t border-gray-700 pt-4 md:pt-6">
             {props.user?.id === props.team.captainId ? (
               <>
                 <InviteUsersButton technologies={technologies} />

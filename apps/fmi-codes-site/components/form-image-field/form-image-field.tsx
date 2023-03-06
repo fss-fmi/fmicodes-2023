@@ -16,7 +16,7 @@ export function FormImageField(props: FormImageFieldProps) {
 
   return (
     <>
-      <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+      <label className="block mb-2 text-sm font-medium text-white">
         {props.label}
         {props.required && <span className="text-red-500">*</span>}
         {props.description && (
@@ -24,20 +24,20 @@ export function FormImageField(props: FormImageFieldProps) {
             {props.description}
           </span>
         )}
-        <div className="flex flex-col items-center justify-center w-full h-36 my-2 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+        <div className="acrylic flex flex-col items-center justify-center w-full h-36 my-2 border-2 border-dashed rounded-lg cursor-pointer hover:bg-gray-700 border-gray-600 ">
           <div className="flex flex-col items-center justify-center pt-5 pb-6">
-            <DocumentPlusIcon className="w-10 h-10 mb-3 text-gray-400" />
-            <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+            <DocumentPlusIcon className="w-10 h-10 mb-3 text-gray-200" />
+            <p className="mb-2 text-sm text-gray-200">
               <span className="font-semibold">
                 Кликнете тук за да качите снимка
               </span>{' '}
               или я пуснете тук
             </p>
-            <p className="text-xs text-gray-500 dark:text-gray-400">
+            <p className="text-xs text-gray-400">
               PNG, JPG, SVG или GIF (Макс. 5MB)
             </p>
             {file && (
-              <p className="text-xs text-gray-500 dark:text-gray-400">
+              <p className="text-xs text-gray-400">
                 Прикачена е {file.name} с размер{' '}
                 {Math.round((file.size / 1024 / 1024) * 100) / 100} MB
               </p>

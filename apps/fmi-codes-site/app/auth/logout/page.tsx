@@ -17,7 +17,7 @@ export default function LogoutPage(): ReactNode {
       <div className="h-2/3 grid place-items-center">
         <div className="w-full acrylic rounded-lg md:mt-0 sm:max-w-6xl xl:p-0">
           <div className="p-6 space-y-2 sm:p-8">
-            <h3 className="text-xl font-bold text-gray-900 md:text-2xl dark:text-white">
+            <h3 className="text-xl font-bold md:text-2xl text-white">
               Наистина ли искате да излезете?
             </h3>
             <p>Ще бъдете пренасочени към началната страница на хакатона.</p>

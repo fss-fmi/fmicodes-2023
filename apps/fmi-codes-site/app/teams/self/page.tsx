@@ -18,7 +18,7 @@ export default async function TeamOfSelfPage(): Promise<ReactNode> {
       <>
         <FancyHeading isRoman title="Грешка" />
         <div className="h-2/3 grid place-items-center">
-          <h1 className="text-2xl font-bold text-gray-800 dark:text-white">
+          <h1 className="text-2xl font-bold text-white">
             Не сте влезли в профила си.
           </h1>
         </div>

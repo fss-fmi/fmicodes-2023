@@ -16,16 +16,16 @@ export async function DiscordWidget() {
   }
 
   return (
-    <div className="w-full flex justify-between bg-white rounded-lg p-6 dark:border dark:bg-gray-800 dark:border-gray-700">
+    <div className="acrylic w-full flex justify-between rounded-lg p-6">
       <>
         <div className="grid">
           <span className="text-sm">Код за верификация</span>
-          <h3 className="text-2xl font-bold text-gray-800 dark:text-white">
+          <h3 className="text-2xl font-bold text-white">
             {user.discordVerificationCode}
           </h3>
         </div>
         <div className="flex content-center items-center space-x-2">
-          <FancyLink isPrimary href="https://discord.gg/NU9tBQHTHQ">
+          <FancyLink isPrimary href={String(process.env.DISCORD_SERVER_INVITE)}>
             Влезте в Discord сървъра
           </FancyLink>
         </div>

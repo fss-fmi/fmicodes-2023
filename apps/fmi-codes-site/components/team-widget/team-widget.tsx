@@ -13,14 +13,12 @@ export async function TeamWidget() {
   const team = await getTeamBySession(session);
 
   return (
-    <div className="w-full flex acrylic justify-between rounded-lg p-6 dark:border dark:border-gray-700">
+    <div className="w-full flex acrylic justify-between rounded-lg p-6">
       {team ? (
         <>
           <div className="">
             <span className="text-sm">Вие сте част от отбор</span>
-            <h3 className="text-2xl font-bold text-gray-800 dark:text-white">
-              {team.name}
-            </h3>
+            <h3 className="text-2xl font-bold text-white">{team.name}</h3>
           </div>
           <div className="flex content-center items-center space-x-2">
             <NotificationsButton />
@@ -33,9 +31,7 @@ export async function TeamWidget() {
         <>
           <div className="grid">
             <span className="text-sm">Вие все още</span>
-            <h3 className="text-2xl font-bold text-gray-800 dark:text-white">
-              Нямате отбор
-            </h3>
+            <h3 className="text-2xl font-bold text-white">Нямате отбор</h3>
           </div>
           <div className="flex content-center items-center space-x-2">
             <NotificationsButton />
