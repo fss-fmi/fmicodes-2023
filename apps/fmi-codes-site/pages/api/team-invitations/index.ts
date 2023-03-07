@@ -23,11 +23,11 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
-  const invitations = getInvitations(user.id);
+  const invitations = getTeamInvitations(user.id);
   res.status(200).json(invitations);
 });
 
-export async function getInvitations(userId: string) {
+export async function getTeamInvitations(userId: string) {
   return await prisma.teamInvitation.findMany({
     where: {
       userId: userId,
@@ -52,11 +52,11 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
-  const invitations = createInvitation(inviter, req.body.inviteeId);
+  const invitations = createTeamInvitation(inviter, req.body.inviteeId);
   res.status(200).json(invitations);
 });
 
-export async function createInvitation(
+export async function createTeamInvitation(
   inviter: UserWithoutPasswordWithJoins,
   inviteeId: string
 ) {
