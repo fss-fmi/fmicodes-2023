@@ -1,6 +1,6 @@
-import {Injectable} from '@nestjs/common';
-import {AuthDto} from './auth.dto';
-import {TransformPipe} from '@discord-nestjs/common';
+import { Injectable } from '@nestjs/common';
+import { AuthDto } from './auth.dto';
+import { TransformPipe } from '@discord-nestjs/common';
 import {
   Command,
   DiscordTransformedCommand,
@@ -8,7 +8,7 @@ import {
   TransformedCommandExecutionContext,
   UsePipes,
 } from '@discord-nestjs/core';
-import {AuthService} from "./auth.service";
+import { AuthService } from './auth.service';
 
 @Injectable()
 @Command({
@@ -17,12 +17,11 @@ import {AuthService} from "./auth.service";
 })
 @UsePipes(TransformPipe)
 export class AuthCommand implements DiscordTransformedCommand<AuthDto> {
-
   constructor(private authService: AuthService) {}
 
   async handler(
     @Payload() dto: AuthDto,
-    {interaction}: TransformedCommandExecutionContext,
+    { interaction }: TransformedCommandExecutionContext
   ): Promise<string> {
     // Get user by code
     const user = await this.authService.getUserByCode(dto.code);
@@ -43,7 +42,7 @@ export class AuthCommand implements DiscordTransformedCommand<AuthDto> {
     const guildMember = await this.authService.getGuildMember(interaction);
 
     // Set discord username
-    await this.authService.updateUserDiscordNickname(guildMember, `${user.firstName} ${user.lastName}`);
+    await this.authService.updateUserDiscordNickname(guildMember, user.name);
 
     // Add membership role to user
     await this.authService.addMemberRole(guildMember, user);

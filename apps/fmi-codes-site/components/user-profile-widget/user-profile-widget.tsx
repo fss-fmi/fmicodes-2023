@@ -21,9 +21,7 @@ export function UserProfileWidget(props: UserProfileWidgetProps) {
         // TODO: src={session.user.image}
         alt=""
       />
-      <h3 className="font-bold text-lg">
-        {props.member.firstName + ' ' + props.member.lastName}
-      </h3>
+      <h3 className="font-bold text-lg">{props.member.name}</h3>
       <p>{props.member.university}</p>
       <p>{props.member.universityMajor}</p>
       <p>

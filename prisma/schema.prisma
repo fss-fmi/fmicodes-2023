@@ -38,8 +38,7 @@ model User {
   teamId                  Int?             @map("team_id")
   discordId               String?          @unique @map("discord_id")
   discordVerificationCode Int              @unique @map("discord_verification_code")
-  firstName               String           @map("first_name")
-  lastName                String           @map("last_name")
+  name                    String
   university              String
   universityFacultyNumber String           @unique @map("university_faculty_number")
   universityDegree        String           @map("university_degree")

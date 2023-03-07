@@ -35,9 +35,7 @@ export default async function TeamsPage(): Promise<ReactNode> {
             id={team.id}
             image="/images/team-banner-temp.png" // TODO: Replace with team banner
             name={team.name}
-            roaster={team.members.map(
-              (member) => `${member.firstName} ${member.lastName}`
-            )}
+            roaster={team.members.map((member) => member.name)}
             projectName={team.projectName}
             projectDescription={team.projectDescription}
             projectTechnologies={team.teamProjectTechnologies.map(

@@ -41,7 +41,7 @@ export const authOptions: NextAuthOptions = {
         return {
           id: user.id,
           email: user.email,
-          name: `${user.firstName} ${user.lastName}`,
+          name: user.name,
           // TODO: Add image
         };
       },

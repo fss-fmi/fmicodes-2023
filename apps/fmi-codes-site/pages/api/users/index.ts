@@ -10,8 +10,7 @@ import { S3Client } from '../../../lib/s3-client';
 import multerS3 from 'multer-s3';
 
 interface UserDto {
-  firstName: string;
-  lastName: string;
+  name: string;
   email: string;
   phone: string;
   password: string;

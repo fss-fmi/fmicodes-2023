@@ -28,27 +28,15 @@ export function RegistrationForm(props: RegistrationFormProps) {
 
   const formFields = [
     {
-      name: 'firstName',
+      name: 'name',
       type: 'text',
       label: 'Име',
       required: true,
-      placeholder: 'Георги',
+      placeholder: 'Георги Георгиев',
       formOptions: {
         minLength: 2,
-        maxLength: 30,
-        pattern: /^[а-яА-Я-]+$/,
-      },
-    },
-    {
-      name: 'lastName',
-      type: 'text',
-      label: 'Фамилия',
-      required: true,
-      placeholder: 'Георгиев',
-      formOptions: {
-        minLength: 2,
-        maxLength: 30,
-        pattern: /^[а-яА-Я-]+$/,
+        maxLength: 60,
+        pattern: /^[а-яА-Я- ]+$/,
       },
     },
     {
