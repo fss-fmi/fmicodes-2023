@@ -16,7 +16,7 @@ export default async function NewTeamPage(): Promise<ReactNode> {
   const user = await getUserBySession(session);
 
   if (!user) {
-    await redirect('/login?error=Не сте влезли в системата!');
+    await redirect('/auth/login?error=Не сте влезли в системата!');
     return;
   }
 
