@@ -6,6 +6,7 @@ import { getUserBySession } from '../users/self';
 import nextConnect from 'next-connect';
 import { onError } from '../../../lib/api-middleware';
 import prisma from '../../../lib/prismadb';
+import { getTeamsCount } from './count';
 
 const handler = nextConnect(onError);
 
@@ -56,6 +57,12 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 });
 
 export async function createTeam(teamDto: TeamDto, userId: string) {
+  const teamsCount = await getTeamsCount();
+
+  if (teamsCount >= 25) {
+    throw new Error('Достигнат е лимита на отборите.');
+  }
+
   const projectTechnologies = teamDto.teamProjectTechnologies
     ? teamDto.teamProjectTechnologies.map((t) => {
         return { technology: { connect: { id: parseInt(t) } } };
