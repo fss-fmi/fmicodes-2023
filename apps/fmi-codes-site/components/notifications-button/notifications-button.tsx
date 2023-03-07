@@ -25,7 +25,7 @@ export async function NotificationsButton() {
         title="Покани от отбори"
         openButtonContent={<BellIcon className="h-5 w-5" />}
       >
-        <div className="flex flex-col space-y-2">
+        <div className="flex flex-col space-y-2 w-full">
           {teamInvites.map((invite, i) => (
             <div
               key={i}

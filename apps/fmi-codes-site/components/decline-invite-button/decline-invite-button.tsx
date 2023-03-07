@@ -12,12 +12,15 @@ export interface DeclineInviteButtonProps {
 export function DeclineInviteButton(props: DeclineInviteButtonProps) {
   const onClick = async () => {
     try {
-      const res = await fetch(`/api/team-invites/${props.invite.id}/respond`, {
-        method: 'POST',
-        body: JSON.stringify({
-          accept: false,
-        }),
-      });
+      const res = await fetch(
+        `/api/team-invitations/${props.invite.id}/respond`,
+        {
+          method: 'POST',
+          body: JSON.stringify({
+            accept: false,
+          }),
+        }
+      );
 
       if (res.status === 200) {
         redirect(`/teams/${props.invite.teamId}`);

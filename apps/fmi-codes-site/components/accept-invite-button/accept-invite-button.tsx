@@ -12,12 +12,15 @@ export interface AcceptInviteButtonProps {
 export function AcceptInviteButton(props: AcceptInviteButtonProps) {
   const onClick = async () => {
     try {
-      const res = await fetch(`/api/team-invites/${props.invite.id}/respond`, {
-        method: 'POST',
-        body: JSON.stringify({
-          accept: true,
-        }),
-      });
+      const res = await fetch(
+        `/api/team-invitations/${props.invite.id}/respond`,
+        {
+          method: 'POST',
+          body: JSON.stringify({
+            accept: true,
+          }),
+        }
+      );
 
       if (res.status === 200) {
         redirect(`/teams/${props.invite.teamId}`);
