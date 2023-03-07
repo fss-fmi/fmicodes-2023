@@ -21,7 +21,7 @@ const navigation = [
 
 const Navbar: FC = () => {
   return (
-    <Disclosure as="nav" className="sticky -mt-16 w-full top-0 z-50 acrylic">
+    <Disclosure as="nav" className="sticky -mt-16 w-full top-0 z-40 acrylic">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-5xl px-2">
