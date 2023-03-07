@@ -1,8 +1,7 @@
 'use client';
 
 import { Technology } from '@prisma/client';
-import FancyButton from '../fancy-button/fancy-button';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import FancyModal from '../fancy-modal/fancy-modal';
 import { UserPlusIcon } from '@heroicons/react/24/outline';
 import FormTextField from '../form-text-field/form-text-field';
@@ -13,8 +12,6 @@ export interface InviteUsersButtonProps {
 }
 
 export function InviteUsersButton(props: InviteUsersButtonProps) {
-  const [isModalShown, setIsModalShown] = useState(false);
-
   const {
     register,
     watch,
@@ -34,19 +31,11 @@ export function InviteUsersButton(props: InviteUsersButtonProps) {
 
   return (
     <>
-      <FancyButton
-        isPrimary
-        onClick={() => {
-          setIsModalShown(true);
-        }}
-      >
-        <UserPlusIcon className="inline h-5 w-5" /> Покани потребители
-      </FancyButton>
-
       <FancyModal
-        isModalShown={isModalShown}
-        setIsModalShown={setIsModalShown}
         title="Покани потребители"
+        openButtonContent={
+          <UserPlusIcon className="h-5 w-5">Покани потребители</UserPlusIcon>
+        }
       >
         <FormTextField
           name="query"
