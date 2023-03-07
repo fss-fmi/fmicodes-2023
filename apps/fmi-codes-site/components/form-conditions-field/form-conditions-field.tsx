@@ -14,6 +14,7 @@ export function FormConditionsField() {
         <Link href="/regulation" target="_blank" className="underline">
           регламента на хакатона
         </Link>
+        <span className="text-red-500">*</span>
       </label>
     </>
   );
