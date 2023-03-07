@@ -84,8 +84,11 @@ export function TeamRegistrationForm(props: TeamRegistrationFormProps) {
 
       reset();
 
+      const json = await res.json();
+      const id = json.id;
+
       if (res.status === 201) {
-        router.push(`/teams`);
+        router.push(`/teams/${id}`);
       } else {
         const error = await res.json();
         setError(error.error);
