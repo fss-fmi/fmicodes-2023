@@ -10,6 +10,7 @@ import FormTechnologiesField from '../form-technologies-field/form-technologies-
 import { Technology } from '@prisma/client';
 import { useState } from 'react';
 import FormConditionsField from '../form-conditions-field/form-conditions-field';
+import CircularLoadingIndicator from '../circular-loading-indicator/circular-loading-indicator';
 
 interface RegistrationFormProps {
   technologies: Technology[];
@@ -25,6 +26,7 @@ export function RegistrationForm(props: RegistrationFormProps) {
   } = useForm({ mode: 'onBlur' });
 
   const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const formFields = [
     {
@@ -146,12 +148,16 @@ export function RegistrationForm(props: RegistrationFormProps) {
     });
 
     try {
-      const res = await fetch(`/api/users`, {
+      setIsLoading(true);
+      const req = fetch(`/api/users`, {
         method: 'POST',
         body: formData,
       }); // TODO: replace with = await createUser(body);
 
       reset();
+
+      const res = await req;
+      setIsLoading(false);
 
       if (res.status === 201) {
         router.push('/auth/login');
@@ -228,7 +234,11 @@ export function RegistrationForm(props: RegistrationFormProps) {
               <FormConditionsField />
             </div>
             <div className="flex justify-end">
-              <FancyButton isPrimary>Регистрация</FancyButton>
+              {isLoading ? (
+                <CircularLoadingIndicator />
+              ) : (
+                <FancyButton isPrimary>Регистрация</FancyButton>
+              )}
             </div>
           </div>
         </form>

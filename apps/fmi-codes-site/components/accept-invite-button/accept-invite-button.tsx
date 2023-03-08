@@ -35,7 +35,7 @@ export function AcceptInviteButton(props: AcceptInviteButtonProps) {
 
   return (
     <>
-      <FancyButton onClick={onClick}>
+      <FancyButton isPrimary onClick={onClick}>
         <CheckCircleIcon className="inline h-7 w-7" />
       </FancyButton>
     </>

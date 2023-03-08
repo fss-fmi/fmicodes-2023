@@ -35,7 +35,7 @@ export function DeclineInviteButton(props: DeclineInviteButtonProps) {
 
   return (
     <>
-      <FancyButton onClick={onClick}>
+      <FancyButton isPrimary onClick={onClick}>
         <XCircleIcon className="inline h-7 w-7" />
       </FancyButton>
     </>

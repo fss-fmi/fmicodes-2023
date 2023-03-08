@@ -35,7 +35,7 @@ export async function NotificationsButton() {
           {teamInvites.map((invite, i) => (
             <div
               key={i}
-              className="flex flex-row space-x-2 grow space-y-1 p-2 border border-gray-700 rounded-lg bg-gray-800 bg-opacity-10"
+              className="flex flex-row space-x-2 space-y-1 max-h-20 p-2 border border-gray-700 rounded-lg bg-gray-800 bg-opacity-10"
             >
               <div className="flex flex-col grow">
                 <span className="text-sm">Покана от отбор</span>
@@ -45,7 +45,7 @@ export async function NotificationsButton() {
                   </h3>
                 </Link>
               </div>
-              <div className="flex flex-row">
+              <div className="flex flex-row space-x-1">
                 <AcceptInviteButton invite={invite} />
                 <DeclineInviteButton invite={invite} />
               </div>
