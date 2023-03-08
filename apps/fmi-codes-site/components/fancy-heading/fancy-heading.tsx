@@ -16,46 +16,46 @@ export function FancyHeading(props: FancyHeadingProps) {
       : 'АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЩЪЬЮЯ') +
     (props.containsNumbers ? '0123456789' : '');
 
-  const textEffect = () => {
-    let iterations = 0;
-
-    const interval = setInterval(() => {
-      if (headingRef.current !== null) {
-        headingRef.current.innerText = headingRef.current.innerText
-          .split('')
-          .map((letter, index) => {
-            if (letter === ' ') {
-              return letter;
-            }
-
-            if (index < iterations) {
-              return props.title[index].toUpperCase();
-            }
-
-            return letters[Math.floor(Math.random() * letters.length)];
-          })
-          .join('');
-
-        if (iterations >= props.title.length) {
-          clearInterval(interval);
-        }
-
-        iterations += 1 / 3;
-      }
-    }, 50);
-  };
-
   useEffect(() => {
+    const textEffect = () => {
+      let iterations = 0;
+
+      const interval = setInterval(() => {
+        if (headingRef.current !== null) {
+          headingRef.current.innerText = headingRef.current.innerText
+            .split('')
+            .map((letter, index) => {
+              if (letter === ' ') {
+                return letter;
+              }
+
+              if (index < iterations) {
+                return props.title[index].toUpperCase();
+              }
+
+              return letters[Math.floor(Math.random() * letters.length)];
+            })
+            .join('');
+
+          if (iterations >= props.title.length) {
+            clearInterval(interval);
+          }
+
+          iterations += 1 / 3;
+        }
+      }, 50);
+    };
+
     if (headingRef.current !== null) {
       textEffect();
-      headingRef.current.onmouseover = textEffect;
+      headingRef.current.onclick = textEffect;
     }
-  }, [textEffect]);
+  }, []);
 
   return (
     <h1
       ref={headingRef}
-      className="inline text-4xl sm:text-6xl font-black capitalize my-4 clip"
+      className="text-4xl sm:text-6xl font-black capitalize my-4 truncate text-clip"
     >
       {props.title.toUpperCase()}
     </h1>
