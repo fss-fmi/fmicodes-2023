@@ -19,6 +19,9 @@ export function AcceptInviteButton(props: AcceptInviteButtonProps) {
           body: JSON.stringify({
             accept: true,
           }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
         }
       );
 

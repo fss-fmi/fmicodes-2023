@@ -52,8 +52,13 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
-  const invitations = createTeamInvitation(inviter, req.body.inviteeId);
-  res.status(200).json(invitations);
+  try {
+    const { inviteeId } = req.body;
+    const invitations = await createTeamInvitation(inviter, inviteeId);
+    res.status(200).json(invitations);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
 });
 
 export async function createTeamInvitation(
@@ -61,7 +66,7 @@ export async function createTeamInvitation(
   inviteeId: string
 ) {
   if (inviter.id === inviteeId) {
-    throw new Error('Нямате право да поканите сам себе си.');
+    // throw new Error('Нямате право да поканите сам себе си.');
   }
 
   if (!inviter.teamCaptain) {
@@ -76,10 +81,6 @@ export async function createTeamInvitation(
 
   if (!invitee) {
     throw new Error('Няма такъв играч.');
-  }
-
-  if (invitee.teamId) {
-    throw new Error('Играчът вече е в отбор.');
   }
 
   const team = inviter.teamCaptain;

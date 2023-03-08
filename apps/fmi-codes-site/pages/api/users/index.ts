@@ -110,6 +110,72 @@ export async function createUser(userDto: UserDto, universityProofImage) {
   return userWithoutPassword;
 }
 
+// GET /api/users?q=...
+handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
+  const query = req.query.q as string;
+  const users = await getUsers(query);
+  res.status(200).json(users);
+});
+
+async function getUsers(query: string) {
+  const users = await prisma.user.findMany({
+    where: {
+      OR: [
+        {
+          name: {
+            contains: query,
+            mode: 'insensitive',
+          },
+        },
+        {
+          email: {
+            contains: query,
+            mode: 'insensitive',
+          },
+        },
+        {
+          phone: {
+            contains: query,
+            mode: 'insensitive',
+          },
+        },
+        {
+          university: {
+            contains: query,
+            mode: 'insensitive',
+          },
+        },
+        {
+          universityDegree: {
+            contains: query,
+            mode: 'insensitive',
+          },
+        },
+        {
+          universityMajor: {
+            contains: query,
+            mode: 'insensitive',
+          },
+        },
+        {
+          universityYear: {
+            contains: query,
+            mode: 'insensitive',
+          },
+        },
+        {
+          universityFacultyNumber: {
+            contains: query,
+            mode: 'insensitive',
+          },
+        },
+      ],
+    },
+  });
+
+  return users.map(({ passwordHash, ...user }) => user);
+}
+
 export default handler;
 
 export const config = {

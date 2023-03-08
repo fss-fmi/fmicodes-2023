@@ -21,9 +21,6 @@ export async function TeamWidget() {
             <h3 className="text-2xl font-bold text-white">{team.name}</h3>
           </div>
           <div className="flex content-center items-center space-x-2">
-            {/*@ts-expect-error Serverside component.*/}
-            <NotificationsButton />
-
             <FancyLink isPrimary href="/teams/self">
               Прегледай отбора
             </FancyLink>

@@ -19,6 +19,9 @@ export function DeclineInviteButton(props: DeclineInviteButtonProps) {
           body: JSON.stringify({
             accept: false,
           }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
         }
       );
 
