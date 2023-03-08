@@ -26,7 +26,9 @@ export function FormTechnologiesField(props: FormTechnologiesFieldProps) {
         {props.label}
         {props.required && <span className="text-red-500">*</span>}
         {props.description && (
-          <span className="text-xs text-gray-500">{props.description}</span>
+          <span className="block text-xs text-gray-500 text-justify">
+            {props.description}
+          </span>
         )}
 
         <div className="flex flex-wrap justify-between">

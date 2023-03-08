@@ -32,7 +32,7 @@ export function TeamRegistrationForm(props: TeamRegistrationFormProps) {
       label: 'Име на отбора',
       required: true,
       spanRow: false,
-      placeholder: '//insert name here (незадължително)',
+      placeholder: 'Име на отбора',
       formOptions: {
         maxLength: 30,
       },
@@ -43,7 +43,7 @@ export function TeamRegistrationForm(props: TeamRegistrationFormProps) {
       label: 'Име на проекта',
       required: false,
       spanRow: false,
-      placeholder: '//insert name here (незадължително)',
+      placeholder: 'Име на проекта (незадължително)',
       formOptions: {
         maxLength: 30,
       },
@@ -61,6 +61,7 @@ export function TeamRegistrationForm(props: TeamRegistrationFormProps) {
       type: 'text',
       label: 'Линк към кодовото хранилище',
       required: false,
+      spanRow: false,
       placeholder: 'https://github.com/... (незадължително)',
     },
     {
@@ -68,13 +69,16 @@ export function TeamRegistrationForm(props: TeamRegistrationFormProps) {
       type: 'text',
       label: 'Линк към проекта',
       required: false,
+      spanRow: false,
       placeholder: 'https://project.com (незадължително)',
     },
     {
       name: 'teamProjectTechnologies',
       type: 'technologies',
       label: 'Използвани технологии',
+      description: 'Изберете технологиите, които използвате в проекта',
       required: false,
+      spanRow: true,
       technologies: props.technologies,
     },
   ];
