@@ -33,6 +33,7 @@ export function RegistrationForm(props: RegistrationFormProps) {
       label: 'Име',
       required: true,
       placeholder: 'Георги Георгиев',
+      spanRow: true,
       formOptions: {
         minLength: 2,
         maxLength: 60,
@@ -45,6 +46,7 @@ export function RegistrationForm(props: RegistrationFormProps) {
       label: 'Телефон',
       required: true,
       placeholder: '0888888888',
+      spanRow: false,
     },
     {
       name: 'email',
@@ -52,12 +54,14 @@ export function RegistrationForm(props: RegistrationFormProps) {
       label: 'Имейл адрес',
       required: true,
       placeholder: 'name@email.com',
+      spanRow: false,
     },
     {
       name: 'password',
       type: 'password',
       label: 'Парола',
       required: true,
+      spanRow: true,
       placeholder: '••••••••',
       formOptions: {
         minLength: 8,
@@ -69,6 +73,7 @@ export function RegistrationForm(props: RegistrationFormProps) {
       type: 'dropdown',
       label: 'Университет',
       required: true,
+      spanRow: false,
       options: universities,
     },
     {
@@ -76,7 +81,8 @@ export function RegistrationForm(props: RegistrationFormProps) {
       type: 'dropdown',
       label: 'Степен',
       required: true,
-      options: ['Бакалавър', 'Магистър', 'Докторант'],
+      spanRow: false,
+      options: ['Бакалавър', 'Магистър'],
     },
     {
       name: 'universityMajor',
@@ -84,6 +90,7 @@ export function RegistrationForm(props: RegistrationFormProps) {
       label: 'Специалност',
       required: true,
       placeholder: 'Компютърни науки',
+      spanRow: false,
       formOptions: {
         minLength: 2,
         maxLength: 120,
@@ -95,14 +102,16 @@ export function RegistrationForm(props: RegistrationFormProps) {
       type: 'dropdown',
       label: 'Курс',
       required: true,
+      spanRow: false,
       placeholder: 'Първи',
-      options: ['Първи', 'Втори', 'Трети', 'Четвърти', 'Пети', 'Шести'],
+      options: ['Първи', 'Втори', 'Трети', 'Четвърти', 'Пети'],
     },
     {
       name: 'universityFacultyNumber',
       type: 'text',
       label: 'Факултетен номер',
       required: true,
+      spanRow: true,
       placeholder: '0MI123456',
       formOptions: {
         minLength: 3,
@@ -115,6 +124,7 @@ export function RegistrationForm(props: RegistrationFormProps) {
       type: 'image',
       label: 'Снимка за удостоверение',
       required: true,
+      spanRow: true,
       description:
         'Снимка на студентската Ви книжка или профила Ви в студентската система на университета, на която се вижда, че сте записали летен семестър през учебната 2022/2023 година',
     },
@@ -123,6 +133,7 @@ export function RegistrationForm(props: RegistrationFormProps) {
       type: 'technologies',
       label: 'Технологии',
       required: true,
+      spanRow: true,
       technologies: props.technologies,
     },
   ];
@@ -164,7 +175,7 @@ export function RegistrationForm(props: RegistrationFormProps) {
           className="space-y-4 md:space-y-6"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <div className="xl:columns-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4">
             {formFields.map((field) => {
               switch (field.type) {
                 case 'text':

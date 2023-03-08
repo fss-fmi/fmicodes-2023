@@ -58,7 +58,7 @@ export function LoginForm(props: LoginFormProps) {
           )}
         </div>
         <form
-          className="space-y-4 md:space-y-6"
+          className="grid grid-cols-1 md:grid-cols-2 gap-x-4"
           onSubmit={handleSubmit(onSubmit)}
         >
           {formFields.map((field) => {
@@ -71,7 +71,7 @@ export function LoginForm(props: LoginFormProps) {
               />
             );
           })}
-          <div className="flex justify-end">
+          <div className="flex justify-end col-span-full">
             <FancyButton isPrimary>Вход</FancyButton>
           </div>
         </form>

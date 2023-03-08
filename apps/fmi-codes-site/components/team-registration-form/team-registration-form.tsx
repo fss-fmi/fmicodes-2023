@@ -31,6 +31,8 @@ export function TeamRegistrationForm(props: TeamRegistrationFormProps) {
       type: 'text',
       label: 'Име на отбора',
       required: true,
+      spanRow: false,
+      placeholder: '//insert name here (незадължително)',
       formOptions: {
         maxLength: 30,
       },
@@ -40,6 +42,8 @@ export function TeamRegistrationForm(props: TeamRegistrationFormProps) {
       type: 'text',
       label: 'Име на проекта',
       required: false,
+      spanRow: false,
+      placeholder: '//insert name here (незадължително)',
       formOptions: {
         maxLength: 30,
       },
@@ -49,6 +53,7 @@ export function TeamRegistrationForm(props: TeamRegistrationFormProps) {
       type: 'text',
       label: 'Описание на проекта',
       required: false,
+      spanRow: true,
       placeholder: 'Подробно описание на проекта, който разработвате...',
     },
     {
@@ -56,14 +61,14 @@ export function TeamRegistrationForm(props: TeamRegistrationFormProps) {
       type: 'text',
       label: 'Линк към кодовото хранилище',
       required: false,
-      placeholder: '',
+      placeholder: 'https://github.com/... (незадължително)',
     },
     {
       name: 'projectLink',
       type: 'text',
       label: 'Линк към проекта',
       required: false,
-      placeholder: '',
+      placeholder: 'https://project.com (незадължително)',
     },
     {
       name: 'teamProjectTechnologies',
@@ -109,7 +114,7 @@ export function TeamRegistrationForm(props: TeamRegistrationFormProps) {
           className="space-y-4 md:space-y-6"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <div className="xl:columns-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4">
             {formFields.map((field) => {
               switch (field.type) {
                 case 'text':

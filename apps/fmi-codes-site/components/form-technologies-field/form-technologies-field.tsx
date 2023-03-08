@@ -8,6 +8,7 @@ export interface FormTechnologiesFieldProps {
   label: string;
   description?: string;
   required?: boolean;
+  spanRow?: boolean;
   technologies: Technology[];
   register: UseFormRegister<FieldValues>;
   errors: FieldErrors;
@@ -16,7 +17,12 @@ export interface FormTechnologiesFieldProps {
 export function FormTechnologiesField(props: FormTechnologiesFieldProps) {
   return (
     <>
-      <label className="block mb-2 text-sm font-medium text-white">
+      <label
+        className={
+          'block mb-2 text-sm font-medium text-white' +
+          (props.spanRow ? ' col-span-full' : '')
+        }
+      >
         {props.label}
         {props.required && <span className="text-red-500">*</span>}
         {props.description && (

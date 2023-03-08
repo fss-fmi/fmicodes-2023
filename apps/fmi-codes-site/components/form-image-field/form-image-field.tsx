@@ -7,6 +7,7 @@ export interface FormImageFieldProps {
   label: string;
   description?: string;
   required?: boolean;
+  spanRow?: boolean;
   register: UseFormRegister<FieldValues>;
   errors: FieldErrors;
 }
@@ -16,7 +17,12 @@ export function FormImageField(props: FormImageFieldProps) {
 
   return (
     <>
-      <label className="block mb-2 text-sm font-medium text-white">
+      <label
+        className={
+          'block mb-2 text-sm font-medium text-white' +
+          (props.spanRow ? ' col-span-full' : '')
+        }
+      >
         {props.label}
         {props.required && <span className="text-red-500">*</span>}
         {props.description && (

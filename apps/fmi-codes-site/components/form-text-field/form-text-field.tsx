@@ -13,6 +13,7 @@ export interface FormTextFieldProps {
   placeholder?: string;
   type?: string;
   formOptions?: RegisterOptions;
+  spanRow?: boolean;
   register: UseFormRegister<FieldValues>;
   errors: FieldErrors;
 }
@@ -20,7 +21,12 @@ export interface FormTextFieldProps {
 export function FormTextField(props: FormTextFieldProps) {
   return (
     <>
-      <label className="block mb-2 text-sm font-medium text-white">
+      <label
+        className={
+          'block mb-2 text-sm font-medium text-white' +
+          (props.spanRow ? ' col-span-full' : '')
+        }
+      >
         {props.label}
         {props.required && <span className="text-red-500">*</span>}
         {props.description && (

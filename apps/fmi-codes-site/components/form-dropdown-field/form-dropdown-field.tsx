@@ -5,6 +5,7 @@ export interface FormDropdownFieldProps {
   label: string;
   description?: string;
   required?: boolean;
+  spanRow?: boolean;
   options: string[];
   register: UseFormRegister<FieldValues>;
   errors: FieldErrors;
@@ -13,7 +14,12 @@ export interface FormDropdownFieldProps {
 export function FormDropdownField(props: FormDropdownFieldProps) {
   return (
     <>
-      <label className="block mb-2 text-sm font-medium text-white">
+      <label
+        className={
+          'block mb-2 text-sm font-medium text-white' +
+          (props.spanRow ? ' col-span-full' : '')
+        }
+      >
         {props.label}
         {props.required && <span className="text-red-500">*</span>}
         {props.description && (
