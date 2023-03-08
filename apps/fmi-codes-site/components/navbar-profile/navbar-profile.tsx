@@ -11,7 +11,7 @@ const loginNavigation = [
 ];
 
 const profileNavigation = [
-  { name: 'Профил', href: '/profile' },
+  { name: 'Дискорд сървър', href: '/discord' },
   { name: 'Създаване на отбор', href: '/teams/create' },
   { name: 'Изход', href: '/auth/logout' },
 ];
