@@ -28,7 +28,7 @@ export class TeamService {
     });
   }
 
-  private async createTeamRole(guild: Guild, team: Team): Promise<Role> {
+  async createTeamRole(guild: Guild, team: Team): Promise<Role> {
     // Create team role
     return await guild.roles.create({
       name: `Отбор ${team.name}`,
@@ -37,7 +37,7 @@ export class TeamService {
     });
   }
 
-  private async createTeamChannels(guild: Guild, team: Team, role: Role) {
+  async createTeamChannels(guild: Guild, team: Team, role: Role) {
     // Create channel category
     const category = await guild.channels.create({
       name: `✨ ${team.name} ✨`,
@@ -52,13 +52,16 @@ export class TeamService {
       parent: category.id,
     });
 
+    const technologies = await this.prisma.technology.findMany({
+      select: { name: true },
+      take: 20,
+    });
+
     // Create team mentor questions channel
     const questionsChannel = await guild.channels.create({
       name: `❓︱въпроси-към-менторите`,
       topic: `Канал за въпроси на отбор ${team.name} към менторите`,
-      availableTags: await this.prisma.technology.findMany({
-        select: { name: true },
-      }),
+      // availableTags: technologies.map((t) => ({ name: t.name.slice(0, 19) })),
       type: ChannelType.GuildForum,
       parent: category.id,
     });

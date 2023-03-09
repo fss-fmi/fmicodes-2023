@@ -1,7 +1,7 @@
-import {GatewayIntentBits, Partials} from "discord.js";
+import { GatewayIntentBits, Partials } from 'discord.js';
 
 const environment = () => ({
-  production: false,
+  production: true,
   discord: {
     token: process.env.DISCORD_TOKEN,
     discordClientOptions: {
@@ -16,7 +16,7 @@ const environment = () => ({
         GatewayIntentBits.GuildInvites,
         GatewayIntentBits.MessageContent,
         GatewayIntentBits.GuildScheduledEvents,
-      ]
+      ],
     },
     partials: [
       Partials.Message,
@@ -32,8 +32,8 @@ const environment = () => ({
     //   }
     // ],
     guildId: process.env.GUILD_ID,
-  }
+  },
 });
 
-export {environment};
+export { environment };
 export default environment;

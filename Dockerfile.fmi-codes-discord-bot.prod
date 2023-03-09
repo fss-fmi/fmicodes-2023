@@ -1,0 +1,20 @@
+FROM node:16 as builder
+
+WORKDIR /app/fmi-codes
+
+COPY . .
+RUN yarn install
+RUN yarn global add nx
+RUN yarn nx build fmi-codes-discord-bot
+
+
+FROM node:16 as runner
+
+WORKDIR /app/fmi-codes-discord-bot
+COPY .package*.json .
+COPY yarn.lock .
+COPY --from=builder /app/fmi-codes/dist/apps/fmi-codes-discord-bot .
+
+RUN yarn install
+
+CMD [ "node", "main.js" ]
