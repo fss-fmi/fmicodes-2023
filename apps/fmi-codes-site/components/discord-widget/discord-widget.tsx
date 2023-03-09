@@ -35,7 +35,11 @@ export async function DiscordWidget() {
           </>
         )}
         <div className="flex content-center items-center space-x-2">
-          <FancyLink isPrimary href={String(process.env.DISCORD_SERVER_INVITE)}>
+          <FancyLink
+            isPrimary
+            target="_blank"
+            href={String(process.env.DISCORD_SERVER_INVITE)}
+          >
             {user.discordId ? 'Линк към сървъра' : 'Влезте в Discord сървъра'}
           </FancyLink>
         </div>

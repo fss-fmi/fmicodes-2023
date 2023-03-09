@@ -153,7 +153,7 @@ export function TeamForm(props: TeamFormProps) {
 
           <div className="flex justify-end">
             <FancyButton isPrimary>
-              {props.team ? 'Създай отбор' : 'Запази промените'}
+              {props.team ? 'Запази промените' : 'Създай отбор'}
             </FancyButton>
           </div>
         </form>
