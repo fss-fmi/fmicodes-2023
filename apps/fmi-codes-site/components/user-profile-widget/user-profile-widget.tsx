@@ -1,7 +1,5 @@
 import { UserWithoutPasswordWithJoins } from '../../lib/types';
 import { Team, User } from '@prisma/client';
-import FancyButton from '../fancy-button/fancy-button';
-import { FireIcon, UserMinusIcon } from '@heroicons/react/24/outline';
 
 export interface UserProfileWidgetProps {
   member: User;
@@ -31,12 +29,12 @@ export function UserProfileWidget(props: UserProfileWidgetProps) {
       {props.user?.id === props.team.captainId &&
       props.user?.id !== props.member.id ? (
         <>
-          <FancyButton>
-            <FireIcon className="inline h-5 w-5" /> Направи капитан
-          </FancyButton>
-          <FancyButton>
-            <UserMinusIcon className="inline h-5 w-5" /> Отстрани от отбора
-          </FancyButton>
+          {/*<FancyButton>*/}
+          {/*  <FireIcon className="inline h-5 w-5" /> Направи капитан*/}
+          {/*</FancyButton>*/}
+          {/*<FancyButton>*/}
+          {/*  <UserMinusIcon className="inline h-5 w-5" /> Отстрани от отбора*/}
+          {/*</FancyButton>*/}
         </>
       ) : null}
     </div>
