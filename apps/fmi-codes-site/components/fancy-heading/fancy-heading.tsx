@@ -50,7 +50,7 @@ export function FancyHeading(props: FancyHeadingProps) {
       textEffect();
       headingRef.current.onclick = textEffect;
     }
-  }, []);
+  }, [letters, props.title]);
 
   return (
     <h1
