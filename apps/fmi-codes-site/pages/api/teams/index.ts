@@ -7,6 +7,7 @@ import nextConnect from 'next-connect';
 import { onError } from '../../../lib/api-middleware';
 import prisma from '../../../lib/prismadb';
 import { getTeamsCount } from './count';
+import { UserWithoutPasswordWithJoins } from '../../../lib/types';
 
 const handler = nextConnect(onError);
 
@@ -84,6 +85,56 @@ export async function assignPlayerToTeam(teamId: number, userId: string) {
   await prisma.user.update({
     where: { id: userId },
     data: { teamId: teamId },
+  });
+}
+
+handler.put(async (req: NextApiRequest, res: NextApiResponse) => {
+  const session = await getServerSession(req, res, authOptions);
+  if (!session) {
+    res.status(401).send('Unauthorized');
+    return;
+  }
+
+  const user = await getUserBySession(session);
+  if (!user) {
+    res.status(401).send('Unauthorized');
+    return;
+  }
+
+  try {
+    const teamDto: TeamDto = req.body;
+    const team = await updateTeam(teamDto, user);
+
+    res.status(201).json(team);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+export async function updateTeam(
+  teamDto: TeamDto,
+  user: UserWithoutPasswordWithJoins
+) {
+  if (!user.teamCaptain) {
+    throw new Error('Нямате право да редактирате този отбор.');
+  }
+
+  const projectTechnologies = teamDto.teamProjectTechnologies
+    ? teamDto.teamProjectTechnologies.map((t) => {
+        return { technology: { connect: { id: parseInt(t) } } };
+      })
+    : [];
+
+  const teamInformation = {
+    ...teamDto,
+    acceptsNewMembers: true,
+    teamProjectTechnologies: {
+      create: projectTechnologies,
+    },
+  };
+  return await prisma.team.update({
+    where: { id: user.teamId },
+    data: teamInformation,
   });
 }
 

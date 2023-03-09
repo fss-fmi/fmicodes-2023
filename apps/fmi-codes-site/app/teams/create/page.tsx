@@ -1,4 +1,4 @@
-import TeamRegistrationForm from '../../../components/team-registration-form/team-registration-form';
+import TeamForm from '../../../components/team-form/team-form';
 import { ReactNode } from 'react';
 import { getTechnologies } from '../../../pages/api/technologies';
 import FancyHeading from '../../../components/fancy-heading/fancy-heading';
@@ -30,10 +30,7 @@ export default async function NewTeamPage(): Promise<ReactNode> {
   return (
     <div className="new-team-page">
       <FancyHeading title="Създаване на отбор" />
-      <TeamRegistrationForm
-        title="Създаване на отбор"
-        technologies={technologies}
-      />
+      <TeamForm technologies={technologies} />
     </div>
   );
 }

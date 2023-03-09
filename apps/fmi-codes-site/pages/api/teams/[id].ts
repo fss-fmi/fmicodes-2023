@@ -2,6 +2,7 @@ import prisma from '../../../lib/prismadb';
 import nextConnect from 'next-connect';
 import { onError } from '../../../lib/api-middleware';
 import { NextApiRequest, NextApiResponse } from 'next';
+import { Team } from '@prisma/client';
 
 const handler = nextConnect(onError);
 
@@ -13,7 +14,7 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
 });
 
 export async function getTeamById(teamId: number) {
-  return await prisma.team.findUnique({
+  const team = await prisma.team.findUnique({
     where: {
       id: teamId,
     },
@@ -22,6 +23,10 @@ export async function getTeamById(teamId: number) {
       teamProjectTechnologies: { include: { technology: true } },
     },
   });
+
+  const { createdAt, ...teamWithoutDates } = team as Team;
+
+  return teamWithoutDates;
 }
 
 export async function getTeamByIdString(teamId: string) {
