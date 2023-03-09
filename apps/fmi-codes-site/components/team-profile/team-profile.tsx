@@ -1,7 +1,6 @@
 import { Team, TeamProjectTechnology, Technology, User } from '@prisma/client';
 import InviteUsersButton from '../invite-users-button/invite-users-button';
 import { getTechnologies } from '../../pages/api/technologies';
-import FancyButton from '../fancy-button/fancy-button';
 import EditTeamButton from '../../components/edit-team-button/edit-team-button';
 import LeaveTeamButton from '../leave-team-button/leave-team-button';
 import { UserWithoutPasswordWithJoins } from '../../lib/types';
@@ -103,7 +102,7 @@ export async function TeamProfile(props: TeamProfileProps) {
         ) : null}
         {props.user?.teamId === null && props.team.acceptsNewMembers ? (
           <div className="flex flex-row space-x-2 border-t border-gray-700 pt-4 md:pt-6">
-            <FancyButton isPrimary>Заяви присъединяване</FancyButton>
+            {/*<FancyButton isPrimary>Заяви присъединяване</FancyButton>*/}
           </div>
         ) : null}
       </div>
