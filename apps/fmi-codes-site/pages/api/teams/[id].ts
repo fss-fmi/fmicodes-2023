@@ -2,7 +2,6 @@ import prisma from '../../../lib/prismadb';
 import nextConnect from 'next-connect';
 import { onError } from '../../../lib/api-middleware';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { Team } from '@prisma/client';
 
 const handler = nextConnect(onError);
 
@@ -10,11 +9,16 @@ const handler = nextConnect(onError);
 handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
   const teamId = req.query.id as string;
   const team = await getTeamByIdString(teamId);
-  res.status(200).json(team);
+  if (!team) {
+    res.status(404).send('Team not found');
+    return;
+  }
+  const { createdAt, ...teamWithoutDates } = team;
+  res.status(200).json(teamWithoutDates);
 });
 
 export async function getTeamById(teamId: number) {
-  const team = await prisma.team.findUnique({
+  return await prisma.team.findUnique({
     where: {
       id: teamId,
     },
@@ -23,10 +27,6 @@ export async function getTeamById(teamId: number) {
       teamProjectTechnologies: { include: { technology: true } },
     },
   });
-
-  const { createdAt, ...teamWithoutDates } = team as Team;
-
-  return teamWithoutDates;
 }
 
 export async function getTeamByIdString(teamId: string) {
