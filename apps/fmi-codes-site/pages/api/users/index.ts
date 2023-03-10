@@ -59,7 +59,9 @@ export async function createUser(userDto: UserDto, universityProofImage) {
   // TODO: Validate input form
   const hashedPassword = await hashPassword(userDto.password);
 
-  let discordVerificationCode = Math.floor(Math.random() * Math.pow(10, 8));
+  let discordVerificationCode = Math.floor(
+    Math.pow(10, 8) + 9 * Math.random() * Math.pow(10, 8)
+  );
   while (
     await prisma.user.findUnique({
       where: { discordVerificationCode: discordVerificationCode },
