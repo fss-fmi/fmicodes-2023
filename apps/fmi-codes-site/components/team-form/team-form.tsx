@@ -23,8 +23,12 @@ export function TeamForm(props: TeamFormProps) {
     formState: { errors },
   } = useForm({
     mode: 'onChange',
-    defaultValues: async () =>
-      props.team ? fetch(`/api/teams/${props.team.id}`) : undefined,
+    defaultValues: async () => {
+      if (props.team) {
+        const res = await fetch(`/api/teams/${props.team.id}`);
+        return await res.json();
+      }
+    },
   });
 
   const [error, setError] = useState<string | null>(null);
@@ -36,6 +40,7 @@ export function TeamForm(props: TeamFormProps) {
       label: 'Име на отбора',
       required: true,
       spanRow: false,
+      disabled: !!props.team,
       placeholder: 'Име на отбора',
       formOptions: {
         maxLength: 30,

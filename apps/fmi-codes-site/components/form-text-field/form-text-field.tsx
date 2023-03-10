@@ -14,6 +14,7 @@ export interface FormTextFieldProps {
   type?: string;
   formOptions?: RegisterOptions;
   spanRow?: boolean;
+  disabled?: boolean;
   register: UseFormRegister<FieldValues>;
   errors: FieldErrors;
 }
@@ -36,6 +37,7 @@ export function FormTextField(props: FormTextFieldProps) {
           className="border-solid border-gray-300 border py-2 px-2 my-1 w-full rounded text-gray-700"
           type={props.type}
           placeholder={props.placeholder}
+          disabled={props.disabled}
           {...props.register(props.name, {
             required: props.required,
             validate: {
