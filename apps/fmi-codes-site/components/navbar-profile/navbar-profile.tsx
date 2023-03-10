@@ -4,6 +4,7 @@ import React, { Fragment } from 'react';
 import styles from './navbar-profile.module.scss';
 import FancyLink from '../fancy-link/fancy-link';
 import { useSession } from 'next-auth/react';
+import Image from 'next/image';
 
 const loginNavigation = [
   { name: 'Вход', href: '/auth/login', isPrimary: false },
@@ -25,10 +26,11 @@ const NavbarProfile = () => {
         <Menu as="div" className="relative ml-3">
           <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
             <span className="sr-only">Отваряне на потребителскоте меню</span>
-            <img
+            <Image
               className="h-8 w-8 rounded-full"
-              src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-              // TODO: src={session.user.image}
+              src="/images/pfp.png"
+              height={200}
+              width={200}
               alt=""
             />
           </Menu.Button>

@@ -1,5 +1,6 @@
 import { UserWithoutPasswordWithJoins } from '../../lib/types';
 import { Team, User } from '@prisma/client';
+import Image from 'next/image';
 
 export interface UserProfileWidgetProps {
   member: User;
@@ -13,10 +14,11 @@ export function UserProfileWidget(props: UserProfileWidgetProps) {
       key={props.member.id}
       className="flex flex-col w-56 text-center items-center space-y-1 p-4 border border-gray-700 rounded-lg bg-gray-800 bg-opacity-10"
     >
-      <img
-        className="h-28 w-28 rounded-full"
-        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-        // TODO: src={session.user.image}
+      <Image
+        className="h-28 w-28 rounded-full border border-gray-700"
+        src="/images/pfp.png"
+        height={200}
+        width={200}
         alt=""
       />
       <h3 className="font-bold text-lg">{props.member.name}</h3>
