@@ -44,11 +44,13 @@ export class AuthCommand implements DiscordTransformedCommand<AuthDto> {
     // Set discord username
     await this.authService.updateUserDiscordNickname(guildMember, user.name);
 
-    // Add membership role to user
-    await this.authService.addMemberRole(guildMember, user);
-
     // Add team role to user
     await this.authService.addTeamRole(guildMember, user);
+
+    // Add membership role to user
+    setTimeout(async () => {
+      await this.authService.addMemberRole(guildMember, user);
+    }, 3000);
 
     return 'Успешно потвърдихте самоличността си';
   }
