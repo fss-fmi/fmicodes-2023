@@ -16,6 +16,8 @@ export class UserService {
     // Subscribe to database user updated event
     pg.client.query('LISTEN user_updated');
     pg.client.on('notification', async (msg) => {
+      if (msg.channel !== 'user_updated') return;
+
       const userDto = JSON.parse(msg.payload);
       const user = await this.prisma.user.findUnique({
         where: { id: userDto.id },

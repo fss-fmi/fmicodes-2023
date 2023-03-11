@@ -21,10 +21,23 @@ export class TeamService {
     // Subscribe to database team added event
     pg.client.query('LISTEN team_added');
     pg.client.on('notification', async (msg) => {
+      if (msg.channel !== 'team_added') return;
+
       const team = JSON.parse(msg.payload);
       const guild = this.client.guilds.cache.get(environment().discord.guildId);
-      const role = await this.createTeamRole(guild, team);
-      await this.createTeamChannels(guild, team, role);
+
+      // Check if team role and channels already exist
+      const role =
+        guild.roles.cache.find((role) => role.name === `Отбор ${team.name}`) ??
+        (await this.createTeamRole(guild, team));
+
+      const teamCategory = guild.channels.cache.find(
+        (channel) => channel.name === `✨ ${team.name} ✨`
+      );
+
+      if (!teamCategory) {
+        await this.createTeamChannels(guild, team, role);
+      }
     });
   }
 
