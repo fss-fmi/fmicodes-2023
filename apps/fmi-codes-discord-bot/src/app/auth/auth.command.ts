@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { AuthDto } from './auth.dto';
 import { TransformPipe } from '@discord-nestjs/common';
 import {
@@ -9,6 +9,7 @@ import {
   UsePipes,
 } from '@discord-nestjs/core';
 import { AuthService } from './auth.service';
+import { HandleLogging } from '../logger/logger.handler';
 
 @Injectable()
 @Command({
@@ -17,12 +18,16 @@ import { AuthService } from './auth.service';
 })
 @UsePipes(TransformPipe)
 export class AuthCommand implements DiscordTransformedCommand<AuthDto> {
+  private readonly logger: Logger = new Logger(AuthCommand.name);
+
   constructor(private authService: AuthService) {}
 
+  @HandleLogging()
   async handler(
     @Payload() dto: AuthDto,
     { interaction }: TransformedCommandExecutionContext
   ): Promise<string> {
+    this.logger.log(`Auth command called with code ${dto.code}.`);
     // Get user by code
     const user = await this.authService.getUserByCode(dto.code);
 

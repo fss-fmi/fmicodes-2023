@@ -1,19 +1,24 @@
-import {Injectable} from '@nestjs/common';
-import {Schedule} from '@prisma/client';
-import {PrismaService} from "../database/prisma.service";
-import {EmbedBuilder, Guild, GuildScheduledEventEntityType, GuildScheduledEventPrivacyLevel} from "discord.js";
+import { Injectable } from '@nestjs/common';
+import { Schedule } from '@prisma/client';
+import { PrismaService } from '../database/prisma.service';
+import {
+  EmbedBuilder,
+  Guild,
+  GuildScheduledEventEntityType,
+  GuildScheduledEventPrivacyLevel,
+} from 'discord.js';
+import { HandleLogging } from '../logger/logger.handler';
 
 @Injectable()
 export class ScheduleService {
-  constructor(
-    private readonly prisma: PrismaService
-  ) {
-  }
+  constructor(private readonly prisma: PrismaService) {}
 
+  @HandleLogging()
   async getSchedule(): Promise<Schedule[]> {
     return this.prisma.schedule.findMany();
   }
 
+  @HandleLogging()
   getEventEmbed(event: Schedule): EmbedBuilder {
     const embed = new EmbedBuilder()
       .setTitle(event.title)
@@ -21,35 +26,29 @@ export class ScheduleService {
       .setFields([
         {
           name: '🕑 Начало',
-          value: event.startsAt.toLocaleString(
-            'bg-BG',
-            {
-              year: 'numeric',
-              month: '2-digit',
-              day: '2-digit',
-              hour: '2-digit',
-              minute: '2-digit',
-            }
-          )
+          value: event.startsAt.toLocaleString('bg-BG', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+          }),
         },
         {
           name: '🕝 Край',
-          value: event.endsAt.toLocaleString(
-            'bg-BG',
-            {
-              year: 'numeric',
-              month: '2-digit',
-              day: '2-digit',
-              hour: '2-digit',
-              minute: '2-digit',
-            }
-          )
+          value: event.endsAt.toLocaleString('bg-BG', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+          }),
         },
         {
           name: '📍 Място',
           value: event.location,
-        }
-      ])
+        },
+      ]);
 
     if (event.image) {
       embed.setImage(event.image);
@@ -58,6 +57,7 @@ export class ScheduleService {
     return embed;
   }
 
+  @HandleLogging()
   async createEvent(guild: Guild, event: Schedule) {
     await guild.scheduledEvents.create({
       name: event.title,
@@ -69,7 +69,7 @@ export class ScheduleService {
       image: event.image,
       entityMetadata: {
         location: event.location,
-      }
-    })
+      },
+    });
   }
 }

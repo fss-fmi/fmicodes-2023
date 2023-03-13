@@ -11,6 +11,7 @@ import {
   User,
 } from 'discord.js';
 import { ChannelType } from 'discord-api-types/v10';
+import { HandleLogging } from '../logger/logger.handler';
 
 @Injectable()
 export class TicketGateway {
@@ -19,6 +20,7 @@ export class TicketGateway {
   constructor(@InjectDiscordClient() private readonly client: Client) {}
 
   @On('threadCreate')
+  @HandleLogging()
   async onMentorForumPost(thread: ThreadChannel) {
     // Get mentor channel from guild
     const mentorChannel = thread.guild.channels.cache.find(
@@ -26,6 +28,9 @@ export class TicketGateway {
         mentorChannel.name === '❓︱въпроси' &&
         mentorChannel.parent.name === '💡 Ментори 💡'
     ) as TextChannel;
+    this.logger.log(
+      `Mentor channel found: ${mentorChannel.parent.name}.${mentorChannel.name}`
+    );
 
     if (
       thread.type == ChannelType.PublicThread &&
@@ -40,14 +45,18 @@ export class TicketGateway {
         try {
           threadMessage = await thread.fetchStarterMessage();
         } catch (DiscordAPIError) {
+          this.logger.log('Waiting for thread starter message...');
           await new Promise((r) => setTimeout(r, 1000));
         }
       }
+      this.logger.log(`Thread starter message found: ${threadMessage.content}`);
 
       // Get author and team discord objects
       const threadAuthor = await thread.guild.members.fetch(
         threadMessage.author
       );
+      this.logger.log(`Thread author found: ${threadAuthor.displayName}`);
+
       const threadPermissions = thread.parent.permissionOverwrites.cache;
       const threadRoles = threadPermissions.map((threadPermission) =>
         thread.guild.roles.cache.find((role) => role.id === threadPermission.id)
@@ -55,6 +64,7 @@ export class TicketGateway {
       const threadTeamRole = threadRoles.find((role) =>
         role.name.includes('Отбор')
       );
+      this.logger.log(`Thread team role found: ${threadTeamRole.name}`);
 
       // Build an embed with the question information from the forum post
       const mentorMessageEmbed = new EmbedBuilder()
@@ -67,13 +77,18 @@ export class TicketGateway {
         .setFooter({
           text: thread.id,
         });
+      this.logger.log(`Mentor message embed built: ${thread.id}`);
 
       // If there are image attachments, set the image to the
       const imageAttachments = threadMessage.attachments.filter((attachment) =>
         attachment.contentType.includes('image/')
       );
+      this.logger.log(`Image attachments found: ${imageAttachments.size}`);
       if (imageAttachments.size !== 0) {
         mentorMessageEmbed.setImage(imageAttachments.at(0).url);
+        this.logger.log(
+          `Image attachment set to: ${imageAttachments.at(0).url}`
+        );
       }
 
       // Get names of all tags applied to the forum post
@@ -83,11 +98,13 @@ export class TicketGateway {
             (availableTag) => availableTag.id === appliedTag
           ).name
       );
+      this.logger.log(`Applied tag names found: ${appliedTagNames}`);
 
       // Create a list of technology roles from the applied tags
       const technologyRoles = appliedTagNames.map((appliedTagName) =>
         thread.guild.roles.cache.find((role) => role.name === appliedTagName)
       );
+      this.logger.log(`Technology roles found: ${technologyRoles}`);
 
       // Send question to mentor channel
       const mentorMessage = await mentorChannel.send({
@@ -98,14 +115,19 @@ export class TicketGateway {
         ),
         embeds: [mentorMessageEmbed],
       });
+      this.logger.log(`Mentor message sent: ${mentorMessage.id}`);
 
       // Add ticket reaction to the message
       await mentorMessage.react('🎟️');
+      this.logger.log(
+        `Ticket reaction added to mentor message: ${mentorMessage.id}`
+      );
 
       // Send a message to the thread, notifying that the question has been sent to the mentor channel
       await thread.send({
         content: 'Въпросът е изпратен към менторите. 🎟️',
       });
+      this.logger.log(`Thread message sent: ${thread.id}`);
     }
   }
 
@@ -120,6 +142,9 @@ export class TicketGateway {
       messageChannel.name === '❓︱въпроси' &&
       messageChannel.parent.name === '💡 Ментори 💡'
     ) {
+      this.logger.log(
+        `Starting ticket processing for message ${message.embeds[0].footer.text}}`
+      );
       const teamRole = await message.mentions.roles.find((role) =>
         role.name.includes('Отбор')
       );

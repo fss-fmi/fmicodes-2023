@@ -1,15 +1,16 @@
-import {Injectable} from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
 import {
   Command,
   DiscordTransformedCommand,
   Payload,
   TransformedCommandExecutionContext,
-  UsePipes
-} from "@discord-nestjs/core";
-import {ChannelType} from 'discord-api-types/v10';
-import {ScheduleService} from "./schedule.service";
-import {ScheduleDto} from "./schedule.dto";
-import {TransformPipe} from "@discord-nestjs/common";
+  UsePipes,
+} from '@discord-nestjs/core';
+import { ChannelType } from 'discord-api-types/v10';
+import { ScheduleService } from './schedule.service';
+import { ScheduleDto } from './schedule.dto';
+import { TransformPipe } from '@discord-nestjs/common';
+import { HandleLogging } from '../logger/logger.handler';
 
 @Injectable()
 @Command({
@@ -18,16 +19,15 @@ import {TransformPipe} from "@discord-nestjs/common";
 })
 @UsePipes(TransformPipe)
 export class ScheduleCommand implements DiscordTransformedCommand<ScheduleDto> {
-  constructor(
-    private readonly scheduleService: ScheduleService
-  ) {}
+  constructor(private readonly scheduleService: ScheduleService) {}
 
+  @HandleLogging()
   async handler(
     @Payload() dto: ScheduleDto,
-    {interaction}: TransformedCommandExecutionContext,
+    { interaction }: TransformedCommandExecutionContext
   ): Promise<string> {
     if (interaction.channel.type !== ChannelType.GuildText) {
-        return 'Тази команда може да се използва само в текстови канали.';
+      return 'Тази команда може да се използва само в текстови канали.';
     }
 
     const schedule = await this.scheduleService.getSchedule();
@@ -36,7 +36,7 @@ export class ScheduleCommand implements DiscordTransformedCommand<ScheduleDto> {
 
       // Send event embed to the current channel
       await interaction.channel.send({
-        embeds: [eventEmbed]
+        embeds: [eventEmbed],
       });
 
       // Create a Discord event if primary flag is set to true
