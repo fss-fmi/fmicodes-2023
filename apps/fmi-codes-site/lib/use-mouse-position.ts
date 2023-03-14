@@ -13,6 +13,8 @@ const useMousePosition = () => {
       setMousePosition({ x: ev.clientX, y: ev.clientY });
     };
     window.addEventListener('mousemove', updateMousePosition);
+    window.addEventListener('touchmove', updateMousePosition);
+    window.addEventListener('scroll', updateMousePosition);
     return () => {
       window.removeEventListener('mousemove', updateMousePosition);
     };
