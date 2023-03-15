@@ -101,9 +101,9 @@ export async function createUser(userDto: UserDto, universityProofImage) {
     passwordHash: hashedPassword,
     universityProofImage: universityProofImage.location,
     discordVerificationCode: discordVerificationCode,
-    // userTechnologies: {
-    //   create: userTechnologies,
-    // },
+    userTechnologies: {
+      create: userTechnologies,
+    },
   };
 
   const user = await prisma.user.create({
