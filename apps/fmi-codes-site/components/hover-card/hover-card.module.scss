@@ -1,0 +1,108 @@
+
+.card {
+  aspect-ratio: 1 / 1.7;
+  border: 0.5vmin solid;
+  cursor: pointer;
+  position: relative;
+  width: 50vmin;
+  @apply m-1;
+}
+
+.card:hover:before {
+  background-position: 100% 100%;
+  transform: scale(1.08, 1.03);
+}
+
+.card:hover > .card-content {
+  background-position: -10% 0%;
+}
+
+.card:hover > .card-icon {
+  color: white;
+}
+
+.card:hover > .card-content > .card-subtitle > .card-subtitle-word {
+  opacity: 1;
+  transform: translateY(0%);
+  transition: opacity 0ms, transform 200ms cubic-bezier(.90, .06, .15, .90);
+}
+
+.card:before {
+  background: linear-gradient(
+      130deg,
+      transparent 0% 33%,
+      rgb(5, 15, 85) 66%,
+      rgb(171, 10, 19) 100%
+  );
+  background-position: 0% 0%;
+  background-size: 300% 300%;
+  content: "";
+  height: 100%;
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  transition: background-position 350ms ease, transform 350ms ease;
+  width: 100%;
+  z-index: 1;
+}
+
+.card-content {
+  background-image: radial-gradient(
+      rgba(255, 255, 255, 0.2) 8%,
+      transparent 8%
+  );
+  background-position: 0% 0%;
+  background-size: 2rem 2rem;
+  height: 100%;
+  width: 100%;
+  padding: 1rem;
+  position: relative;
+  transition: background-position 350ms ease;
+  z-index: 10;
+}
+
+.card-title,
+.card-subtitle {
+  color: white;
+  font-weight: 400;
+  margin: 0px;
+}
+
+.card-title {
+  font-size: 6vmin;
+}
+
+.card-subtitle {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  font-size: 2vmin;
+  margin-top: 2vmin;
+  max-height: 80%;
+  text-align: justify;
+  overflow: hidden;
+}
+
+.card-subtitle-word {
+  display: inline-block;
+  margin: 0 0.3vmin;
+  @media (max-width: 768px) {
+    opacity: 1;
+  }
+  opacity: 0;
+  position: relative;
+  transform: translateY(40%);
+  transition: none;
+}
+
+.card-icon {
+  bottom: 0;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 7vmin;
+  left: 0;
+  margin: 5vmin;
+  position: absolute;
+  transition: color 250ms ease;
+  z-index: 2;
+}
