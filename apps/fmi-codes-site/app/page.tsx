@@ -47,7 +47,7 @@ export default async function HomePage(): Promise<ReactNode> {
         <HeroLogo />
       </div>
       <div>
-        <FancyHeading title="Златни спонсори" />
+        <FancyHeading title="Златни спонсори и партньори" />
         <div className="flex flex-wrap w-full h-full justify-center">
           {goldSponsors.map((sponsor, i) => (
             <HoverCard
@@ -61,7 +61,7 @@ export default async function HomePage(): Promise<ReactNode> {
           ))}
         </div>
 
-        <FancyHeading title="Сребрени спонсори" />
+        <FancyHeading title="Сребърни спонсори" />
 
         <div className="flex flex-wrap w-full h-full justify-center">
           {silverSponsors.map((sponsor, i) => (
