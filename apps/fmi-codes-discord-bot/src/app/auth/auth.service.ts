@@ -63,7 +63,12 @@ export class AuthService {
       (role) => role.name === this.DB_DISCORD_ROLES[user.role]
     );
 
-    this.logger.log(`Membership role id is ${role.id}`);
+    if (!role) {
+      this.logger.log(`Member role not found`);
+      return;
+    }
+
+    this.logger.error(`Membership role id is ${role.id}`);
     await guildMember.roles.add(role);
   }
 
@@ -80,6 +85,11 @@ export class AuthService {
       const teamRole = guildMember.guild.roles.cache.find(
         (role) => role.name === `Отбор ${team.name}`
       );
+
+      if (!teamRole) {
+        this.logger.error(`Team role not found`);
+        return;
+      }
 
       this.logger.log(
         `Adding team role with id ${teamRole.id} for ${guildMember.id}`
