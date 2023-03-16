@@ -60,7 +60,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 export async function createTeam(teamDto: TeamDto, userId: string) {
   const teamsCount = await getTeamsCount();
 
-  if (teamsCount >= 25) {
+  if (teamsCount >= 22) {
     throw new Error('Достигнат е лимита на отборите.');
   }
 

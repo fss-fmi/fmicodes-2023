@@ -5,6 +5,7 @@ import FancyHeading from '../../../components/fancy-heading/fancy-heading';
 import { getUserBySession } from '../../../pages/api/users/self';
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
+import { getTeamsCount } from '../../../pages/api/teams/count';
 
 /**
  * Defines the "/teams/create" page.
@@ -14,6 +15,7 @@ import { redirect } from 'next/navigation';
 export default async function NewTeamPage(): Promise<ReactNode> {
   const session = await getServerSession();
   const user = await getUserBySession(session);
+  const teamsCount = await getTeamsCount();
 
   if (!user) {
     await redirect('/auth/login?error=Не сте влезли в системата!');
@@ -23,6 +25,10 @@ export default async function NewTeamPage(): Promise<ReactNode> {
   if (user.teamId) {
     await redirect('/teams?error=Вече сте част от отбор!');
     return;
+  }
+
+  if (teamsCount >= 22) {
+    await redirect('/teams?error=Вече са създадени максималния брой отбори!');
   }
 
   const technologies = await getTechnologies();
