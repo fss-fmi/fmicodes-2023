@@ -11,12 +11,18 @@ import { SessionProvider } from 'next-auth/react';
 
 const navigation = [
   // { name: 'За хакатона', href: '/about' },
-  // { name: 'Програма', href: '/schedule' },
+  { name: 'Програма', href: '/schedule' },
   { name: 'Регламент', href: '/regulation' },
   { name: 'Отбори', href: '/teams' },
   // { name: 'Ментори', href: '/mentors' },
   // { name: 'Класация', href: '/ranking' },
   // { name: 'Архив', href: '/archive' },
+];
+
+const navigationMobile = [
+  ...navigation,
+  { name: 'Вход', href: '/auth/login' },
+  { name: 'Регистрация', href: '/auth/register' },
 ];
 
 const Navbar: FC = () => {
@@ -76,7 +82,7 @@ const Navbar: FC = () => {
           >
             <Disclosure.Panel className="lg:hidden">
               <div className="space-y-1 px-2 pt-2 pb-3">
-                {navigation.map((item) => (
+                {navigationMobile.map((item) => (
                   <Disclosure.Button key={item.name} className="block w-full">
                     {({ open }) => (
                       <FancyLink href={item.href} isBlock>

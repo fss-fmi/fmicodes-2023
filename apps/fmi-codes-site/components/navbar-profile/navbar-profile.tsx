@@ -5,6 +5,7 @@ import styles from './navbar-profile.module.scss';
 import FancyLink from '../fancy-link/fancy-link';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const loginNavigation = [
   { name: 'Вход', href: '/auth/login', isPrimary: false },
@@ -48,7 +49,7 @@ const NavbarProfile = () => {
                 <div key={item.name}>
                   <Menu.Item>
                     {({ active }) => (
-                      <a
+                      <Link
                         href={item.href}
                         className={
                           (active ? 'bg-gray-100 ' : '') +
@@ -56,7 +57,7 @@ const NavbarProfile = () => {
                         }
                       >
                         {item.name}
-                      </a>
+                      </Link>
                     )}
                   </Menu.Item>
                 </div>
@@ -65,7 +66,7 @@ const NavbarProfile = () => {
           </Transition>
         </Menu>
       ) : (
-        <div className="flex space-x-2">
+        <div className="hidden space-x-2 lg:flex">
           {loginNavigation.map((item) => (
             <FancyLink
               key={item.name}
