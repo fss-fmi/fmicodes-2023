@@ -127,11 +127,13 @@ export async function updateTeam(
     : [];
 
   const teamInformation = {
-    ...teamDto,
-    acceptsNewMembers: true,
-    teamProjectTechnologies: {
-      create: projectTechnologies,
-    },
+    projectName: teamDto.projectName,
+    projectDescription: teamDto.projectDescription,
+    projectRepository: teamDto.projectRepository,
+    projectLink: teamDto.projectLink,
+    // teamProjectTechnologies: {
+    //   create: projectTechnologies,
+    // },
   };
   return await prisma.team.update({
     where: { id: user.teamId },
