@@ -8,6 +8,9 @@ const useCountdown = (targetDate) => {
 
   useEffect(() => {
     const target = new Date(targetDate);
+    if (target < new Date()) {
+      return;
+    }
 
     const interval = setInterval(() => {
       const now = new Date();
