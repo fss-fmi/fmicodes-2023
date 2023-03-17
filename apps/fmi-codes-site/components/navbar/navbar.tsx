@@ -7,25 +7,31 @@ import NavbarProfile from '../navbar-profile/navbar-profile';
 import Link from 'next/link';
 import Image from 'next/image';
 import FancyLink from '../fancy-link/fancy-link';
-import { SessionProvider } from 'next-auth/react';
-
-const navigation = [
-  // { name: 'За хакатона', href: '/about' },
-  { name: 'Програма', href: '/schedule' },
-  { name: 'Регламент', href: '/regulation' },
-  { name: 'Отбори', href: '/teams' },
-  // { name: 'Ментори', href: '/mentors' },
-  // { name: 'Класация', href: '/ranking' },
-  // { name: 'Архив', href: '/archive' },
-];
-
-const navigationMobile = [
-  ...navigation,
-  { name: 'Вход', href: '/auth/login' },
-  { name: 'Регистрация', href: '/auth/register' },
-];
+import { useSession } from 'next-auth/react';
 
 const Navbar: FC = () => {
+  const { data: session, status } = useSession();
+
+  const navigation = [
+    // { name: 'За хакатона', href: '/about' },
+    { name: 'Програма', href: '/schedule' },
+    { name: 'Регламент', href: '/regulation' },
+    { name: 'Отбори', href: '/teams' },
+    // { name: 'Ментори', href: '/mentors' },
+    // { name: 'Класация', href: '/ranking' },
+    // { name: 'Архив', href: '/archive' },
+  ];
+
+  const navigationMobile = [
+    ...navigation,
+    ...(status !== 'authenticated'
+      ? [
+          { name: 'Вход', href: '/auth/login' },
+          { name: 'Регистрация', href: '/auth/register' },
+        ]
+      : []),
+  ];
+
   return (
     <Disclosure as="nav" className="sticky -mt-16 w-full top-0 z-40 acrylic">
       {({ open }) => (
@@ -65,9 +71,7 @@ const Navbar: FC = () => {
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 lg:static lg:inset-auto lg:ml-6 lg:pr-0">
                 {/* Profile dropdown */}
-                <SessionProvider>
-                  <NavbarProfile />
-                </SessionProvider>
+                <NavbarProfile />
               </div>
             </div>
           </div>
