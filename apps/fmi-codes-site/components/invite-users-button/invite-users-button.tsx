@@ -52,11 +52,17 @@ export function InviteUsersButton(props: InviteUsersButtonProps) {
           register={register}
           errors={errors}
         />
-        <div className="flex flex-col space-y-2">
+        <div className="flex flex-col space-y-2 w-full h-64 overflow-y-auto">
+          {results.length === 0 ? (
+            <div className="px-4 mt-2 py-2 text-md text-white border border-gray-700 rounded-lg bg-gray-800 bg-opacity-10">
+              Няма намерени потребители. 🥲
+            </div>
+          ) : null}
+
           {results.map((user, i) => (
             <div
               key={i}
-              className="flex flex-row space-x-2 grow space-y-1 p-2 border border-gray-700 rounded-lg bg-gray-800 bg-opacity-10"
+              className="flex flex-row space-x-2 space-y-1 max-h-20 p-2 border border-gray-700 rounded-lg bg-gray-800 bg-opacity-10"
             >
               <div className="flex flex-col grow">
                 <h3 className="text-lg font-bold text-white">{user.name}</h3>
