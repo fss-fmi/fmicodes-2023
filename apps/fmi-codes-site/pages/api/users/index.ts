@@ -122,62 +122,73 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
 });
 
 async function getUsers(query: string) {
-  const users = await prisma.user.findMany({
+  return await prisma.user.findMany({
     where: {
-      OR: [
+      AND: [
         {
-          name: {
-            contains: query,
-            mode: 'insensitive',
-          },
+          OR: [
+            {
+              name: {
+                contains: query,
+                mode: 'insensitive',
+              },
+            },
+            {
+              email: {
+                contains: query,
+                mode: 'insensitive',
+              },
+            },
+            {
+              phone: {
+                contains: query,
+                mode: 'insensitive',
+              },
+            },
+            {
+              university: {
+                contains: query,
+                mode: 'insensitive',
+              },
+            },
+            {
+              universityDegree: {
+                contains: query,
+                mode: 'insensitive',
+              },
+            },
+            {
+              universityMajor: {
+                contains: query,
+                mode: 'insensitive',
+              },
+            },
+            {
+              universityYear: {
+                contains: query,
+                mode: 'insensitive',
+              },
+            },
+            {
+              universityFacultyNumber: {
+                contains: query,
+                mode: 'insensitive',
+              },
+            },
+          ],
         },
         {
-          email: {
-            contains: query,
-            mode: 'insensitive',
-          },
-        },
-        {
-          phone: {
-            contains: query,
-            mode: 'insensitive',
-          },
-        },
-        {
-          university: {
-            contains: query,
-            mode: 'insensitive',
-          },
-        },
-        {
-          universityDegree: {
-            contains: query,
-            mode: 'insensitive',
-          },
-        },
-        {
-          universityMajor: {
-            contains: query,
-            mode: 'insensitive',
-          },
-        },
-        {
-          universityYear: {
-            contains: query,
-            mode: 'insensitive',
-          },
-        },
-        {
-          universityFacultyNumber: {
-            contains: query,
-            mode: 'insensitive',
-          },
+          teamId: null,
         },
       ],
     },
+    select: {
+      id: true,
+      name: true,
+      university: true,
+      universityMajor: true,
+    },
   });
-
-  return users.map(({ passwordHash, ...user }) => user);
 }
 
 export default handler;

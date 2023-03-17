@@ -22,8 +22,8 @@ interface TeamDto {
 
 // GET /api/teams
 handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
-  const teams = await getTeams();
-  res.json(teams);
+  // const teams = await getTeams();
+  res.json('ntnt Poke <3 (ty for the bug report tho <3 <3)');
 });
 
 export async function getTeams() {
@@ -32,6 +32,7 @@ export async function getTeams() {
       members: true,
       teamProjectTechnologies: { include: { technology: true } },
     },
+    orderBy: { createdAt: 'asc' },
   });
 }
 
