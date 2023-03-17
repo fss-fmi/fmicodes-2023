@@ -15,40 +15,50 @@ export class ScheduleService {
 
   @HandleLogging()
   async getSchedule(): Promise<Schedule[]> {
-    return this.prisma.schedule.findMany();
+    return this.prisma.schedule.findMany({
+      orderBy: { startsAt: 'asc' },
+    });
   }
 
   @HandleLogging()
   getEventEmbed(event: Schedule): EmbedBuilder {
+    const fields = [
+      {
+        name: '🕑 Начало',
+        value: event.startsAt.toLocaleString('bg-BG', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit',
+        }),
+      },
+    ];
+
+    if (event.endsAt) {
+      fields.push({
+        name: '🕝 Край',
+        value: event.endsAt.toLocaleString('bg-BG', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit',
+        }),
+      });
+    }
+
+    if (event.location) {
+      fields.push({
+        name: '📍 Място',
+        value: event.location,
+      });
+    }
+
     const embed = new EmbedBuilder()
       .setTitle(event.title)
       .setDescription(event.description)
-      .setFields([
-        {
-          name: '🕑 Начало',
-          value: event.startsAt.toLocaleString('bg-BG', {
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit',
-          }),
-        },
-        {
-          name: '🕝 Край',
-          value: event.endsAt.toLocaleString('bg-BG', {
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit',
-          }),
-        },
-        {
-          name: '📍 Място',
-          value: event.location,
-        },
-      ]);
+      .setFields(fields);
 
     if (event.image) {
       embed.setImage(event.image);
@@ -71,5 +81,13 @@ export class ScheduleService {
         location: event.location,
       },
     });
+  }
+
+  @HandleLogging()
+  getImage(name: string) {
+    return {
+      attachment: `https://fmicodes.com/images/schedule/${name}.png`,
+      name: `${name}.png`,
+    };
   }
 }
