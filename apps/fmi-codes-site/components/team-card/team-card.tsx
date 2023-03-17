@@ -8,6 +8,7 @@ export interface TeamCardProps {
   image: string;
   name: string;
   roaster: string[];
+  room: string | null;
   projectName: string | null;
   projectDescription: string | null;
   projectTechnologies: Technology[];
@@ -22,6 +23,7 @@ export function TeamCard(props: TeamCardProps) {
         url={`/teams/${props.id}`}
         content={CardContent(
           props.roaster,
+          props.room,
           props.projectName,
           props.projectDescription,
           props.projectTechnologies
@@ -33,6 +35,7 @@ export function TeamCard(props: TeamCardProps) {
 
 function CardContent(
   roaster: string[],
+  room: string | null,
   projectName: string | null,
   projectDescription: string | null,
   projectTechnologies: Technology[]
@@ -47,16 +50,27 @@ function CardContent(
           ))}
         </ul>
       </div>
+
+      {room ? (
+        <div className={styles['card-content__room']}>
+          <h3 className="font-bold">Зала</h3>
+          <p>{room}</p>
+        </div>
+      ) : null}
+
       {projectName && projectDescription ? (
         <div className={styles['card-content__project']}>
           <h3 className="font-bold">{`Проект "${projectName}"`}</h3>
           <p className="line-clamp-3">{projectDescription}</p>
         </div>
       ) : null}
-      <div>
-        <h3 className="font-bold">Технологии</h3>
-        <TechnologiesShowcase technologies={projectTechnologies} />
-      </div>
+
+      {projectTechnologies.length > 0 ? (
+        <div>
+          <h3 className="font-bold">Технологии</h3>
+          <TechnologiesShowcase technologies={projectTechnologies} />
+        </div>
+      ) : null}
     </div>
   );
 }
