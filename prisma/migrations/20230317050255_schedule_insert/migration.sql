@@ -1,7 +1,7 @@
 INSERT INTO public."Schedule"
 (title, starts_at, ends_at, description, image, "location", is_primary)
 VALUES ('Регистрация', '2023-03-17 17:00:00.000', NULL, 'Последен шанс за регистрация преди началотo на събитието!',
-        NULL, 'Фоайето на ФМИ', false, '2023-03-15 18:54:00.733');
+        NULL, 'Фоайето на ФМИ', false);
 
 INSERT INTO public."Schedule"
 (title, starts_at, ends_at, description, image, "location", is_primary)
