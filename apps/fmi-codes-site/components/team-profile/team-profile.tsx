@@ -39,8 +39,8 @@ export async function TeamProfile(props: TeamProfileProps) {
         props.team.teamProjectTechnologies.length > 0 ? (
           <div className="border-t border-gray-700 pt-4 md:pt-6">
             <h2 className="text-2xl font-bold block">Проект</h2>
-            <div className="flex flex-row space-x-2 h-full flex-wrap">
-              <div className="flex flex-col bg-gray-800 bg-opacity-10 border border-gray-700 rounded-lg p-4 flex-auto m-1">
+            <div className="flex flex-row h-full flex-wrap md:flex-nowrap">
+              <div className="flex flex-col md:max-w-lg bg-gray-800 bg-opacity-10 border border-gray-700 rounded-lg p-4 flex-auto m-1">
                 <div className="flex flex-col">
                   <h3 className="text-xl font-bold">Име на проекта</h3>
                   {props.team.projectName ? (
@@ -50,12 +50,14 @@ export async function TeamProfile(props: TeamProfileProps) {
                   )}
                   <h3 className="text-xl font-bold">Описание на проекта</h3>
                   {props.team.projectDescription ? (
-                    <p className="h-10">{props.team.projectDescription}</p>
+                    <p className="min-h-10 max-h-40 overflow-y-auto">
+                      {props.team.projectDescription}
+                    </p>
                   ) : (
-                    <p className="h-10 text-gray-500">Няма описание</p>
+                    <p className="min-h-10 text-gray-500">Няма описание</p>
                   )}
                   {props.team.projectLink || props.team.projectRepository ? (
-                    <div className="flex flex-row space-x-2">
+                    <div className="flex flex-row space-x-2 mt-2">
                       {props.team.projectLink ? (
                         <FancyLink href={props.team.projectLink} isPrimary>
                           Линк към проекта
